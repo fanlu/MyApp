@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta property="qc:admins" content="45633162376646375" />
 <title>web</title>
 <script src="http://a.tbcdn.cn/apps/top/x/sdk.js?t=120525.js"></script> 
 <script> 

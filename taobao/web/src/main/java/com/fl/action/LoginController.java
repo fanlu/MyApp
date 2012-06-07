@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.WebUtils;
 
+import com.fl.RenRenConstant;
 import com.fl.TaobaoConstant;
 import com.taobao.api.Constants;
 import com.taobao.api.internal.util.StringUtils;
@@ -25,7 +26,7 @@ import com.taobao.api.internal.util.TaobaoUtils;
 public class LoginController {
 
 	@RequestMapping("/login/taobao")
-	private String taobao(HttpServletResponse res) throws IOException {
+	public String taobao(HttpServletResponse res) throws IOException {
 		long timestamp = (new Date()).getTime();
 		String message = TaobaoConstant.APP_SERCET + "app_key"
 				+ TaobaoConstant.APP_KEY + "timestamp" + timestamp
@@ -38,18 +39,20 @@ public class LoginController {
 	}
 
 	@RequestMapping("/other/login/{platform}")
-	private String otherLogin(@PathVariable String platform,
+	public String otherLogin(@PathVariable String platform,
 			HttpServletResponse res) {
 		if ("taobao".equals(platform)) {
 			return "redirect:https://oauth.taobao.com/authorize?response_type=code&client_id="
 					+ TaobaoConstant.APP_KEY
-					+ "&redirect_uri=http://www.fl.com/other/taobaocallback&state=1212&scope=item&view=web";
+					+ "&redirect_uri=http://www.fl.com&state=1212&scope=item&view=web";
+		}else if ("renren".equals(platform)){
+			return "redirect:https://graph.renren.com/oauth/authorize?client_id="+RenRenConstant.APP_KEY+"&redirect_uri=http://www.fl.com/other/renrencallback&response_type=code";
 		}
 		return "";
 	}
 
 	@RequestMapping("/other/taobaocallback")
-	private String loginFromTaobao(HttpServletRequest req,
+	public String loginFromTaobao(HttpServletRequest req,
 			HttpServletResponse res) {
 		Map<String, Object> map = WebUtils.getParametersStartingWith(req, "");
 		String code = (String) map.get("code");
@@ -79,6 +82,17 @@ public class LoginController {
 
 		return "";
 	}
+	
+	@RequestMapping("/other/renrencallback")
+	public String loginFromRenRen(HttpServletRequest req,
+			HttpServletResponse res) throws IOException {
+		Map<String, Object> map = WebUtils.getParametersStartingWith(req, "");
+		String code = (String) map.get("code");
+		String actoken = (String) map.get("access_token");
+		res.getOutputStream().print(code);
+		return "";
+	}
+	
 
 	private static byte[] encryptMD5(String data) throws IOException {
 		byte[] bytes = null;
