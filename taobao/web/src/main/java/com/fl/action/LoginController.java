@@ -18,9 +18,14 @@ import org.springframework.web.util.WebUtils;
 
 import com.fl.RenRenConstant;
 import com.fl.TaobaoConstant;
+import com.taobao.api.ApiException;
 import com.taobao.api.Constants;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
 import com.taobao.api.internal.util.StringUtils;
 import com.taobao.api.internal.util.TaobaoUtils;
+import com.taobao.api.request.UserGetRequest;
+import com.taobao.api.response.UserGetResponse;
 
 @Controller
 public class LoginController {
@@ -44,9 +49,11 @@ public class LoginController {
 		if ("taobao".equals(platform)) {
 			return "redirect:https://oauth.taobao.com/authorize?response_type=code&client_id="
 					+ TaobaoConstant.APP_KEY
-					+ "&redirect_uri=http://www.fl.com&state=1212&scope=item&view=web";
-		}else if ("renren".equals(platform)){
-			return "redirect:https://graph.renren.com/oauth/authorize?client_id="+RenRenConstant.APP_KEY+"&redirect_uri=http://www.fl.com/other/renrencallback&response_type=code";
+					+ "&redirect_uri=http://www.fl.com/other/taobaocallback&state=1212&scope=item&view=web";
+		} else if ("renren".equals(platform)) {
+			return "redirect:https://graph.renren.com/oauth/authorize?client_id="
+					+ RenRenConstant.APP_KEY
+					+ "&redirect_uri=http://www.fl.com/other/renrencallback&response_type=code";
 		}
 		return "";
 	}
@@ -57,32 +64,49 @@ public class LoginController {
 		Map<String, Object> map = WebUtils.getParametersStartingWith(req, "");
 		String code = (String) map.get("code");
 		String state = (String) map.get("state");
-		
+
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("grant_type", "authorization_code");
 		param.put("code", code);
 		param.put("client_id", TaobaoConstant.APP_KEY);
 		param.put("client_secret", TaobaoConstant.APP_SERCET);
-		param.put("redirect_uri", "http://www.fl.com/other/taobao");
+		param.put("redirect_uri", "http://www.fl.com/other/taobaocallback");
 		param.put("scope", "item");
 		param.put("view", "web");
 		param.put("state", state);
 		try {
-			String responseJson = com.taobao.api.internal.util.WebUtils.doPost("https://oauth.taobao.com/token", param, 3000, 3000);
+			String responseJson = com.taobao.api.internal.util.WebUtils.doPost(
+					"https://oauth.taobao.com/token", param, 3000, 3000);
 			Map<?, ?> resmap = TaobaoUtils.parseJson(responseJson);
 			String taobaoid = resmap.get("taobao_user_id").toString();
-	        String uname = (String) resmap.get("taobao_user_nick");
-	        if (!StringUtils.isEmpty(uname)) {
-	            uname = com.taobao.api.internal.util.WebUtils.decode(uname, "UTF-8");
-	        }
-	        String actoken = (String) resmap.get("access_token");
+			String uname = (String) resmap.get("taobao_user_nick");
+			if (!StringUtils.isEmpty(uname)) {
+				uname = com.taobao.api.internal.util.WebUtils.decode(uname,
+						"UTF-8");
+			}
+			String actoken = (String) resmap.get("access_token");
+			TaobaoClient client = new DefaultTaobaoClient(
+					TaobaoConstant.APP_URL, TaobaoConstant.APP_KEY,
+					TaobaoConstant.APP_SERCET);
+			UserGetRequest userreq = new UserGetRequest();// 实例化具体API对应的Request类
+			userreq.setFields("user_id,uid,nick,sex,buyer_credit,seller_credit,location,created,last_visit,birthday,type,status,alipay_no,alipay_account,alipay_account,email,consumer_protection,alipay_bind");
+			userreq.setNick(uname);
+			try {
+				UserGetResponse response = client.execute(userreq);
+				response.getBody();
+				res.getWriter().print(response.getBody());
+			} catch (ApiException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		return "";
 	}
-	
+
 	@RequestMapping("/other/renrencallback")
 	public String loginFromRenRen(HttpServletRequest req,
 			HttpServletResponse res) throws IOException {
@@ -92,7 +116,6 @@ public class LoginController {
 		res.getOutputStream().print(code);
 		return "";
 	}
-	
 
 	private static byte[] encryptMD5(String data) throws IOException {
 		byte[] bytes = null;
