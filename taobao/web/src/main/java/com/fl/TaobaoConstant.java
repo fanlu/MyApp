@@ -13,7 +13,9 @@ public class TaobaoConstant {
 	
 	public final static String APP_HTTPS_URL = "https://eco.taobao.com/router/rest";
 	//获取授权码的地址
-	public final static String GET_SESSION_URL = "http://container.api.tbsandbox.com/container";
-	//颜色值
-	public final static String PID = "1627207"; 
+	public final static String GET_SESSION_SANDBOX_URL = "http://container.api.tbsandbox.com/container";
+	
+	public final static String GET_SESSION_URL = "http://container.open.taobao.com/container";
+	
+	public final static String GET_SESSION_CLIENT_URL = "http://my.open.taobao.com/auth/authorize.htm";
 }

@@ -57,6 +57,16 @@ public class LoginController {
 		}
 		return "";
 	}
+	
+	@RequestMapping("/other/logout/{platform}")
+	public String otherLogout(@PathVariable String platform,
+			HttpServletResponse res){
+		//不用实现，只退出应用即可
+		if("taobao".equals(platform)){
+			return "https://oauth.taobao.com/logoff?client_id="+TaobaoConstant.APP_KEY+"&redirect_uri=http://www.fl.com/login/taobao/&view=web";
+		}
+		return "";
+	}
 
 	@RequestMapping("/other/taobaocallback")
 	public String loginFromTaobao(HttpServletRequest req,
@@ -65,6 +75,10 @@ public class LoginController {
 		String code = (String) map.get("code");
 		String state = (String) map.get("state");
 
+		if(StringUtils.isEmpty(code)){
+			return otherLogin("taobao",res);
+		}
+		
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("grant_type", "authorization_code");
 		param.put("code", code);

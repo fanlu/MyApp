@@ -10,5 +10,6 @@
 </head>
 <body>
 start page
+<a href="/other/logout/taobao">退出</a>
 </body>
 </html>
