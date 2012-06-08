@@ -10,6 +10,8 @@ public class TaobaoConstant {
 	public final static String SANDBOX_URL = "http://gw.api.tbsandbox.com/router/rest";
 	//正式环境需要设置为
 	public final static String APP_URL = "http://gw.api.taobao.com/router/rest";      
+	
+	public final static String APP_HTTPS_URL = "https://eco.taobao.com/router/rest";
 	//获取授权码的地址
 	public final static String GET_SESSION_URL = "http://container.api.tbsandbox.com/container";
 	//颜色值
