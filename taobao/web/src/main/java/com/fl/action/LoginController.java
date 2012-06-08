@@ -97,14 +97,12 @@ public class LoginController {
 				res.getWriter().print(response.getBody());
 			} catch (ApiException e) {
 				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return "";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/other/renrencallback")
