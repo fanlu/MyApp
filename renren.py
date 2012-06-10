@@ -89,7 +89,7 @@ class spider(SGMLParser):
 
 
 
-renrenspider=spider('wxnaw84@163.com','wangxin1234')
+renrenspider=spider('u','p')
 renrenspider.login()
 renrenspider.feed(renrenspider.file)
 renrenspider.show()
