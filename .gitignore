@@ -4,3 +4,4 @@ taobao/taobaoke/target/
 taobao/web/.settings/
 taobao/web/target/
 taobao/Servers/
+*.pyc
