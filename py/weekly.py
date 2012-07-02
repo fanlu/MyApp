@@ -30,11 +30,13 @@ def dealdetail(href):
 
 def deal(href):
     soup = BeautifulSoup(urlopen(href))
+    div = soup.findAll(id=re.compile('content_Div'))
+    print div[0]('strong')
     for strong in soup('strong'):
-        print strong.text
+        #print strong.text
         if strong.nextSibling:
             a = strong.nextSibling.split('<br/>')
-            print a
+            #print u(a[0].replace('&nbsp;', ''), 'utf-8')
             #print strong.nextSibling
         #if strong.nextSibling.contents[0]:
         #    print strong.nextSibling.contents[0].nextSibling
