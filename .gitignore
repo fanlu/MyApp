@@ -5,3 +5,6 @@ taobao/web/.settings/
 taobao/web/target/
 taobao/Servers/
 *.pyc
+*.idea
+*.iml
+*target

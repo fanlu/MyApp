@@ -11,6 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,6 @@ import com.taobao.api.ApiException;
 import com.taobao.api.Constants;
 import com.taobao.api.DefaultTaobaoClient;
 import com.taobao.api.TaobaoClient;
-import com.taobao.api.internal.util.StringUtils;
 import com.taobao.api.internal.util.TaobaoUtils;
 import com.taobao.api.request.UserGetRequest;
 import com.taobao.api.response.UserGetResponse;
