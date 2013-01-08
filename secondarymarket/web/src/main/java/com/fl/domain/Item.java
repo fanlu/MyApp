@@ -1,5 +1,9 @@
 package com.fl.domain;
 
+import com.google.common.collect.Lists;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: FANLU
@@ -21,9 +25,13 @@ public class Item {
 
     private int categoryId;
 
+    private String tbPath;
+
     private float newPrice;
 
     private float oldPrice;
+
+    private List<Eval> evalList = Lists.newArrayList();
 
     public int getId() {
         return id;
@@ -73,6 +81,14 @@ public class Item {
         this.categoryId = categoryId;
     }
 
+    public String getTbPath() {
+        return tbPath;
+    }
+
+    public void setTbPath(String tbPath) {
+        this.tbPath = tbPath;
+    }
+
     public float getNewPrice() {
         return newPrice;
     }
@@ -87,5 +103,13 @@ public class Item {
 
     public void setOldPrice(float oldPrice) {
         this.oldPrice = oldPrice;
+    }
+
+    public List<Eval> getEvalList() {
+        return evalList;
+    }
+
+    public void setEvalList(List<Eval> evalList) {
+        this.evalList = evalList;
     }
 }

@@ -15,37 +15,29 @@
     <title>妈妈跳蚤街</title>
     <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
     <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
-    <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid=100681361&platform=qzone"></script>
     <script type="text/javascript">
-        function openShareDialog(imgURL){
+        function openShareDialog(iid){
             var shareSuccessurl="/TXQZ/xks/resultshareSuccess";
             fusion2.dialog.share
             ({
                 url:'http://rc.qzone.qq.com/100681361',
                 showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
-                desc:'网购美衣，还在大海捞针？现在，有了选款师玲玲帮我忙，挑选衣服再也不用费心了。你也来试试？',/*默认分享理由(可选)*/
-                title:'寻找我的私人选款师',/*分享标题(可选)*/
-                site:'简单网',/*分享来源 如：腾讯网(可选)*/
-                pics :imgURL,
-                summary:'',/*分享摘要(可选)*/
+                desc:$("#desc_"+iid).text(),/*默认分享理由(可选)*/
+                title:$("#title_"+iid).text(),/*分享标题(可选)*/
+                site:'妈妈跳蚤街',/*分享来源 如：腾讯网(可选)*/
+                pics :$("#pic_"+iid).attr("src"),
+                summary:'',
                 context:"share",
                 onShown:  function (opt){
-                    //alert("Shown");
                 },
                 onSuccess : function (opt){
                     jQuery.get(shareSuccessurl, function(data) {
-                        //alert(data);
                     });
-                    // opt.context：可选。opt.context为调用该接口时的context透传参数，以识别请求
-                    //alert("Succeeded: " + opt.context);
                 },
                 onCancel : function (opt){
-                    // opt.context：可选。opt.context为调用该接口时的context透传参数，以识别请求
-                    //alert("Cancelled: " + opt.context);
                 },
                 onClose : function (opt){
-                    //alert("Closed");
                 }
             });
         }
@@ -55,7 +47,7 @@
             snum = parseInt(snum) + 1;
             $('#share_'+iid).html(snum);
             $.ajax({
-                url: "/ilike",
+                url: "/qqapp/ilike",
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 data: {
                     'iid': iid
@@ -67,14 +59,14 @@
                     //alert("服务器繁忙，请稍候重试!");
                 }
             });
-            openShareDialog("http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg");
+            openShareDialog(iid);
         }
         function collect(iid){
             var snum = $('#collect_'+iid).html();
             snum = parseInt(snum) + 1;
             $('#collect_'+iid).html(snum);
             $.ajax({
-                url: "/icollect",
+                url: "/qqapp/icollect",
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 data: {
                     'iid': iid
@@ -119,7 +111,7 @@
         }
         function togo(tmpurl,iid){
             $.ajax({
-                url: "/iclick",
+                url: "/qqapp/iclick",
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 data: {
                     'iid': iid
@@ -158,31 +150,42 @@
     </div>
 
     <div class="bd" style="padding-top:0px;">
-        <img src="./static/images/topbanner.png">
+        <img src="/static/images/topbanner.png">
     <div class="wrap_list">
     <c:forEach items="${items}" var="item">
     <div class="wrap_box itemtype_0 itemtype_${item.categoryId} ">
-        <p class="wrap_hd"><a href="http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB07S4%2FK0CITy7klxn%2F7bvn0ay1AuiIvq4frJRYsSxViC4Kw6u9eYlrLf5vMm%2BdPNz%2FtT3fmrQuPbgNlBIOHZdj%2FzvzBm8JyonFPhI3TTBbzw3B0gBg2Xd%2BjPoQvBzaaAcQWw1Sm85ZjjXAFBA%2B3nb7SZXSnLXTmptWfXkawvsz%2BTXLgRVyfW31L&amp;unid=hlt&amp;spm=2014.12327544.1.21567132138" onclick="javascript:togo('http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB07S4%2FK0CITy7klxn%2F7bvn0ay1AuiIvq4frJRYsSxViC4Kw6u9eYlrLf5vMm%2BdPNz%2FtT3fmrQuPbgNlBIOHZdj%2FzvzBm8JyonFPhI3TTBbzw3B0gBg2Xd%2BjPoQvBzaaAcQWw1Sm85ZjjXAFBA%2B3nb7SZXSnLXTmptWfXkawvsz%2BTXLgRVyfW31L&amp;unid=hlt&amp;spm=2014.12327544.1.21567132138',13892);" target="_blank">
-            <i class="item_tip_5 wrap_hd_tips"></i>${item.title}<em class="bold" style="text-decoration:line-through;color: orange;font-weight: normal;">原价 ${item.oldPrice}元</em>&nbsp;&nbsp;&nbsp;<em class="bold">现价 ${item.newPrice}元</em></a></p>
+        <p class="wrap_hd"><a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
+            <i class="item_tip_5 wrap_hd_tips"></i><span id="title_${item.id}">${item.title}</span>
+            <em class="bold" style="text-decoration:line-through;color: orange;font-weight: normal;">原价 ${item.oldPrice}元</em>&nbsp;&nbsp;&nbsp;<em class="bold">现价 ${item.newPrice}元</em></a></p>
         <ul class="wrap_bd">
             <li class="fl w310">
-                <a href="http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB07S4%2FK0CITy7klxn%2F7bvn0ay1AuiIvq4frJRYsSxViC4Kw6u9eYlrLf5vMm%2BdPNz%2FtT3fmrQuPbgNlBIOHZdj%2FzvzBm8JyonFPhI3TTBbzw3B0gBg2Xd%2BjPoQvBzaaAcQWw1Sm85ZjjXAFBA%2B3nb7SZXSnLXTmptWfXkawvsz%2BTXLgRVyfW31L&amp;unid=hlt&amp;spm=2014.12327544.1.21567132138" onclick="javascript:togo('http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB07S4%2FK0CITy7klxn%2F7bvn0ay1AuiIvq4frJRYsSxViC4Kw6u9eYlrLf5vMm%2BdPNz%2FtT3fmrQuPbgNlBIOHZdj%2FzvzBm8JyonFPhI3TTBbzw3B0gBg2Xd%2BjPoQvBzaaAcQWw1Sm85ZjjXAFBA%2B3nb7SZXSnLXTmptWfXkawvsz%2BTXLgRVyfW31L&amp;unid=hlt&amp;spm=2014.12327544.1.21567132138',13892);" target="_blank">
-                    <img src="http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg"></a>
+                <a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
+                    <img id="pic_${item.id}" src="${item.pic}"></a>
             </li>
             <li class="fr">
-                <p class="item_desc"><span class="orange">小编推荐：</span>${item.desc}</p>
+                <p class="item_desc"><span class="orange">小编推荐：</span><span id="desc_${item.id}">${item.desc}</span></p>
                 <div class="item_comm">
-                    <c:forEach items="${evals}" var="eval">
-                    <div><img src="${eval.pic}"><span>${eval.txt}</span></div>
+                    <c:forEach items="${item.evalList}" var="eval">
+                    <div><img src="${eval.id}"><span>${eval.eval}</span></div>
                     </c:forEach>
                 </div>
                 <p class="wrap_bd_bottom_2">
                     已有<span class="pink">336</span>人想买
                 </p>
                 <p class="wrap_bd_bottom">
-                    <span class="fl"><a class="share_btn pngfix fl" href="javascript:void(13892_00);" onclick="javascript:share(13892);window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F%3Fpid%3D13892%26via%3DQZ%2eASSISTANT%2eFEED%2eSHARE&amp;title='+encodeURIComponent('美发工具海绵卷发棒')+'&amp;pics='+encodeURIComponent('http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg')+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent('使用方便简洁，百变发型随心所欲，真的很实用哦~'),'_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');return false;"></a><a class="fl num_lico" href="javascript:void(13892_01);" onclick="javascript:share(13892);window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F%3Fpid%3D13892%26via%3DQZ%2eASSISTANT%2eFEED%2eSHARE&amp;title='+encodeURIComponent('美发工具海绵卷发棒')+'&amp;pics='+encodeURIComponent('http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg')+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent('使用方便简洁，百变发型随心所欲，真的很实用哦~'),'_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');return false;" id="share_13892">300</a><i class="num_rico"></i></span>
-                    <span class="fl"><a class="collect_btn pngfix fl" href="javascript:void(13892_10);" onclick="javascript:collect(13892);window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F%3Fpid%3D13892%26via%3DQZ%2eASSISTANT%2eFEED%2eSHARE&amp;title='+encodeURIComponent('美发工具海绵卷发棒')+'&amp;pics='+encodeURIComponent('http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg')+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent('使用方便简洁，百变发型随心所欲，真的很实用哦~'),'_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');return false;"></a><a class="fl num_lico" href="javascript:void(13892_11);" onclick="javascript:collect(13892);window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F%3Fpid%3D13892%26via%3DQZ%2eASSISTANT%2eFEED%2eSHARE&amp;title='+encodeURIComponent('美发工具海绵卷发棒')+'&amp;pics='+encodeURIComponent('http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg')+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent('使用方便简洁，百变发型随心所欲，真的很实用哦~'),'_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');return false;" id="collect_13892">403</a><i class="num_rico"></i></span>
-                    <a class="tobuy_btn fr" href="http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB07S4%2FK0CITy7klxn%2F7bvn0ay1AuiIvq4frJRYsSxViC4Kw6u9eYlrLf5vMm%2BdPNz%2FtT3fmrQuPbgNlBIOHZdj%2FzvzBm8JyonFPhI3TTBbzw3B0gBg2Xd%2BjPoQvBzaaAcQWw1Sm85ZjjXAFBA%2B3nb7SZXSnLXTmptWfXkawvsz%2BTXLgRVyfW31L&amp;unid=hlt&amp;spm=2014.12327544.1.21567132138" onclick="javascript:togo('http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB07S4%2FK0CITy7klxn%2F7bvn0ay1AuiIvq4frJRYsSxViC4Kw6u9eYlrLf5vMm%2BdPNz%2FtT3fmrQuPbgNlBIOHZdj%2FzvzBm8JyonFPhI3TTBbzw3B0gBg2Xd%2BjPoQvBzaaAcQWw1Sm85ZjjXAFBA%2B3nb7SZXSnLXTmptWfXkawvsz%2BTXLgRVyfW31L&amp;unid=hlt&amp;spm=2014.12327544.1.21567132138',13892);" target="_blank"><span style="text-align:center;float:left;width:66px;height:35px;font-size:16px;">￥${item.newPrice}</span><span style="text-align:center;float:left;width:64px;height:35px;font-size:14px;">去购买</span></a>
+                    <span class="fl">
+                        <a class="share_btn pngfix fl" href="javascript:void('${item.id}_00');" onclick="javascript:share(${item.id})"></a>
+                        <a class="fl num_lico" href="javascript:void('${item.id}_01');" onclick="javascript:share(${item.id});" id="share_${item.id}">300</a>
+                        <i class="num_rico"></i>
+                    </span>
+                    <span class="fl">
+                        <a class="collect_btn pngfix fl" href="javascript:void('${item.id}_10');" onclick="javascript:collect(${item.id});"></a>
+                        <!--window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F%3Fpid%3D13892%26via%3DQZ%2eASSISTANT%2eFEED%2eSHARE&amp;title='+encodeURIComponent('美发工具海绵卷发棒')+'&amp;pics='+encodeURIComponent('http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg')+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent('使用方便简洁，百变发型随心所欲，真的很实用哦~'),'_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');return false;-->
+                        <a class="fl num_lico" href="javascript:void('${item.id}_11');" onclick="javascript:collect(${item.id});" id="collect_${item.id}">403</a>
+                        <i class="num_rico"></i></span>
+                    <a class="tobuy_btn fr" href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
+                        <span style="text-align:center;float:left;width:66px;height:35px;font-size:16px;">￥${item.newPrice}</span><span style="text-align:center;float:left;width:64px;height:35px;font-size:14px;">去购买</span>
+                    </a>
                 </p>
             </li>
             <div class="clear"></div>
@@ -277,8 +280,8 @@
         itemshow();
     </script>
     </div>
-    <div class="c mt15"><img src="./static/images/bmuyoule.png"></div>
-    <div class="tbanner" style="position:relative;width:678px;height:217px;background:url('./static/images/bottombanner2.png') center center no-repeat;">
+    <div class="c mt15"><img src="/static/images/bmuyoule.png"></div>
+    <div class="tbanner" style="position:relative;width:678px;height:217px;background:url('/static/images/bottombanner2.png') center center no-repeat;">
         <a style="position:absolute;left:28px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/lady.php?pid=mm_27508566_3117978_10377431&amp;mode=86" target="_blank"></a>
         <a style="position:absolute;left:155px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://s.click.taobao.com/t_8?e=7HZ5x%2BOzffaf8CdCl42apBmoFQ%3D%3D&amp;p=mm_27508566_0_0" target="_blank"></a>
         <a style="position:absolute;left:290px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/jewelry.php?pid=mm_27508566_3117978_10377431&amp;mode=86" target="_blank"></a>

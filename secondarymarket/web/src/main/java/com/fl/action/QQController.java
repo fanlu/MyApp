@@ -3,12 +3,11 @@ package com.fl.action;
 import com.fl.mapper.CategoryMapper;
 import com.fl.mapper.ItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/qqapp")
+public class QQController {
 
     @Autowired
     private CategoryMapper categoryMapper;
@@ -36,16 +35,20 @@ public class HomeController {
     }
 
     @RequestMapping("/ilike")
-    public void ilike(HttpServletRequest request){
+    @ResponseBody
+    public String ilike(HttpServletRequest request){
         System.out.println(1);
+        return null;
     }
 
     @RequestMapping("/icollect")
+    @ResponseBody
     public void icollect(HttpServletRequest request){
         System.out.println(2);
     }
 
     @RequestMapping("/iclick")
+    @ResponseBody
     public void iclick(HttpServletRequest request){
         System.out.println(3);
     }

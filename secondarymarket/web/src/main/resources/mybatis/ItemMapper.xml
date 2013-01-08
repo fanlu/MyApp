@@ -9,11 +9,19 @@
         <result property="desc" column="desc" />
         <result property="pic" column="pic" />
         <result property="categoryId" column="categoryId" />
+        <result property="tbPath" column="tbPath" />
         <result property="newPrice" column="newPrice" />
         <result property="oldPrice" column="oldPrice" />
+        <collection property="evalList" javaType="Eval">
+            <id property="id" column="eval_id" />
+            <result property="eval" column="eval_eval" />
+        </collection>
 	</resultMap>
 
 	<select id="getAll" resultMap="itemMap">
-		select * from item
+		select i.*,
+		e.id as eval_id,
+		e.eval as eval_eval
+		from item i left join eval e on i.Id = e.itemId
 	</select>
 </mapper> 
