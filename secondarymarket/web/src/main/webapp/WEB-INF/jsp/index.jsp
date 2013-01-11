@@ -7,18 +7,19 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" import="com.fl.util.Constant" %>
+<c:set var="staticUrl" value="<%=Constant.staticUrl%>"/>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <title>妈妈跳蚤街</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles/style.css">
-    <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="${staticUrl}/styles/style.css">
+    <script type="text/javascript" src="${staticUrl}/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid=100681361&platform=qzone"></script>
     <script type="text/javascript">
-        function openShareDialog(iid){
-            var shareSuccessurl="/TXQZ/xks/resultshareSuccess";
+        function openShareDialog(iid,type){
             fusion2.dialog.share
             ({
                 url:'http://rc.qzone.qq.com/100681361',
@@ -32,7 +33,7 @@
                 onShown:  function (opt){
                 },
                 onSuccess : function (opt){
-                    jQuery.get(shareSuccessurl, function(data) {
+                    $.get("/qqapp/ishare/"+type, function(data) {
                     });
                 },
                 onCancel : function (opt){
@@ -59,7 +60,7 @@
                     //alert("服务器繁忙，请稍候重试!");
                 }
             });
-            openShareDialog(iid);
+            openShareDialog(iid,"ilike");
         }
         function collect(iid){
             var snum = $('#collect_'+iid).html();
@@ -78,6 +79,7 @@
                     //alert("服务器繁忙，请稍候重试!");
                 }
             });
+            openShareDialog(iid,"icollect");
         }
         function showItems(itype){
             $('.current').removeClass('current');
@@ -130,7 +132,7 @@
 <body>
 <div id="mainbox">
     <!--<div class="hd" style="position:fixed;width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">-->
-    <div class="hd" style="position:;width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">
+    <div class="hd" style="position:fixed;;width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">
         <div>
             <div class="logo"></div>
             <div class="clear"></div>
@@ -150,7 +152,7 @@
     </div>
 
     <div class="bd" style="padding-top:0px;">
-        <img src="/static/images/topbanner.png">
+        <img src="${staticUrl}/images/topbanner.png">
     <div class="wrap_list">
     <c:forEach items="${items}" var="item">
     <div class="wrap_box itemtype_0 itemtype_${item.categoryId} ">
@@ -212,19 +214,11 @@
         function getArray(count,maxs,mins){
             while(tmparray.length < count){
                 var temp = getRandom(maxs,mins);
-                if(!serch(tmparray,temp)){
+                if($.inArray(temp, tmparray)==-1){
                     tmparray.push(temp);
                 }
             }
             return tmparray;
-        }
-        function serch(array,num){   //array是否重复的数
-            for(var i=0;i<array.length;i++){
-                if(array[i] == num){
-                    return true;
-                }
-            }
-            return false;
         }
         function random_select(itemtype,itemtypes,amount){
             var arr = new Array();
@@ -280,8 +274,8 @@
         itemshow();
     </script>
     </div>
-    <div class="c mt15"><img src="/static/images/bmuyoule.png"></div>
-    <div class="tbanner" style="position:relative;width:678px;height:217px;background:url('/static/images/bottombanner2.png') center center no-repeat;">
+    <div class="c mt15"><img src="${staticUrl}/images/bmuyoule.png"></div>
+    <div class="tbanner" style="position:relative;width:678px;height:217px;background:url('${staticUrl}/images/bottombanner2.png') center center no-repeat;">
         <a style="position:absolute;left:28px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/lady.php?pid=mm_27508566_3117978_10377431&amp;mode=86" target="_blank"></a>
         <a style="position:absolute;left:155px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://s.click.taobao.com/t_8?e=7HZ5x%2BOzffaf8CdCl42apBmoFQ%3D%3D&amp;p=mm_27508566_0_0" target="_blank"></a>
         <a style="position:absolute;left:290px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/jewelry.php?pid=mm_27508566_3117978_10377431&amp;mode=86" target="_blank"></a>
