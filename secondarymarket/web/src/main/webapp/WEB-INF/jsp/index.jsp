@@ -99,7 +99,7 @@
                 $('.itemtype_2').css('display','block');
             }else if(itype==4){
                 $('.itemtype_4').css('display','block');
-                $('<p class="middletip">每天推荐5样配饰和5样美妆，下面是精选出来的5款美妆哦~</p>').appendTo('.wrap_list');
+                $('<p class="middletip">每天推荐5样配饰下和5样美妆，面是精选出来的5款美妆哦~</p>').appendTo('.wrap_list');
                 $('.itemtype_5').appendTo(".wrap_list");
                 $('.itemtype_5').css('display','block');
             }else if(itype==5){
