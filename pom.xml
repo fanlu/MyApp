@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mmtzj</groupId>
+	<artifactId>mmtzj-project</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>mmtzj :: Project</name>
+	<packaging>pom</packaging>
+
+	<description>mmtzj</description>
+	<url>http://www.github.com/springside/springside4</url>
+	<inceptionYear>2012-2013</inceptionYear>
+	<organization>
+		<name>mmtzj</name>
+		<url>http://www.mmtzj.com</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>fanlu</id>
+			<name>fanlu</name>
+			<email>fanlu7311 at 163.com</email>
+			<organization>mmtzj</organization>
+			<roles>
+				<role>Project lead</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+	<modules>
+		<module>modules</module>
+		<module>secondarymarket</module>
+  </modules>
+
+<!--
+	<ciManagement>
+        <system>Jenkins</system>
+        <url>http://ec2-107-22-29-7.compute-1.amazonaws.com/hudson/</url>
+    </ciManagement>-->
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/fanlu/MyApp/issue</url>
+    </issueManagement>
+
+    <scm>
+        <url>https://github.com/fanlu/MyApp</url>
+        <connection>scm:git:git://github.com/fanlu/MyApp.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:fanlu/MyApp.git</developerConnection>
+    </scm>
+</project>
