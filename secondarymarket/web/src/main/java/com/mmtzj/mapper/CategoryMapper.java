@@ -1,7 +1,7 @@
-package com.fl.mapper;
+package com.mmtzj.mapper;
 
 
-import com.fl.domain.Category;
+import com.mmtzj.domain.Category;
 
 import java.util.List;
 

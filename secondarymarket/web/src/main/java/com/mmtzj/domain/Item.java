@@ -1,4 +1,4 @@
-package com.fl.domain;
+package com.mmtzj.domain;
 
 import com.google.common.collect.Lists;
 

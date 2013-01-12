@@ -1,6 +1,6 @@
-package com.fl.mapper;
+package com.mmtzj.mapper;
 
-import com.fl.domain.Item;
+import com.mmtzj.domain.Item;
 
 import java.util.List;
 

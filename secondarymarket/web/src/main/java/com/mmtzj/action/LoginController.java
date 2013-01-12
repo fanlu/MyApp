@@ -1,4 +1,4 @@
-package com.fl.action;
+package com.mmtzj.action;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -11,14 +11,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mmtzj.RenRenConstant;
+import com.mmtzj.TaobaoConstant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.WebUtils;
 
-import com.fl.RenRenConstant;
-import com.fl.TaobaoConstant;
 import com.taobao.api.ApiException;
 import com.taobao.api.Constants;
 import com.taobao.api.DefaultTaobaoClient;

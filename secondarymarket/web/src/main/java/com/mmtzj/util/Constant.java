@@ -1,4 +1,4 @@
-package com.fl.util;
+package com.mmtzj.util;
 
 /**
  * Created with IntelliJ IDEA.

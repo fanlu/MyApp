@@ -121,44 +121,35 @@
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-        <!-- log4j 实际调用slf4j -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
-            <scope>runtime</scope>
         </dependency>
-
-        <!-- common-logging 实际调用slf4j -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <scope>runtime</scope>
         </dependency>
-
-        <!-- java.util.logging 实际调用slf4j -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jul-to-slf4j</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
-        <!-- log4jdbc -->
         <dependency>
             <groupId>org.lazyluke</groupId>
             <artifactId>log4jdbc-remix</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>net.sf</groupId>
-            <artifactId>log4jdbc4</artifactId>
-            <version>1.2beta2</version>
-        </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>

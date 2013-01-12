@@ -1,4 +1,4 @@
-package com.fl;
+package com.mmtzj;
 
 public class RenRenConstant {
 	

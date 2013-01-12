@@ -1,4 +1,4 @@
-package com.fl.domain;
+package com.mmtzj.domain;
 
 /**
  * Created with IntelliJ IDEA.

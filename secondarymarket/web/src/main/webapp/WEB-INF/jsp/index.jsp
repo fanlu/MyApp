@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" import="com.fl.util.Constant" %>
+<%@ page language="java" import="com.mmtzj.util.Constant" %>
 <c:set var="staticUrl" value="<%=Constant.staticUrl%>"/>
 <html>
 <head>

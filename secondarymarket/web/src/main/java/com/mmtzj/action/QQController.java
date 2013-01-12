@@ -1,7 +1,7 @@
-package com.fl.action;
+package com.mmtzj.action;
 
-import com.fl.mapper.CategoryMapper;
-import com.fl.mapper.ItemMapper;
+import com.mmtzj.mapper.CategoryMapper;
+import com.mmtzj.mapper.ItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
