@@ -10,6 +10,7 @@
 
     <properties>
         <!-- 主要依赖库的版本定义 -->
+        <mmtzj.version>1.0-SNAPSHOT</mmtzj.version>
         <spring.version>3.2.0.RELEASE</spring.version>
         <hibernate.version>4.1.9.Final</hibernate.version>
         <mybatis.version>3.1.1</mybatis.version>
@@ -102,7 +103,11 @@
                 <version>${springside.version}</version>
             </dependency>
             SPRINGSIDE MODULES end -->
-
+            <dependency>
+                <groupId>com.mmtzj</groupId>
+                <artifactId>core</artifactId>
+                <version>${mmtzj.version}</version>
+            </dependency>
             <!-- SPRING basic begin(一般不需要显式定义) -->
             <dependency>
                 <groupId>org.springframework</groupId>
