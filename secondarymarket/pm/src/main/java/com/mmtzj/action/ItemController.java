@@ -20,4 +20,9 @@ public class ItemController {
     public String addItem(HttpServletRequest request){
         return "/item/addItem";
     }
+
+    @RequestMapping("/list")
+    public String listItem(HttpServletRequest request){
+        return "/item/listItem";
+    }
 }
