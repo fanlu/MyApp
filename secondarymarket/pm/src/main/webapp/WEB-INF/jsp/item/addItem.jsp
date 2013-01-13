@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
     <title></title>
     <link href="/static/js/fineuploader/fineuploader.css" rel="stylesheet">
@@ -20,8 +22,12 @@
     <script src="/static/js/fineuploader/js/dnd.js"></script>
     <script src="/static/js/fineuploader/js/uploader.js"></script>
     <script src="/static/js/fineuploader/js/jquery-plugin.js"></script>
+    <style type="text/css">
+
+    </style>
 </head>
 <body>
+测试
 <div id="jquery-wrapped-fine-uploader"></div>
 <div id="addyoujianfujian"></div>
 </body>

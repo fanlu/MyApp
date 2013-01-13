@@ -13,14 +13,18 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <title></title>
     <link href="/static/js/jqueryui/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
     <link href="/static/js/jqgrid/ui.jqgrid.css" rel="stylesheet">
+    <link href="/static/styles/styles.css" rel="stylesheet">
     <script src="/static/js/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/jqueryui/jquery-ui-1.9.2.custom.min.js"></script>
     <script src="/static/js/jqgrid/grid.locale-cn.js"></script>
     <script src="/static/js/jqgrid/jquery.jqGrid.min.js"></script>
     <script src="/static/js/jqgrid/ObjectTemplate.js"></script>
 </head>
 <body>
+<input type="button" value="新增" id="newBtn"/>
 <table id="list4"></table>
 <div id="gridPager"></div>
+<div id="dialog"></div>
 </body>
 <script type="text/javascript">
     $("#list4").jqGrid($.extend(ObjectTemplate.gridSetting,{
@@ -37,5 +41,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         ],
         caption: "单品"
     }));
+    $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
+    $("#newBtn").click(function(){
+        $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 480});
+        $("#dialog").load("/item/forAdd").dialog("open");
+    });
 </script>
 </html>

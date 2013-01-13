@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mmtzj.TaobaoConstant;
+import com.mmtzj.util.TaobaoConstant;
 import org.junit.Before;
 import org.junit.Test;
 

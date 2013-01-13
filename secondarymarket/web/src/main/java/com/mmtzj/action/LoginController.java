@@ -11,8 +11,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mmtzj.RenRenConstant;
-import com.mmtzj.TaobaoConstant;
+import com.mmtzj.util.RenRenConstant;
+import com.mmtzj.util.TaobaoConstant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

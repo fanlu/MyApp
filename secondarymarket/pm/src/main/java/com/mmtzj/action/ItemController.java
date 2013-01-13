@@ -23,9 +23,14 @@ public class ItemController {
     @Resource
     private ItemService itemService;
 
+    @RequestMapping("/forAdd")
+    public String forAddItem(HttpServletRequest request){
+        return "/item/addItem";
+    }
+
     @RequestMapping("/add")
     public String addItem(HttpServletRequest request){
-        return "/item/addItem";
+        return "";
     }
 
     @RequestMapping("/list")
