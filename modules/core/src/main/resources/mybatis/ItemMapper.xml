@@ -1,27 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mmtzj.mapper.ItemMapper">
-	<resultMap id="itemMap" type="Item">
-		<id property="id" column="id" />
-		<result property="name" column="name" />
-        <result property="title" column="title" />
-        <result property="desc" column="desc" />
-        <result property="pic" column="pic" />
-        <result property="categoryId" column="categoryId" />
-        <result property="tbPath" column="tbPath" />
-        <result property="newPrice" column="newPrice" />
-        <result property="oldPrice" column="oldPrice" />
+    <resultMap id="itemMap" type="Item">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="title" column="title"/>
+        <result property="desc" column="desc"/>
+        <result property="pic" column="pic"/>
+        <result property="categoryId" column="categoryId"/>
+        <result property="tbPath" column="tbPath"/>
+        <result property="newPrice" column="newPrice"/>
+        <result property="oldPrice" column="oldPrice"/>
         <collection property="evalList" javaType="Eval">
-            <id property="id" column="eval_id" />
-            <result property="eval" column="eval_eval" />
+            <id property="id" column="eval_id"/>
+            <result property="eval" column="eval_eval"/>
         </collection>
-	</resultMap>
+    </resultMap>
 
-	<select id="getAll" resultMap="itemMap">
+    <select id="getAll" resultMap="itemMap">
 		select i.*,
 		e.id as eval_id,
 		e.eval as eval_eval
 		from item i left join eval e on i.Id = e.itemId
 	</select>
+
+    <sql id="where">
+
+    </sql>
+
+
+    <select id="find" resultMap="itemMap">
+        SELECT
+        *
+        FROM item
+        <include refid="where"/>
+        <if test="orderBy != null and orderBy != ''">
+            order by ${orderBy} ${order}
+        </if>
+        <if test="limit != null">
+            limit
+            <if test="offset != null">
+                #{offset},
+            </if>
+            #{limit}
+        </if>
+    </select>
+
+    <select id="findPageCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT count(id) FROM item
+        <include refid="where"/>
+    </select>
 </mapper> 

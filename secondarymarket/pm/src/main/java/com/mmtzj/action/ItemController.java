@@ -1,8 +1,12 @@
 package com.mmtzj.action;
 
+import com.mmtzj.service.ItemService;
+import com.mmtzj.util.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/item")
 public class ItemController {
 
+    @Resource
+    private ItemService itemService;
+
     @RequestMapping("/add")
     public String addItem(HttpServletRequest request){
         return "/item/addItem";
@@ -23,6 +30,14 @@ public class ItemController {
 
     @RequestMapping("/list")
     public String listItem(HttpServletRequest request){
+
         return "/item/listItem";
+    }
+
+    @RequestMapping("/page")
+    @ResponseBody
+    public Page pageItem(HttpServletRequest request, Page page){
+        itemService.findPage(page);
+        return page;
     }
 }
