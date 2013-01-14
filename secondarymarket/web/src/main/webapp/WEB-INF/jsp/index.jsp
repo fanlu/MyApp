@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="com.mmtzj.util.Constant" %>
+<%@ page import="com.mmtzj.util.QQConstant" %>
 <c:set var="staticUrl" value="<%=Constant.staticUrl%>"/>
+<c:set var="appid" value="<%=QQConstant.APP_ID_SM%>"/>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,12 +19,12 @@
     <title>妈妈跳蚤街</title>
     <link rel="stylesheet" type="text/css" href="${staticUrl}/styles/style.css">
     <script type="text/javascript" src="${staticUrl}/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid=100681361&platform=qzone"></script>
+    <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid=${appid}&platform=qzone"></script>
     <script type="text/javascript">
         function openShareDialog(iid,type){
             fusion2.dialog.share
             ({
-                url:'http://rc.qzone.qq.com/100681361',
+                url:'http://rc.qzone.qq.com/${appid}',
                 showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
                 desc:$("#desc_"+iid).text(),/*默认分享理由(可选)*/
                 title:$("#title_"+iid).text(),/*分享标题(可选)*/
@@ -132,7 +134,7 @@
 <body>
 <div id="mainbox">
     <!--<div class="hd" style="position:fixed;width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">-->
-    <div class="hd" style="position:fixed;;width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">
+    <div class="hd" style="width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">
         <div>
             <div class="logo"></div>
             <div class="clear"></div>
