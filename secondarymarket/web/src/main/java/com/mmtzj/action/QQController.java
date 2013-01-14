@@ -1,5 +1,7 @@
 package com.mmtzj.action;
 
+import com.google.common.collect.Maps;
+import com.mmtzj.domain.Item;
 import com.mmtzj.mapper.CategoryMapper;
 import com.mmtzj.mapper.ItemMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,7 +35,17 @@ public class QQController {
     @RequestMapping("/")
     public String index(Model model){
         model.addAttribute("categories", categoryMapper.getCategories());
-        model.addAttribute("items", itemMapper.getAll());
+        List<Item> items = itemMapper.getAll();
+        model.addAttribute("items", items);
+        Map<String, Integer> itemTypes = Maps.newHashMap();
+        for(Item item : items){
+            if(itemTypes.containsKey("itemtype"+item.getCategoryId())){
+                itemTypes.put("itemtype"+item.getCategoryId(), itemTypes.get("itemtype"+item.getCategoryId())+1);
+            }else{
+                itemTypes.put("itemtype"+item.getCategoryId(), 1);
+            }
+        }
+        model.addAttribute("itemTypes", itemTypes);
         return "index";
     }
 

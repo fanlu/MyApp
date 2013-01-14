@@ -198,11 +198,11 @@
     </div>
     </c:forEach>
     <script type="text/javascript">
-        var itemtype1 = parseInt('33');
-        var itemtype2 = parseInt('16');
-        var itemtype3 = parseInt('16');
-        var itemtype4 = parseInt('17');
-        var itemtype5 = parseInt('17');
+        var itemtype1 = parseInt('${itemTypes.itemtype1}');
+        var itemtype2 = parseInt('${itemTypes.itemtype2}');
+        var itemtype3 = parseInt('${itemTypes.itemtype3}');
+        var itemtype4 = parseInt('${itemTypes.itemtype4}');
+        var itemtype5 = parseInt('${itemTypes.itemtype5}');
         var itemplus = parseInt('0');
         var item1toshow = 10;
         var item2toshow = 5;
@@ -273,7 +273,7 @@
             //$('.paipai').appendTo(".wrap_list");
             itemcounts += itemplus;
         }
-//        itemshow();
+        itemshow();
     </script>
     </div>
     <div class="c mt15"><img src="${staticUrl}/images/bmuyoule.png"></div>
