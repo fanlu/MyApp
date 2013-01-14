@@ -31,6 +31,8 @@ public class Item {
 
     private float oldPrice;
 
+    private int status;
+
     private List<Eval> evalList = Lists.newArrayList();
 
     public int getId() {
@@ -111,5 +113,13 @@ public class Item {
 
     public void setEvalList(List<Eval> evalList) {
         this.evalList = evalList;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -273,7 +273,7 @@
             //$('.paipai').appendTo(".wrap_list");
             itemcounts += itemplus;
         }
-        itemshow();
+//        itemshow();
     </script>
     </div>
     <div class="c mt15"><img src="${staticUrl}/images/bmuyoule.png"></div>

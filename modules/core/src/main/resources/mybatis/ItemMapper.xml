@@ -12,6 +12,7 @@
         <result property="tbPath" column="tbPath"/>
         <result property="newPrice" column="newPrice"/>
         <result property="oldPrice" column="oldPrice"/>
+        <result property="status" column="status"/>
         <collection property="evalList" javaType="Eval">
             <id property="id" column="eval_id"/>
             <result property="eval" column="eval_eval"/>
@@ -23,6 +24,7 @@
 		e.id as eval_id,
 		e.eval as eval_eval
 		from item i left join eval e on i.Id = e.itemId
+		where i.status=1
 	</select>
 
     <sql id="where">
