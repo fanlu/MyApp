@@ -33,6 +33,10 @@ public class Item {
 
     private int status;
 
+    private int likeCount;
+
+    private int collectCount;
+
     private List<Eval> evalList = Lists.newArrayList();
 
     public int getId() {
@@ -121,5 +125,21 @@ public class Item {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getCollectCount() {
+        return collectCount;
+    }
+
+    public void setCollectCount(int collectCount) {
+        this.collectCount = collectCount;
     }
 }

@@ -179,13 +179,13 @@
                 <p class="wrap_bd_bottom">
                     <span class="fl">
                         <a class="share_btn pngfix fl" href="javascript:void('${item.id}_00');" onclick="javascript:share(${item.id})"></a>
-                        <a class="fl num_lico" href="javascript:void('${item.id}_01');" onclick="javascript:share(${item.id});" id="share_${item.id}">300</a>
+                        <a class="fl num_lico" href="javascript:void('${item.id}_01');" onclick="javascript:share(${item.id});" id="share_${item.id}">${item.likeCount}</a>
                         <i class="num_rico"></i>
                     </span>
                     <span class="fl">
                         <a class="collect_btn pngfix fl" href="javascript:void('${item.id}_10');" onclick="javascript:collect(${item.id});"></a>
                         <!--window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F%3Fpid%3D13892%26via%3DQZ%2eASSISTANT%2eFEED%2eSHARE&amp;title='+encodeURIComponent('美发工具海绵卷发棒')+'&amp;pics='+encodeURIComponent('http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg')+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent('使用方便简洁，百变发型随心所欲，真的很实用哦~'),'_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');return false;-->
-                        <a class="fl num_lico" href="javascript:void('${item.id}_11');" onclick="javascript:collect(${item.id});" id="collect_${item.id}">403</a>
+                        <a class="fl num_lico" href="javascript:void('${item.id}_11');" onclick="javascript:collect(${item.id});" id="collect_${item.id}">${item.collectCount}</a>
                         <i class="num_rico"></i></span>
                     <a class="tobuy_btn fr" href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
                         <span style="text-align:center;float:left;width:66px;height:35px;font-size:16px;">￥${item.newPrice}</span><span style="text-align:center;float:left;width:64px;height:35px;font-size:14px;">去购买</span>

@@ -1,8 +1,6 @@
 package com.mmtzj.mapper;
 
-import com.mmtzj.domain.Item;
-
-import java.util.List;
+import com.mmtzj.domain.Icollect;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,7 +10,6 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @MyBatisRepository
-public interface ItemMapper extends BaseMapper<Item>{
+public interface IcollectMapper extends BaseMapper<Icollect>{
 
-    public List<Item> getAll();
 }

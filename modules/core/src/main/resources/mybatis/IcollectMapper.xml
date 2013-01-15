@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mmtzj.mapper.IcollectMapper">
+	<resultMap id="icollectMap" type="Icollect">
+		<id property="id" column="id" />
+		<result property="ip" column="ip" />
+        <result property="creationTime" column="creationTime" />
+        <result property="itemId" column="itemId" />
+        <result property="userId" column="userId" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Icollect" useGeneratedKeys="true" keyProperty="id">
+          insert into icollect (ip,creationTime,itemId,userId) values (#{ip},now(),#{itemId},0)
+	</insert>
+</mapper> 

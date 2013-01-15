@@ -1,5 +1,6 @@
 package com.mmtzj.mapper;
 
+import com.mmtzj.domain.Ilike;
 import com.mmtzj.domain.Item;
 
 import java.util.List;
@@ -12,7 +13,6 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @MyBatisRepository
-public interface ItemMapper extends BaseMapper<Item>{
+public interface IlikeMapper extends BaseMapper<Ilike>{
 
-    public List<Item> getAll();
 }

@@ -13,6 +13,8 @@
         <result property="newPrice" column="newPrice"/>
         <result property="oldPrice" column="oldPrice"/>
         <result property="status" column="status"/>
+        <result property="likeCount" column="likeCount"/>
+        <result property="collectCount" column="collectCount"/>
         <collection property="evalList" javaType="Eval">
             <id property="id" column="eval_id"/>
             <result property="eval" column="eval_eval"/>
@@ -26,6 +28,10 @@
 		from item i left join eval e on i.Id = e.itemId
 		where i.status=1
 	</select>
+
+    <select id="get" resultMap="itemMap" parameterType="hashmap">
+        select * from item where id = #{id}
+    </select>
 
     <sql id="where">
 
@@ -53,4 +59,41 @@
         SELECT count(id) FROM item
         <include refid="where"/>
     </select>
+
+    <update id="update" parameterType="Item">
+        update item
+        <set>
+            <if test="title!=null">
+                title = #{title},
+            </if>
+            <if test="pic!=null">
+                pic = #{pic},
+            </if>
+            <if test="desc!=null">
+                `desc` = #{desc},
+            </if>
+            <if test="categoryId!=null and categoryId>0">
+                categoryId = #{categoryId},
+            </if>
+            <if test="tbPath!=null">
+                tbPath  = #{tbPath},
+            </if>
+            <if test="newPrice!=null and newPrice>0">
+                newPrice = #{newPrice},
+            </if>
+            <if test="oldPrice!=null and oldPrice>0">
+                oldPrice = #{oldPrice},
+            </if>
+            <if test="status!=null and status>0">
+                status = #{status},
+            </if>
+            <if test="likeCount!=null and likeCount>0">
+                likeCount = #{likeCount},
+            </if>
+            <if test="collectCount!=null and collectCount>0">
+                collectCount = #{collectCount},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper> 

@@ -1,9 +1,15 @@
 package com.mmtzj.action;
 
 import com.google.common.collect.Maps;
+import com.mmtzj.domain.Icollect;
 import com.mmtzj.domain.Item;
 import com.mmtzj.mapper.CategoryMapper;
+import com.mmtzj.mapper.IcollectMapper;
+import com.mmtzj.mapper.IlikeMapper;
 import com.mmtzj.mapper.ItemMapper;
+import com.mmtzj.util.BaseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +32,19 @@ import java.util.Map;
 @RequestMapping("/qqapp")
 public class QQController {
 
+    Logger logger = LoggerFactory.getLogger(QQController.class);
+
     @Autowired
     private CategoryMapper categoryMapper;
 
     @Autowired
     private ItemMapper itemMapper;
+
+    @Autowired
+    private IlikeMapper ilikeMapper;
+
+    @Autowired
+    private IcollectMapper icollectMapper;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -52,20 +66,34 @@ public class QQController {
     @RequestMapping("/ilike")
     @ResponseBody
     public String ilike(HttpServletRequest request){
-        System.out.println(1);
+        int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
+        logger.info("the ip {} like the item {}", BaseUtil.getIP(request), itemId);
+        Item itemDB = itemMapper.get(itemId);
+        Item item = new Item();
+        item.setId(itemId);
+        item.setLikeCount(itemDB.getLikeCount() + 1);
+        itemMapper.update(item);
         return null;
     }
 
     @RequestMapping("/icollect")
     @ResponseBody
-    public void icollect(HttpServletRequest request){
-        System.out.println(2);
+    public String icollect(HttpServletRequest request){
+        int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
+        logger.info("the ip {} collect the item {}", BaseUtil.getIP(request), itemId);
+        Item itemDB = itemMapper.get(itemId);
+        Item item = new Item();
+        item.setId(itemId);
+        item.setCollectCount(itemDB.getCollectCount() + 1);
+        itemMapper.update(item);
+        return null;
     }
 
     @RequestMapping("/iclick")
     @ResponseBody
-    public void iclick(HttpServletRequest request){
-        System.out.println(3);
+    public String iclick(HttpServletRequest request){
+        logger.info("the ip {} click the item {}", BaseUtil.getIP(request), request.getParameter("iid"));
+        return null;
     }
 
 }
