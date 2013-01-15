@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,18 +35,17 @@ public class UploadController {
         List<MultipartFile> files = fileRequest.getFiles("qqfile");
         ResourceBundle rb = ResourceBundle.getBundle("file");
         String filePath = rb.getString("file.path") + File.separator + new DateTime().toString("yyyyMMdd") + File.separator;
-        for (MultipartFile myfile : files)
-        {
+        File pathFile = new File(filePath);
+        if(!pathFile.exists()){
+            pathFile.mkdirs();
+        }
+        for (MultipartFile myfile : files){
             String path = myfile.getOriginalFilename();
-            String fileName = path;
+            String newName = Long.toHexString(new Date().getTime()) + path.substring(path.lastIndexOf("."));
             InputStream is = null;
             try {
                 is = myfile.getInputStream();
-                File pathFile = new File(filePath);
-                if(!pathFile.exists()){
-                    pathFile.mkdir();
-                }
-                File destFile = new File(filePath +fileName);
+                File destFile = new File(filePath +newName);
                 IOUtils.copy(is, new FileOutputStream(destFile));
             } catch (IOException e) {
                 e.printStackTrace();
