@@ -11,7 +11,8 @@
 <%@ page import="com.mmtzj.util.QQConstant" %>
 <c:set var="staticUrl" value="<%=Constant.staticUrl%>"/>
 <c:set var="appid" value="<%=QQConstant.APP_ID_SM%>"/>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="utf-8" />
@@ -134,7 +135,7 @@
 <body>
 <div id="mainbox">
     <!--<div class="hd" style="position:fixed;width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">-->
-    <div class="hd" style="width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">
+    <div class="hd" style="position:;width:760px;left:0;top:0;right:0;z-index:2;margin:auto;">
         <div>
             <div class="logo"></div>
             <div class="clear"></div>
@@ -154,8 +155,8 @@
     </div>
 
     <div class="bd" style="padding-top:0px;">
-        <img src="${staticUrl}/images/topbanner.png">
-    <div class="wrap_list">
+        <div class="tbanner"><img src="${staticUrl}/images/topbanner.png"></div>
+        <div class="wrap_list">
     <c:forEach items="${items}" var="item">
     <div class="wrap_box itemtype_0 itemtype_${item.categoryId} ">
         <p class="wrap_hd"><a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
@@ -164,7 +165,8 @@
         <ul class="wrap_bd">
             <li class="fl w310">
                 <a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
-                    <img id="pic_${item.id}" src="${item.pic}"></a>
+                    <!--<img id="pic_${item.id}" src="${item.pic}"></a>-->
+                    <img id="pic_${item.id}" src="http://i1.mmtzj.com/images/20130114/20130114223537.png"></a>
             </li>
             <li class="fr">
                 <p class="item_desc"><span class="orange">小编推荐：</span><span id="desc_${item.id}">${item.desc}</span></p>
