@@ -11,16 +11,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
     <title></title>
-    <link href="/static/js/jqueryui/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
-    <link href="/static/js/jqgrid/ui.jqgrid.css" rel="stylesheet">
-    <link href="/static/css/styles.css" rel="stylesheet">
-    <link href="/static/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/static/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/static/css/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/static/js/jqueryui/jquery-ui-1.9.2.custom.min.js"></script>
-    <script src="/static/js/jqgrid/grid.locale-cn.js"></script>
-    <script src="/static/js/jqgrid/jquery.jqGrid.min.js"></script>
-    <script src="/static/js/jqgrid/ObjectTemplate.js"></script>
+<jsp:include page="../meta.jsp" />
 </head>
 <body>
 <input type="button" value="新增" id="newBtn" class="btn btn-primary"/>
@@ -45,7 +36,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     }));
     $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
     $("#newBtn").click(function(){
-        $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 480});
+        $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 600});
         $("#dialog").load("/item/forAdd").dialog("open");
     });
 </script>

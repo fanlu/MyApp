@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangxin
@@ -11,25 +12,38 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
     <title></title>
-    <link href="/static/js/fineuploader/fineuploader.css" rel="stylesheet">
-    <script src="/static/js/jquery-1.8.3.min.js"></script>
-    <script src="/static/js/fineuploader/js/util.js"></script>
-    <script src="/static/js/fineuploader/js/button.js"></script>
-    <script src="/static/js/fineuploader/js/handler.base.js"></script>
-    <script src="/static/js/fineuploader/js/handler.form.js"></script>
-    <script src="/static/js/fineuploader/js/handler.xhr.js"></script>
-    <script src="/static/js/fineuploader/js/uploader.basic.js"></script>
-    <script src="/static/js/fineuploader/js/dnd.js"></script>
-    <script src="/static/js/fineuploader/js/uploader.js"></script>
-    <script src="/static/js/fineuploader/js/jquery-plugin.js"></script>
-    <style type="text/css">
-
-    </style>
 </head>
 <body>
-测试
-<div id="jquery-wrapped-fine-uploader"></div>
-<div id="addyoujianfujian"></div>
+<form action="/item/add" method="POST">
+<table>
+    <input type="hidden" name="id" value="${item.id}"/>
+    <tr>
+        <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}"/></td>
+    </tr>
+    <tr>
+        <td>图片：</td><td colspan="3"><input type="text" name="pic" id="pic" value="${item.pic}"/><div id="jquery-wrapped-fine-uploader"></div></td>
+    </tr>
+    <tr>
+        <td>小编：</td><td colspan="3"><textarea rows="4" cols="10" name="desc">${item.desc}</textarea></td>
+    </tr>
+    <tr>
+        <td>推广链接：</td><td colspan="3"><input type="text" name="tbPath" value="${item.tbPath}"/></td>
+    </tr>
+    <tr>
+        <td>类别：</td>
+        <td colspan="3">
+            <select name="categoryId">
+                <c:forEach items="${categories}" var="category">
+                    <option <c:if test="${item.categoryId eq category.id}">selected="selected"</c:if> value="${category.id}">${category.title}</option>
+                </c:forEach>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>原价：</td><td colspan="3"><input type="text" name="oldPrice" value="${item.oldPrice}"/></td><td>现价：</td><td><input type="text" name="newPrice" value="${item.newPrice}"/></td>
+    </tr>
+</table>
+</form>
 </body>
 <script type="text/javascript">
     $('#jquery-wrapped-fine-uploader').fineUploader({
@@ -37,15 +51,16 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
             endpoint: '/upload',
             forceMultipart:true
         },
-        multiple:true,
+        multiple:false,
         validation: {
             allowedExtensions: ['jpeg', 'jpg', 'gif', 'png','xls','doc','xlsx','docx','pdf','txt'],
             sizeLimit: 40960000 // 50 kB = 50 * 1024 bytes16.
         },
         callbacks: {
             onComplete: function(id, fileName, responseJSON) {
+                alert(fileName);
                 if (responseJSON.success) {
-                    $("#addyoujianfujian").append(fileName+";");
+                    $("#pic").val(fileName);
                 }
             }
         }

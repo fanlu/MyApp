@@ -39,6 +39,7 @@ public class UploadController {
         if(!pathFile.exists()){
             pathFile.mkdirs();
         }
+        String url = null;
         for (MultipartFile myfile : files){
             String path = myfile.getOriginalFilename();
             String newName = Long.toHexString(new Date().getTime()) + path.substring(path.lastIndexOf("."));
@@ -50,7 +51,8 @@ public class UploadController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            url = "http://i1.mmtzj.com/images/" + new DateTime().toString("yyyyMMdd") + "/" +newName;
         }
-        return "{\"success\": true}";
+        return "{\"success\": true, \"filename\":\""+url+"\"}";
     }
 }
