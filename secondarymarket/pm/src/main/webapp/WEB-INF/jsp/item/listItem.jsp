@@ -15,6 +15,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 </head>
 <body>
 <input type="button" value="新增" id="newBtn" class="btn btn-primary"/>
+<input type="button" value="修改" id="updateBtn" class="btn btn-primary"/>
 <table id="list4"></table>
 <div id="gridPager"></div>
 <div id="dialog"></div>
@@ -25,19 +26,24 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         colNames:['id','名称', '主题', '图片','编辑描述','推广链接','类别'],
         colModel:[
             {name:'id',index:'id', width:60, sorttype:"int", hidden:true},
-            {name:'name',index:'name', width:100},
+            {name:'name',index:'name', width:100, hidden:true},
             {name:'title',index:'title', width:100},
             {name:'pic',index:'pic', width:100},
             {name:'desc',index:'desc', width:90},
-            {name:'tbPath',index:'tbPath', width:80, align:"right",sorttype:"float"},
-            {name:'categoryId',index:'categoryId', width:80, align:"right",sorttype:"float"},
+            {name:'tbPath',index:'tbPath', width:80},
+            {name:'categoryId',index:'categoryId', width:10,sorttype:"float"},
         ],
         caption: "单品"
     }));
     $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
     $("#newBtn").click(function(){
-        $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 600});
+        $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 600,position: [300,50]});
         $("#dialog").load("/item/forAdd").dialog("open");
+    });
+    $("#updateBtn").click(function(){
+        var gr = $("#list4").jqGrid('getGridParam','selarrrow');
+        $("#dialog").dialog({title:"修改", autoOpen:false, modal:true, resizable:true, width: 600,position: [300,50]});
+        $("#dialog").load("/item/forUpdate/"+gr).dialog("open");
     });
 </script>
 </html>

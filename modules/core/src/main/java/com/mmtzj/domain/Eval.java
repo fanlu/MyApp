@@ -13,7 +13,7 @@ public class Eval {
 
     private String eval;
 
-//    private Item item;
+    private int itemId;
 
     public int getId() {
         return id;
@@ -31,11 +31,11 @@ public class Eval {
         this.eval = eval;
     }
 
-//    public Item getItem() {
-//        return item;
-//    }
-//
-//    public void setItem(Item item) {
-//        this.item = item;
-//    }
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
 }

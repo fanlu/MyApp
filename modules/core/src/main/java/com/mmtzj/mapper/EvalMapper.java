@@ -1,14 +1,15 @@
 package com.mmtzj.mapper;
 
-import com.mmtzj.domain.Item;
+import com.mmtzj.domain.Eval;
 
 /**
  * Created with IntelliJ IDEA.
  * User: FANLU
- * Date: 13-1-13
- * Time: 上午11:12
+ * Date: 13-1-7
+ * Time: 下午9:01
  * To change this template use File | Settings | File Templates.
  */
 @MyBatisRepository
-public interface ItemMapper extends BaseMapper<Item>{
+public interface EvalMapper extends BaseMapper<Eval>{
+
 }

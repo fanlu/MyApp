@@ -22,15 +22,16 @@
     </resultMap>
 
     <select id="getAll" resultMap="itemMap">
-		select i.*,
-		e.id as eval_id,
-		e.eval as eval_eval
-		from item i left join eval e on i.Id = e.itemId
-		where i.status=1
+		SELECT i.*,
+		e.id AS eval_id,
+		e.eval AS eval_eval
+		FROM item i LEFT JOIN eval e ON i.Id = e.itemId
+		WHERE i.status=1
 	</select>
 
     <select id="get" resultMap="itemMap" parameterType="hashmap">
-        select * from item where id = #{id}
+        SELECT i.*,e.id AS eval_id,
+		e.eval AS eval_eval FROM item i LEFT JOIN eval e ON i.Id=e.itemId WHERE i.id = #{id}
     </select>
 
     <sql id="where">
@@ -44,7 +45,7 @@
         FROM item
         <include refid="where"/>
         <if test="orderBy != null and orderBy != ''">
-            order by ${orderBy} ${order}
+            ORDER BY ${orderBy} ${order}
         </if>
         <if test="limit != null">
             limit
@@ -56,12 +57,12 @@
     </select>
 
     <select id="findPageCount" resultType="java.lang.Integer" parameterType="java.util.Map">
-        SELECT count(id) FROM item
+        SELECT COUNT(id) FROM item
         <include refid="where"/>
     </select>
 
     <update id="update" parameterType="Item">
-        update item
+        UPDATE item
         <set>
             <if test="title!=null">
                 title = #{title},
@@ -70,7 +71,7 @@
                 pic = #{pic},
             </if>
             <if test="desc!=null">
-                `desc` = #{desc},
+                `DESC` = #{desc},
             </if>
             <if test="categoryId!=null and categoryId>0">
                 categoryId = #{categoryId},
@@ -94,6 +95,11 @@
                 collectCount = #{collectCount},
             </if>
         </set>
-        where id=#{id}
+        WHERE id=#{id}
     </update>
+
+    <insert id="insert" parameterType="Item">
+        insert into item (title,`desc`,pic,tbPath,categoryId,oldPrice,newPrice,status) values
+        (#{title},#{desc},#{pic},#{tbPath},#{categoryId},#{oldPrice},#{newPrice},#{status})
+    </insert>
 </mapper> 

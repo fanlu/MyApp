@@ -21,7 +21,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}"/></td>
     </tr>
     <tr>
-        <td>图片：</td><td colspan="3"><input type="text" name="pic" id="pic" value="${item.pic}"/><div id="jquery-wrapped-fine-uploader"></div></td>
+        <td>图片：</td><td colspan="2"><input type="text" name="pic" id="pic" value="${item.pic}"/><div id="jquery-wrapped-fine-uploader"></div></td>
     </tr>
     <tr>
         <td>小编：</td><td colspan="3"><textarea rows="4" cols="10" name="desc">${item.desc}</textarea></td>
@@ -42,12 +42,29 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <tr>
         <td>原价：</td><td><input type="text" name="oldPrice" value="${item.oldPrice}"/></td><td>现价：</td><td><input type="text" name="newPrice" value="${item.newPrice}"/></td>
     </tr>
+    <tr><td>评价：</td>
+        <td colspan="3">
+    <table>
     <tr>
-        <td><input name="evalList[0].id" value="" /></td>
-        <td><input name="evalList[0].eval" value="aaa" /></td>
+        <td><input type="hidden" name="evalList[0].id" value="${item.evalList[0].id}" /></td>
+        <td><input name="evalList[0].eval" value="${item.evalList[0].eval}" /></td>
+    </tr>
+    <tr>
+        <td><input type="hidden" name="evalList[1].id" value="${item.evalList[1].id}" /></td>
+        <td><input name="evalList[1].eval" value="${item.evalList[1].eval}" /></td>
+    </tr>
+    <tr>
+        <td><input type="hidden" name="evalList[2].id" value="${item.evalList[2].id}" /></td>
+        <td><input name="evalList[2].eval" value="${item.evalList[2].eval}" /></td>
+    </tr>
+    <tr>
+        <td><input type="hidden" name="evalList[3].id" value="${item.evalList[3].id}" /></td>
+        <td><input name="evalList[3].eval" value="${item.evalList[3].eval}" /></td>
+    </tr>
+    </table>
+        </td>
     </tr>
 </table>
-    <input type="submit">
     <input type="button" value="保存" onclick="submitf();">
 </form>
 </body>
@@ -79,11 +96,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
             dataType : "json",
             cache : false,
             error : function(textStatus, errorThrown) {
-                alert("系统ajax交互错误: " + textStatus);
+                $("#dialog").dialog("close");
+                $("#list4").trigger("reloadGrid");
+//                alert("系统ajax交互错误: " + textStatus + errorThrown);
             },
             success : function(data, textStatus) {
                 if(data == "success") {
-                    $("#console").dialog("close");
+                    $("#dialog").dialog("close");
                     $("#list4").trigger("reloadGrid");
                     alert("新合同添加操作成功!");
                 } else {

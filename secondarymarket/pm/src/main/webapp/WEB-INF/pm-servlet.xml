@@ -14,7 +14,7 @@
     <mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/*.html" location="/"/>
 	
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" /> 
+
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
@@ -34,40 +34,40 @@
 		</constructor-arg>
 	</bean>
     <!--
-		<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+            <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+            <property name="messageConverters">
+                <list>
+                    <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                    </bean>
+                    <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+                    <bean
+                        class="org.springframework.http.converter.StringHttpMessageConverter">
+                        <property name="supportedMediaTypes">
+                            <list>
+                                <value>text/html;charset=UTF-8</value>
+                            </list>
+                        </property>
+                    </bean>
+                </list>
+            </property>
+        </bean>
+          -->
+        <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+            <mvc:message-converters register-defaults="true">
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <constructor-arg value="UTF-8" />
                 </bean>
-                <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
-				<bean
-					class="org.springframework.http.converter.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/html;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-			</list>
-		</property>
-	</bean>-->
-    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
-        <mvc:message-converters register-defaults="true">
-            <!-- 将StringHttpMessageCOnverter的默认编码设为UTF-8 -->
-            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                <constructor-arg value="UTF-8" />
-            </bean>
-        </mvc:message-converters>
-    </mvc:annotation-driven>
+            </mvc:message-converters>
+        </mvc:annotation-driven>
 
-    <!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
-    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-        <property name="mediaTypes" >
-            <value>
-                json=application/json
-                xml=application/xml
-            </value>
-        </property>
-    </bean>
+        <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+            <property name="mediaTypes" >
+                <value>
+                    json=application/json
+                    xml=application/xml
+                </value>
+            </property>
+        </bean>
 
 </beans>  

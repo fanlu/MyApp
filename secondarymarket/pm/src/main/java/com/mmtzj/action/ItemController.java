@@ -1,14 +1,16 @@
 package com.mmtzj.action;
 
-import com.mmtzj.FormBean.ItemForm;
 import com.mmtzj.domain.Category;
+import com.mmtzj.domain.Eval;
 import com.mmtzj.domain.Item;
 import com.mmtzj.mapper.CategoryMapper;
+import com.mmtzj.service.EvalService;
 import com.mmtzj.service.ItemService;
 import com.mmtzj.util.Page;
-import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +36,9 @@ public class ItemController {
     @Resource
     private CategoryMapper categoryMapper;
 
+    @Resource
+    private EvalService evalService;
+
     @RequestMapping("/forAdd")
     public String forAddItem(HttpServletRequest request, Model model){
         List<Category> categories = categoryMapper.getCategories();
@@ -52,10 +57,15 @@ public class ItemController {
 
     @RequestMapping("/save")
     @ResponseBody
-    public String saveItem(HttpServletRequest request, ItemForm itemForm) throws Exception {
-//        itemService.saveOrUpdate(item);
-        Item item = new Item();
-        PropertyUtils.copyProperties(item, itemForm);
+    public String saveItem(HttpServletRequest request, Item item, BindingResult result) throws Exception {
+        itemService.saveOrUpdate(item);
+        for(Eval eval: item.getEvalList()){
+            if(StringUtils.isEmpty(eval.getEval())){
+                continue;
+            }
+            eval.setItemId(item.getId());
+            evalService.saveOrUpdate(eval);
+        }
         return "success";
     }
 
