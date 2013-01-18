@@ -165,8 +165,8 @@
         <ul class="wrap_bd">
             <li class="fl w310">
                 <a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
-                    <!--<img id="pic_${item.id}" src="${item.pic}"></a>-->
-                    <img id="pic_${item.id}" src="http://i1.mmtzj.com/images/20130114/20130114223537.png"></a>
+                    <img id="pic_${item.id}" src="${item.pic}"></a>
+                <!--<img id="pic_${item.id}" src="http://i1.mmtzj.com/images/20130114/20130114223537.png"></a>-->
             </li>
             <li class="fr">
                 <p class="item_desc"><span class="orange">小编推荐：</span><span id="desc_${item.id}">${item.desc}</span></p>
