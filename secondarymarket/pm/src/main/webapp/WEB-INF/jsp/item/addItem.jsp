@@ -14,9 +14,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <title></title>
 </head>
 <body>
-<form action="/item/add" method="POST">
-<table>
+<form action="/item/save" method="POST" id="f">
     <input type="hidden" name="id" value="${item.id}"/>
+<table>
     <tr>
         <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}"/></td>
     </tr>
@@ -40,9 +40,15 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         </td>
     </tr>
     <tr>
-        <td>原价：</td><td colspan="3"><input type="text" name="oldPrice" value="${item.oldPrice}"/></td><td>现价：</td><td><input type="text" name="newPrice" value="${item.newPrice}"/></td>
+        <td>原价：</td><td><input type="text" name="oldPrice" value="${item.oldPrice}"/></td><td>现价：</td><td><input type="text" name="newPrice" value="${item.newPrice}"/></td>
+    </tr>
+    <tr>
+        <td><input name="evalList[0].id" value="" /></td>
+        <td><input name="evalList[0].eval" value="aaa" /></td>
     </tr>
 </table>
+    <input type="submit">
+    <input type="button" value="保存" onclick="submitf();">
 </form>
 </body>
 <script type="text/javascript">
@@ -56,14 +62,35 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
             allowedExtensions: ['jpeg', 'jpg', 'gif', 'png','xls','doc','xlsx','docx','pdf','txt'],
             sizeLimit: 40960000 // 50 kB = 50 * 1024 bytes16.
         },
-        callbacks: {
-            onComplete: function(id, fileName, responseJSON) {
-                alert(fileName);
-                if (responseJSON.success) {
-                    $("#pic").val(fileName);
-                }
-            }
+        text: {
+            uploadButton: '<i class="icon-upload icon-white"></i> 上传'
+        }
+    }).on('complete', function(event, id, fileName, responseJSON) {
+        if (responseJSON.success) {
+            $("#pic").val(responseJSON.filename);
         }
     });
+    function submitf(){
+        var params = $('#f').serializeObject();
+        $.ajax( {
+            url : "/item/save",
+            method: "post",
+            data : params,
+            dataType : "json",
+            cache : false,
+            error : function(textStatus, errorThrown) {
+                alert("系统ajax交互错误: " + textStatus);
+            },
+            success : function(data, textStatus) {
+                if(data == "success") {
+                    $("#console").dialog("close");
+                    $("#list4").trigger("reloadGrid");
+                    alert("新合同添加操作成功!");
+                } else {
+                    alert("操作失败!");
+                }
+            }
+        });
+    }
 </script>
 </html>

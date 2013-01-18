@@ -1,10 +1,12 @@
 package com.mmtzj.action;
 
+import com.mmtzj.FormBean.ItemForm;
 import com.mmtzj.domain.Category;
 import com.mmtzj.domain.Item;
 import com.mmtzj.mapper.CategoryMapper;
 import com.mmtzj.service.ItemService;
 import com.mmtzj.util.Page;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,10 +50,13 @@ public class ItemController {
         return "/item/addItem";
     }
 
-    @RequestMapping("/add")
-    public String addItem(HttpServletRequest request, Item item){
-        itemService.saveOrUpdate(item);
-        return "";
+    @RequestMapping("/save")
+    @ResponseBody
+    public String saveItem(HttpServletRequest request, ItemForm itemForm) throws Exception {
+//        itemService.saveOrUpdate(item);
+        Item item = new Item();
+        PropertyUtils.copyProperties(item, itemForm);
+        return "success";
     }
 
     @RequestMapping("/list")
