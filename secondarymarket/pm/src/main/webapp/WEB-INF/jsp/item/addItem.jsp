@@ -93,7 +93,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
             url : "/item/save",
             method: "post",
             data : params,
-            dataType : "json",
+//            dataType : "json",
             cache : false,
             error : function(textStatus, errorThrown) {
                 $("#dialog").dialog("close");
@@ -104,7 +104,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                 if(data == "success") {
                     $("#dialog").dialog("close");
                     $("#list4").trigger("reloadGrid");
-                    alert("新合同添加操作成功!");
+                    alert("操作成功!");
                 } else {
                     alert("操作失败!");
                 }
