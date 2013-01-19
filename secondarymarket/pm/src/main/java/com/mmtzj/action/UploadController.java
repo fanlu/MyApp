@@ -1,5 +1,8 @@
 package com.mmtzj.action;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.mmtzj.util.Constant;
 import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -30,7 +34,7 @@ public class UploadController {
 
     @RequestMapping("/upload")
     @ResponseBody
-    public String upload(HttpServletRequest request, HttpServletResponse response){
+    public Map<String, Object> upload(HttpServletRequest request, HttpServletResponse response){
         MultipartHttpServletRequest fileRequest = (MultipartHttpServletRequest)request;
         List<MultipartFile> files = fileRequest.getFiles("qqfile");
         ResourceBundle rb = ResourceBundle.getBundle("file");
@@ -39,7 +43,8 @@ public class UploadController {
         if(!pathFile.exists()){
             pathFile.mkdirs();
         }
-        String url = null;
+        Map<String, Object> retMap = Maps.newHashMap();
+        List<String> url = Lists.newArrayList();
         for (MultipartFile myfile : files){
             String path = myfile.getOriginalFilename();
             String newName = Long.toHexString(new Date().getTime()) + path.substring(path.lastIndexOf("."));
@@ -50,9 +55,13 @@ public class UploadController {
                 IOUtils.copy(is, new FileOutputStream(destFile));
             } catch (IOException e) {
                 e.printStackTrace();
+                retMap.put("success", false);
+                return retMap;
             }
-            url = "http://i1.mmtzj.com/images/" + new DateTime().toString("yyyyMMdd") + "/" +newName;
+            url.add(Constant.staticUrl + "/images/" + new DateTime().toString("yyyyMMdd") + "/" +newName);
         }
-        return "{\"success\": true, \"filename\":\""+url+"\"}";
+        retMap.put("success", true);
+        retMap.put("urls", url);
+        return retMap;
     }
 }

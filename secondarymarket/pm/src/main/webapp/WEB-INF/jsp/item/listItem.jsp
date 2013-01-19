@@ -27,8 +27,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         colModel:[
             {name:'id',index:'id', width:60, sorttype:"int", hidden:true},
             {name:'name',index:'name', width:100, hidden:true},
+            {name:'pic',index:'pic', width:100,formatter:imageFormat, unformat:imageUnFormat},
             {name:'title',index:'title', width:100},
-            {name:'pic',index:'pic', width:100},
             {name:'desc',index:'desc', width:90},
             {name:'tbPath',index:'tbPath', width:80},
             {name:'categoryId',index:'categoryId', width:10,sorttype:"float"},
@@ -38,13 +38,19 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
     $("#newBtn").click(function(){
         $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 600,position:{my:"center",at:"center top"}});
-        $("#dialog").load("/item/forAdd").dialog("open");
-//        $("#dialog").load("/item/forAdd").modal('show');
+//        $("#dialog").load("/item/forAdd").dialog("open");
+        $("#dialog").load("/item/forAdd").modal();
     });
     $("#updateBtn").click(function(){
         var gr = $("#list4").jqGrid('getGridParam','selarrrow');
         $("#dialog").dialog({title:"修改", autoOpen:false, modal:true, resizable:true, width: 600,position: {my:"center",at:"center top"}});
         $("#dialog").load("/item/forUpdate/"+gr).dialog("open");
     });
+    function imageFormat( cellvalue, options, rowObject ){
+        return '<img src="'+cellvalue+'" />';
+    }
+    function imageUnFormat( cellvalue, options, cell){
+        return $('img', cell).attr('src');
+    }
 </script>
 </html>

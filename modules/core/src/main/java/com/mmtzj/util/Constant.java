@@ -12,4 +12,9 @@ public class Constant {
     public static final int PAGE_SIZE = 100;
 
     public static final int PAGE_SLIDER = 10;
+
+    public static final String mainUrl = "http://www.mmtzj.com";
+
+    public static final String staticUrl = "http://i1.mmtzj.com";
+
 }

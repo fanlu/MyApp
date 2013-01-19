@@ -84,10 +84,15 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         }
     }).on('complete', function(event, id, fileName, responseJSON) {
         if (responseJSON.success) {
-            $("#pic").val(responseJSON.filename);
+            $("#pic").val(responseJSON.urls[0]);
         }
     });
     function submitf(){
+        var title = $("input[name='title']").val()
+        if(title.replace(/[^\x00-\xff]/g, 'xx').length>=50){
+            alert("标题超长");
+            return false;
+        }
         var params = $('#f').serializeObject();
         $.ajax( {
             url : "/item/save",

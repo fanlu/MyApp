@@ -53,7 +53,7 @@ ObjectTemplate.gridSetting = {
     autoencode : true,//当设置为true时，对来自服务器的数据和提交数据进行encodes编码。如< 将被转换为&lt;
     rownumbers:true,//显示行号
 //    serializeGridData:ObjectTemplate.formatePostData,
-    height : "auto",
+    height : "300",
     width : "300",//初始时，表格的宽度，如果设置了随窗口改变自动适应宽度，该值实效
     autowidth : true,
     sortname : 'id',
