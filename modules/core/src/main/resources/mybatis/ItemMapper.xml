@@ -13,6 +13,7 @@
         <result property="newPrice" column="newPrice"/>
         <result property="oldPrice" column="oldPrice"/>
         <result property="status" column="status"/>
+        <result property="wantToBuy" column="wantToBuy"/>
         <result property="likeCount" column="likeCount"/>
         <result property="collectCount" column="collectCount"/>
         <collection property="evalList" javaType="Eval">
@@ -88,6 +89,9 @@
             <if test="status!=null and status>0">
                 status = #{status},
             </if>
+            <if test="wantToBuy!=null and wantToBuy>0">
+                wantToBuy = #{wantToBuy},
+            </if>
             <if test="likeCount!=null and likeCount>0">
                 likeCount = #{likeCount},
             </if>
@@ -99,7 +103,7 @@
     </update>
 
     <insert id="insert" parameterType="Item">
-        insert into item (title,`desc`,pic,tbPath,categoryId,oldPrice,newPrice,status) values
-        (#{title},#{desc},#{pic},#{tbPath},#{categoryId},#{oldPrice},#{newPrice},#{status})
+        insert into item (title,`desc`,pic,tbPath,categoryId,oldPrice,newPrice,status,wantToBuy,likeCount,collectCount) values
+        (#{title},#{desc},#{pic},#{tbPath},#{categoryId},#{oldPrice},#{newPrice},#{status},#{wantToBuy},#{likeCount},#{collectCount})
     </insert>
 </mapper> 

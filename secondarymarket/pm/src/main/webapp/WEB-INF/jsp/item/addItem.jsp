@@ -18,26 +18,30 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <input type="hidden" name="id" value="${item.id}"/>
 <table>
     <tr>
-        <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}"/></td>
+        <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}" style="width:490px"/></td>
     </tr>
     <tr>
-        <td>图片：</td><td colspan="2"><input type="text" name="pic" id="pic" value="${item.pic}"/><div id="jquery-wrapped-fine-uploader"></div></td>
+        <td>图片：</td><td colspan="3"><input type="text" name="pic" id="pic" value="${item.pic}" style="width:490px"/><div id="jquery-wrapped-fine-uploader"></div></td>
     </tr>
     <tr>
-        <td>小编：</td><td colspan="3"><textarea rows="4" cols="10" name="desc">${item.desc}</textarea></td>
+        <td>小编：</td><td colspan="3"><textarea rows="4" cols="10" name="desc" style="width:490px">${item.desc}</textarea></td>
     </tr>
     <tr>
-        <td>推广链接：</td><td colspan="3"><input type="text" name="tbPath" value="${item.tbPath}"/></td>
+        <td>推广链接：</td><td colspan="3"><input type="text" name="tbPath" value="${item.tbPath}" style="width:490px"/></td>
     </tr>
     <tr>
         <td>类别：</td>
-        <td colspan="3">
+        <td>
             <select name="categoryId">
                 <c:forEach items="${categories}" var="category">
                     <option <c:if test="${item.categoryId eq category.id}">selected="selected"</c:if> value="${category.id}">${category.title}</option>
                 </c:forEach>
             </select>
         </td>
+        <td>想买：</td><td><input type="text" name="wantToBuy" value="${item.wantToBuy}"/></td>
+    </tr>
+    <tr>
+        <td>喜欢：</td><td><input type="text" name="likeCount" value="${item.likeCount}"/></td><td>收藏：</td><td><input type="text" name="collectCount" value="${item.collectCount}"/></td>
     </tr>
     <tr>
         <td>原价：</td><td><input type="text" name="oldPrice" value="${item.oldPrice}"/></td><td>现价：</td><td><input type="text" name="newPrice" value="${item.newPrice}"/></td>
@@ -46,20 +50,16 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         <td colspan="3">
     <table>
     <tr>
-        <td><input type="hidden" name="evalList[0].id" value="${item.evalList[0].id}" /></td>
-        <td><input name="evalList[0].eval" value="${item.evalList[0].eval}" /></td>
+        <td>1<input type="hidden" name="evalList[0].id" value="${item.evalList[0].id}" /></td>
+        <td><input type="text" name="evalList[0].eval" value="${item.evalList[0].eval}" /></td>
+        <td>2<input type="hidden" name="evalList[1].id" value="${item.evalList[1].id}" /></td>
+        <td><input type="text" name="evalList[1].eval" value="${item.evalList[1].eval}" /></td>
     </tr>
     <tr>
-        <td><input type="hidden" name="evalList[1].id" value="${item.evalList[1].id}" /></td>
-        <td><input name="evalList[1].eval" value="${item.evalList[1].eval}" /></td>
-    </tr>
-    <tr>
-        <td><input type="hidden" name="evalList[2].id" value="${item.evalList[2].id}" /></td>
-        <td><input name="evalList[2].eval" value="${item.evalList[2].eval}" /></td>
-    </tr>
-    <tr>
-        <td><input type="hidden" name="evalList[3].id" value="${item.evalList[3].id}" /></td>
-        <td><input name="evalList[3].eval" value="${item.evalList[3].eval}" /></td>
+        <td>3<input type="hidden" name="evalList[2].id" value="${item.evalList[2].id}" /></td>
+        <td><input type="text" name="evalList[2].eval" value="${item.evalList[2].eval}" /></td>
+        <td>4<input type="hidden" name="evalList[3].id" value="${item.evalList[3].id}" /></td>
+        <td><input type="text" name="evalList[3].eval" value="${item.evalList[3].eval}" /></td>
     </tr>
     </table>
         </td>

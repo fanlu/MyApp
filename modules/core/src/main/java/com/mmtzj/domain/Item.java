@@ -33,6 +33,8 @@ public class Item {
 
     private int status;
 
+    private int wantToBuy;
+
     private int likeCount;
 
     private int collectCount;
@@ -125,6 +127,14 @@ public class Item {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getWantToBuy() {
+        return wantToBuy;
+    }
+
+    public void setWantToBuy(int wantToBuy) {
+        this.wantToBuy = wantToBuy;
     }
 
     public int getLikeCount() {

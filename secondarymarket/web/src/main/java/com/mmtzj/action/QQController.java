@@ -1,7 +1,6 @@
 package com.mmtzj.action;
 
 import com.google.common.collect.Maps;
-import com.mmtzj.domain.Icollect;
 import com.mmtzj.domain.Item;
 import com.mmtzj.mapper.CategoryMapper;
 import com.mmtzj.mapper.IcollectMapper;
@@ -92,7 +91,13 @@ public class QQController {
     @RequestMapping("/iclick")
     @ResponseBody
     public String iclick(HttpServletRequest request){
-        logger.info("the ip {} click the item {}", BaseUtil.getIP(request), request.getParameter("iid"));
+        int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
+        logger.info("the ip {} click the item {}", BaseUtil.getIP(request), itemId);
+        Item itemDB = itemMapper.get(itemId);
+        Item item = new Item();
+        item.setId(itemId);
+        item.setWantToBuy(itemDB.getWantToBuy() + 1);
+        itemMapper.update(item);
         return null;
     }
 

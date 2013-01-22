@@ -92,22 +92,22 @@
             $('.middletip').remove();
             if(itype==2){
                 $('.itemtype_2').css('display','block');
-                $('<p class="middletip">每天推荐5款包包和5款美鞋，下面是精选出来的5款美鞋哦~</p>').appendTo('.wrap_list');
+                $('<p class="middletip">每天推荐5款婴儿用品和5款玩具，下面是精选出来的5款玩具哦~</p>').appendTo('.wrap_list');
                 $('.itemtype_3').appendTo(".wrap_list");
                 $('.itemtype_3').css('display','block');
             }else if(itype==3){
                 $('.itemtype_3').css('display','block');
-                $('<p class="middletip">每天推荐5款美鞋和5款包包，下面是精选出来的5款包包哦~</p>').appendTo('.wrap_list');
+                $('<p class="middletip">每天推荐5款玩具和5款婴儿用品，下面是精选出来的5款婴儿用品哦~</p>').appendTo('.wrap_list');
                 $('.itemtype_2').appendTo(".wrap_list");
                 $('.itemtype_2').css('display','block');
             }else if(itype==4){
                 $('.itemtype_4').css('display','block');
-                $('<p class="middletip">每天推荐5样配饰下和5样美妆，面是精选出来的5款美妆哦~</p>').appendTo('.wrap_list');
+                $('<p class="middletip">每天推荐5款孕妈宝贝和5款玩具，面是精选出来的5款玩具哦~</p>').appendTo('.wrap_list');
                 $('.itemtype_5').appendTo(".wrap_list");
                 $('.itemtype_5').css('display','block');
             }else if(itype==5){
                 $('.itemtype_5').css('display','block');
-                $('<p class="middletip">每天推荐5样美妆和5样配饰，下面是精选出来的5款配饰哦~</p>').appendTo('.wrap_list');
+                $('<p class="middletip">每天推荐5款和5款，下面是精选出来的5款哦~</p>').appendTo('.wrap_list');
                 $('.itemtype_4').appendTo(".wrap_list");
                 $('.itemtype_4').css('display','block');
             }else{
@@ -160,8 +160,8 @@
     <c:forEach items="${items}" var="item">
     <div class="wrap_box itemtype_0 itemtype_${item.categoryId} ">
         <p class="wrap_hd"><a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
-            <i class="item_tip_5 wrap_hd_tips"></i><span id="title_${item.id}">${item.title}</span>
-            <em class="bold" style="text-decoration:line-through;color: orange;font-weight: normal;">原价 ${item.oldPrice}元</em>&nbsp;&nbsp;&nbsp;<em class="bold">现价 ${item.newPrice}元</em></a></p>
+            <i class="item_tip_${item.categoryId} wrap_hd_tips"></i><span id="title_${item.id}">${item.title}</span>
+            <em class="bold" style="text-decoration:line-through;color: orange;font-weight: normal;"><c:if test="${item.oldPrice gt 0}">原价 ${item.oldPrice}元</c:if></em>&nbsp;&nbsp;&nbsp;<em class="bold">现价 ${item.newPrice}元</em></a></p>
         <ul class="wrap_bd">
             <li class="fl w310">
                 <a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
@@ -172,11 +172,11 @@
                 <p class="item_desc"><span class="orange">小编推荐：</span><span id="desc_${item.id}">${item.desc}</span></p>
                 <div class="item_comm">
                     <c:forEach items="${item.evalList}" var="eval">
-                    <div><img src="${eval.id}"><span>${eval.eval}</span></div>
+                    <div><!--<img src="${eval.id}">--><span>${eval.eval}</span></div>
                     </c:forEach>
                 </div>
                 <p class="wrap_bd_bottom_2">
-                    已有<span class="pink">336</span>人想买
+                    已有<span class="pink">${item.wantToBuy}</span>人想买
                 </p>
                 <p class="wrap_bd_bottom">
                     <span class="fl">
@@ -186,7 +186,6 @@
                     </span>
                     <span class="fl">
                         <a class="collect_btn pngfix fl" href="javascript:void('${item.id}_10');" onclick="javascript:collect(${item.id});"></a>
-                        <!--window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F%3Fpid%3D13892%26via%3DQZ%2eASSISTANT%2eFEED%2eSHARE&amp;title='+encodeURIComponent('美发工具海绵卷发棒')+'&amp;pics='+encodeURIComponent('http://img02.taobaocdn.com/bao/uploaded/i2/12732018826909138/T1WywuXgXaXXXXXXXX_!!0-item_pic.jpg_310x310.jpg')+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent('使用方便简洁，百变发型随心所欲，真的很实用哦~'),'_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');return false;-->
                         <a class="fl num_lico" href="javascript:void('${item.id}_11');" onclick="javascript:collect(${item.id});" id="collect_${item.id}">${item.collectCount}</a>
                         <i class="num_rico"></i></span>
                     <a class="tobuy_btn fr" href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">

@@ -37,13 +37,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     }));
     $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
     $("#newBtn").click(function(){
-        $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 600,position:{my:"center",at:"center top"}});
-//        $("#dialog").load("/item/forAdd").dialog("open");
-        $("#dialog").load("/item/forAdd").modal();
+        $("#dialog").dialog({title:"新建", autoOpen:false, modal:true, resizable:true, width: 700,position:{my:"center",at:"center top"}});
+        $("#dialog").load("/item/forAdd").dialog("open");
+//        $("#dialog").load("/item/forAdd").modal();
     });
     $("#updateBtn").click(function(){
         var gr = $("#list4").jqGrid('getGridParam','selarrrow');
-        $("#dialog").dialog({title:"修改", autoOpen:false, modal:true, resizable:true, width: 600,position: {my:"center",at:"center top"}});
+        $("#dialog").dialog({title:"修改", autoOpen:false, modal:true, resizable:true, width: 700,position: {my:"center",at:"center top"}});
         $("#dialog").load("/item/forUpdate/"+gr).dialog("open");
     });
     function imageFormat( cellvalue, options, rowObject ){

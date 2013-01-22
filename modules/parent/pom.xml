@@ -721,6 +721,12 @@
                 <scope>test</scope>
             </dependency>
             <!-- TEST end -->
+
+            <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.0.2.RELEASE</version>
+        </dependency>
         </dependencies>
     </dependencyManagement>
 
