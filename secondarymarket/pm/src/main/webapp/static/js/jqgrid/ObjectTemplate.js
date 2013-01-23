@@ -68,8 +68,8 @@ ObjectTemplate.gridSetting = {
     jsonReader : ObjectTemplate.jsonReader,
     prmNames:{
         //search: 'search',
-        page:"page",
-        rows:"limit",
+        page:"pageNo",
+        rows:"pageSize",
         sort:"orderBy",
         order:"order"
     },

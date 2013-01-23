@@ -9,21 +9,21 @@ package com.mmtzj.domain;
  */
 public class Category {
 
-    private int id;
+    private Integer id;
 
     private String name;
 
     private String title;
 
-    private int rank;
+    private Integer rank;
 
-    private int status;
+    private Integer status;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,19 +43,19 @@ public class Category {
         this.title = title;
     }
 
-    public int getRank() {
+    public Integer getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(Integer rank) {
         this.rank = rank;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Item {
 
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -23,29 +23,29 @@ public class Item {
 
     private String desc;
 
-    private int categoryId;
+    private Integer categoryId;
 
     private String tbPath;
 
-    private float newPrice;
+    private Float newPrice;
 
-    private float oldPrice;
+    private Float oldPrice;
 
-    private int status;
+    private Integer status;
 
-    private int wantToBuy;
+    private Integer wantToBuy;
 
-    private int likeCount;
+    private Integer likeCount;
 
-    private int collectCount;
+    private Integer collectCount;
 
     private List<Eval> evalList = Lists.newArrayList();
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,11 +81,11 @@ public class Item {
         this.desc = desc;
     }
 
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -97,19 +97,19 @@ public class Item {
         this.tbPath = tbPath;
     }
 
-    public float getNewPrice() {
+    public Float getNewPrice() {
         return newPrice;
     }
 
-    public void setNewPrice(float newPrice) {
+    public void setNewPrice(Float newPrice) {
         this.newPrice = newPrice;
     }
 
-    public float getOldPrice() {
+    public Float getOldPrice() {
         return oldPrice;
     }
 
-    public void setOldPrice(float oldPrice) {
+    public void setOldPrice(Float oldPrice) {
         this.oldPrice = oldPrice;
     }
 
@@ -121,35 +121,35 @@ public class Item {
         this.evalList = evalList;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getWantToBuy() {
+    public Integer getWantToBuy() {
         return wantToBuy;
     }
 
-    public void setWantToBuy(int wantToBuy) {
+    public void setWantToBuy(Integer wantToBuy) {
         this.wantToBuy = wantToBuy;
     }
 
-    public int getLikeCount() {
+    public Integer getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(int likeCount) {
+    public void setLikeCount(Integer likeCount) {
         this.likeCount = likeCount;
     }
 
-    public int getCollectCount() {
+    public Integer getCollectCount() {
         return collectCount;
     }
 
-    public void setCollectCount(int collectCount) {
+    public void setCollectCount(Integer collectCount) {
         this.collectCount = collectCount;
     }
 }

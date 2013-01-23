@@ -214,6 +214,14 @@
             <artifactId>taobao-sdk</artifactId>
             <version>20110609</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

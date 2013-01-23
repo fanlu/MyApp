@@ -6,6 +6,7 @@ import com.mmtzj.mapper.CategoryMapper;
 import com.mmtzj.mapper.IcollectMapper;
 import com.mmtzj.mapper.IlikeMapper;
 import com.mmtzj.mapper.ItemMapper;
+import com.mmtzj.service.QQService;
 import com.mmtzj.util.BaseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
@@ -29,26 +31,17 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/qqapp")
-public class QQController {
+public class QQController extends BaseController{
 
     Logger logger = LoggerFactory.getLogger(QQController.class);
 
-    @Autowired
-    private CategoryMapper categoryMapper;
-
-    @Autowired
-    private ItemMapper itemMapper;
-
-    @Autowired
-    private IlikeMapper ilikeMapper;
-
-    @Autowired
-    private IcollectMapper icollectMapper;
+    @Resource
+    private QQService qqService;
 
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("categories", categoryMapper.getCategories());
-        List<Item> items = itemMapper.getAll();
+        model.addAttribute("categories", qqService.getCategories());
+        List<Item> items = qqService.getAllItems();
         model.addAttribute("items", items);
         Map<String, Integer> itemTypes = Maps.newHashMap();
         for(Item item : items){
@@ -67,11 +60,7 @@ public class QQController {
     public String ilike(HttpServletRequest request){
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
         logger.info("the ip {} like the item {}", BaseUtil.getIP(request), itemId);
-        Item itemDB = itemMapper.get(itemId);
-        Item item = new Item();
-        item.setId(itemId);
-        item.setLikeCount(itemDB.getLikeCount() + 1);
-        itemMapper.update(item);
+        qqService.updateItem(itemId, "likeCount");
         return null;
     }
 
@@ -80,11 +69,7 @@ public class QQController {
     public String icollect(HttpServletRequest request){
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
         logger.info("the ip {} collect the item {}", BaseUtil.getIP(request), itemId);
-        Item itemDB = itemMapper.get(itemId);
-        Item item = new Item();
-        item.setId(itemId);
-        item.setCollectCount(itemDB.getCollectCount() + 1);
-        itemMapper.update(item);
+        qqService.updateItem(itemId, "collectCount");
         return null;
     }
 
@@ -93,11 +78,7 @@ public class QQController {
     public String iclick(HttpServletRequest request){
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
         logger.info("the ip {} click the item {}", BaseUtil.getIP(request), itemId);
-        Item itemDB = itemMapper.get(itemId);
-        Item item = new Item();
-        item.setId(itemId);
-        item.setWantToBuy(itemDB.getWantToBuy() + 1);
-        itemMapper.update(item);
+        qqService.updateItem(itemId, "wantToBuy");
         return null;
     }
 
