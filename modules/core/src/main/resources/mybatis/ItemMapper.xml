@@ -86,7 +86,7 @@
             <if test="oldPrice!=null and oldPrice>0">
                 oldPrice = #{oldPrice},
             </if>
-            <if test="status!=null and status>0">
+            <if test="status!=null and status>=0">
                 status = #{status},
             </if>
             <if test="wantToBuy!=null and wantToBuy>0">

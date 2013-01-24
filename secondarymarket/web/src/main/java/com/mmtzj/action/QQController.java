@@ -1,6 +1,9 @@
 package com.mmtzj.action;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.mmtzj.domain.Eval;
 import com.mmtzj.domain.Item;
 import com.mmtzj.mapper.CategoryMapper;
 import com.mmtzj.mapper.IcollectMapper;
@@ -45,12 +48,14 @@ public class QQController extends BaseController{
         model.addAttribute("items", items);
         Map<String, Integer> itemTypes = Maps.newHashMap();
         for(Item item : items){
+            item.setEvalList(qqService.getAllEvals(ImmutableList.of(item.getId())));
             if(itemTypes.containsKey("itemtype"+item.getCategoryId())){
                 itemTypes.put("itemtype"+item.getCategoryId(), itemTypes.get("itemtype"+item.getCategoryId())+1);
             }else{
                 itemTypes.put("itemtype"+item.getCategoryId(), 1);
             }
         }
+
         model.addAttribute("itemTypes", itemTypes);
         return "index";
     }

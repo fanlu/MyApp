@@ -25,7 +25,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <jsp:include page="../index.jsp" />
 <input type="button" value="新增" id="newBtn" class="btn btn-primary"/>
 <input type="button" value="修改" id="updateBtn" class="btn btn-primary"/>
-<input type="button" value="发布" id="publishBtn" class="btn btn-primary"/>
+<input type="button" value="上线" id="publishBtn" onclick="publish(1)" class="btn btn-primary"/>
+<input type="button" value="取消上线" id="unpublishBtn" onclick="publish(0)" class="btn btn-primary"/>
 <table id="list4"></table>
 <div id="gridPager"></div>
 <div id="dialog"></div>
@@ -58,17 +59,17 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         $("#dialog").dialog({title:"修改", autoOpen:false, modal:true, resizable:true, width: 700,position: {my:"center",at:"center top"}});
         $("#dialog").load("/item/forUpdate/"+gr).dialog("open");
     });
-    $("#publishBtn").click(function(){
+    function publish(status){
         var gr = $("#list4").jqGrid('getGridParam','selrow');
-        $.get("/item/save", {id:gr, status:1}, function(data){
+        $.get("/item/save", {id:gr, status:status}, function(data){
             if(data == "success"){
-                alert("发布成功");
+                alert("操作成功");
                 $("#list4").trigger("reloadGrid");
             }
         });
-    });
+    }
     function imageFormat( cellvalue, options, rowObject ){
-        return '<img src="'+cellvalue+'" />';
+        return cellvalue == null ? "" : '<img src="'+cellvalue+'" />';
     }
     function imageUnFormat( cellvalue, options, cell){
         return $('img', cell).attr('src');
