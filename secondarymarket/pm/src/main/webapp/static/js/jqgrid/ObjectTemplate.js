@@ -53,7 +53,7 @@ ObjectTemplate.gridSetting = {
     autoencode : true,//当设置为true时，对来自服务器的数据和提交数据进行encodes编码。如< 将被转换为&lt;
     rownumbers:true,//显示行号
 //    serializeGridData:ObjectTemplate.formatePostData,
-    height : "500",
+    height : "450",
     width : "300",//初始时，表格的宽度，如果设置了随窗口改变自动适应宽度，该值实效
     autowidth : true,
     sortname : 'id',
@@ -65,6 +65,7 @@ ObjectTemplate.gridSetting = {
     multiselect : true,
     multiboxonly : false,
     pager : "#gridPager",
+    cloneToTop:true,
     jsonReader : ObjectTemplate.jsonReader,
     prmNames:{
         //search: 'search',
@@ -76,10 +77,10 @@ ObjectTemplate.gridSetting = {
     caption : "JqGrid模板标题"
 };
 ObjectTemplate.pagerSetting = {
-    edit : true,
-    add : true,
-    del : true,
-    search : true
+    edit : false,
+    add : false,
+    del : false,
+    search : false
 };
 //ObjectTemplate.getDwrArgs = function (postData)
 //{

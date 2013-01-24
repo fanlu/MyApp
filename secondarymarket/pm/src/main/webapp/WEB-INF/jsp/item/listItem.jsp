@@ -12,11 +12,20 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
+    <style type="text/css">
+        .ui-jqgrid tr.jqgrow td {
+            white-space: normal !important;
+            height:auto;
+            vertical-align:text-top;
+            padding-top:2px;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="../index.jsp" />
 <input type="button" value="新增" id="newBtn" class="btn btn-primary"/>
 <input type="button" value="修改" id="updateBtn" class="btn btn-primary"/>
+<input type="button" value="发布" id="publishBtn" class="btn btn-primary"/>
 <table id="list4"></table>
 <div id="gridPager"></div>
 <div id="dialog"></div>
@@ -24,7 +33,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <script type="text/javascript">
     $("#list4").jqGrid($.extend(ObjectTemplate.gridSetting,{
         url: "/item/page",
-        colNames:['id','名称', '主题', '图片','编辑描述','推广链接','类别'],
+        colNames:['id','名称','图片','主题','编辑描述','推广链接','类别','状态'],
         colModel:[
             {name:'id',index:'id', width:60, sorttype:"int", hidden:true},
             {name:'name',index:'name', width:100, hidden:true},
@@ -32,9 +41,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
             {name:'title',index:'title', width:100},
             {name:'desc',index:'desc', width:90},
             {name:'tbPath',index:'tbPath', width:80},
-            {name:'categoryId',index:'categoryId', width:10,sorttype:"float"},
+            {name:'categoryId',index:'categoryId', width:18,align:"center",formatter:'select', editoptions:{value:"1:童装童鞋;2:婴儿用品;3:玩具早教;4:孕妈专区"}},
+            {name:'status',index:'status', width:12,sorttype:"float",edittype:'select', formatter:'select', editoptions:{value:"0:未上线;1:上线"}}
         ],
-        caption: "单品"
+        caption: "单品",
+        sortname: "status"
     }));
     $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
     $("#newBtn").click(function(){
@@ -43,9 +54,18 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 //        $("#dialog").load("/item/forAdd").modal();
     });
     $("#updateBtn").click(function(){
-        var gr = $("#list4").jqGrid('getGridParam','selarrrow');
+        var gr = $("#list4").jqGrid('getGridParam','selrow');
         $("#dialog").dialog({title:"修改", autoOpen:false, modal:true, resizable:true, width: 700,position: {my:"center",at:"center top"}});
         $("#dialog").load("/item/forUpdate/"+gr).dialog("open");
+    });
+    $("#publishBtn").click(function(){
+        var gr = $("#list4").jqGrid('getGridParam','selrow');
+        $.get("/item/save", {id:gr, status:1}, function(data){
+            if(data == "success"){
+                alert("发布成功");
+                $("#list4").trigger("reloadGrid");
+            }
+        });
     });
     function imageFormat( cellvalue, options, rowObject ){
         return '<img src="'+cellvalue+'" />';
