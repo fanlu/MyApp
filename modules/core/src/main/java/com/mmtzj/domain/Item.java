@@ -98,7 +98,7 @@ public class Item {
     }
 
     public Float getNewPrice() {
-        return newPrice;
+        return newPrice == null ? 0f : newPrice;
     }
 
     public void setNewPrice(Float newPrice) {
@@ -106,7 +106,7 @@ public class Item {
     }
 
     public Float getOldPrice() {
-        return oldPrice;
+        return oldPrice == null ? 0f : oldPrice;
     }
 
     public void setOldPrice(Float oldPrice) {
@@ -130,7 +130,7 @@ public class Item {
     }
 
     public Integer getWantToBuy() {
-        return wantToBuy;
+        return wantToBuy == null ? 0 : wantToBuy;
     }
 
     public void setWantToBuy(Integer wantToBuy) {
@@ -138,7 +138,7 @@ public class Item {
     }
 
     public Integer getLikeCount() {
-        return likeCount;
+        return likeCount == null ? 0 : likeCount;
     }
 
     public void setLikeCount(Integer likeCount) {
@@ -146,7 +146,7 @@ public class Item {
     }
 
     public Integer getCollectCount() {
-        return collectCount;
+        return collectCount == null ? 0 : collectCount;
     }
 
     public void setCollectCount(Integer collectCount) {

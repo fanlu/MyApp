@@ -44,7 +44,7 @@ public class Category {
     }
 
     public Integer getRank() {
-        return rank;
+        return rank ==null ? 0 : rank;
     }
 
     public void setRank(Integer rank) {
@@ -52,7 +52,7 @@ public class Category {
     }
 
     public Integer getStatus() {
-        return status;
+        return status == null ? 0 : status;
     }
 
     public void setStatus(Integer status) {
