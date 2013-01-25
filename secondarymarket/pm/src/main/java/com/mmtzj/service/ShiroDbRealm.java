@@ -20,14 +20,16 @@ package com.mmtzj.service;
 
 import com.google.common.base.Objects;
 import com.mmtzj.domain.User;
-import com.mmtzj.util.Encodes;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -43,11 +45,15 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		User user = accountService.findUserByLoginName(token.getUsername());
+//		User user = accountService.findUserByLoginName(token.getUsername());
+        User user = new User();
+        user.setId(1);
+        user.setLoginName("superadmin");
+        user.setPassword("719a8f29e3a1746fdb1736e9f6f7e63a553737f0");
 		if (user != null) {
-			byte[] salt = Encodes.decodeHex(user.getSalt());
+//			byte[] salt = Encodes.decodeHex(user.getSalt());
 			return new SimpleAuthenticationInfo(new ShiroUser(user.getId(), user.getLoginName(), user.getName()),
-					user.getPassword(), ByteSource.Util.bytes(salt), getName());
+					user.getPassword(), getName());
 		} else {
 			return null;
 		}
