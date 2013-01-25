@@ -7,7 +7,6 @@
 
 <html>
 <head>
-    <jsp:include page="meta.jsp" />
 	<title>登录页</title>
 	<script>
 		$(document).ready(function() {

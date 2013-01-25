@@ -49,6 +49,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         User user = new User();
         user.setId(1);
         user.setLoginName("superadmin");
+        user.setName("superadmin");
         user.setPassword("719a8f29e3a1746fdb1736e9f6f7e63a553737f0");
 		if (user != null) {
 //			byte[] salt = Encodes.decodeHex(user.getSalt());

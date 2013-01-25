@@ -13,6 +13,57 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#jquery-wrapped-fine-uploader').fineUploader({
+                request: {
+                    endpoint: '/upload',
+                    forceMultipart:true
+                },
+                multiple:false,
+                validation: {
+                    allowedExtensions: ['jpeg', 'jpg', 'gif', 'png','xls','doc','xlsx','docx','pdf','txt'],
+                    sizeLimit: 40960000 // 50 kB = 50 * 1024 bytes16.
+                },
+                text: {
+                    uploadButton: '<i class="icon-upload icon-white"></i> 上传'
+                }
+            }).on('complete', function(event, id, fileName, responseJSON) {
+                        if (responseJSON.success) {
+                            $("#pic").val(responseJSON.urls[0]);
+                        }
+                    });
+        });
+        function submitf(){
+            var title = $("input[name='title']").val()
+            if(title.replace(/[^\x00-\xff]/g, 'xx').length>=50){
+                alert("标题超长");
+                return false;
+            }
+            var params = $('#f').serializeObject();
+            $.ajax( {
+                url : "/item/save",
+                method: "post",
+                data : params,
+//            dataType : "json",
+                cache : false,
+                error : function(textStatus, errorThrown) {
+                    $("#dialog").dialog("close");
+                    $("#list4").trigger("reloadGrid");
+//                alert("系统ajax交互错误: " + textStatus + errorThrown);
+                },
+                success : function(data, textStatus) {
+                    if(data == "success") {
+                        $("#dialog").dialog("close");
+                        $("#list4").trigger("reloadGrid");
+                        alert("操作成功!");
+                    } else {
+                        alert("操作失败!");
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <form action="/item/save" method="POST" id="f">
@@ -69,53 +120,4 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <input type="button" value="保存" onclick="submitf();">
 </form>
 </body>
-<script type="text/javascript">
-    $('#jquery-wrapped-fine-uploader').fineUploader({
-        request: {
-            endpoint: '/upload',
-            forceMultipart:true
-        },
-        multiple:false,
-        validation: {
-            allowedExtensions: ['jpeg', 'jpg', 'gif', 'png','xls','doc','xlsx','docx','pdf','txt'],
-            sizeLimit: 40960000 // 50 kB = 50 * 1024 bytes16.
-        },
-        text: {
-            uploadButton: '<i class="icon-upload icon-white"></i> 上传'
-        }
-    }).on('complete', function(event, id, fileName, responseJSON) {
-        if (responseJSON.success) {
-            $("#pic").val(responseJSON.urls[0]);
-        }
-    });
-    function submitf(){
-        var title = $("input[name='title']").val()
-        if(title.replace(/[^\x00-\xff]/g, 'xx').length>=50){
-            alert("标题超长");
-            return false;
-        }
-        var params = $('#f').serializeObject();
-        $.ajax( {
-            url : "/item/save",
-            method: "post",
-            data : params,
-//            dataType : "json",
-            cache : false,
-            error : function(textStatus, errorThrown) {
-                $("#dialog").dialog("close");
-                $("#list4").trigger("reloadGrid");
-//                alert("系统ajax交互错误: " + textStatus + errorThrown);
-            },
-            success : function(data, textStatus) {
-                if(data == "success") {
-                    $("#dialog").dialog("close");
-                    $("#list4").trigger("reloadGrid");
-                    alert("操作成功!");
-                } else {
-                    alert("操作失败!");
-                }
-            }
-        });
-    }
-</script>
 </html>
