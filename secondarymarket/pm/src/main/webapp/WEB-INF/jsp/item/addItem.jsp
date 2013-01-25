@@ -70,16 +70,19 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <input type="hidden" name="id" value="${item.id}"/>
 <table>
     <tr>
-        <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}" style="width:490px"/></td>
+        <td>淘宝numid：</td><td colspan="3"><input type="text" name="name" value="${item.name}" style="width:485px"/></td>
     </tr>
     <tr>
-        <td>图片：</td><td colspan="3"><input type="text" name="pic" id="pic" value="${item.pic}" style="width:490px"/><div id="jquery-wrapped-fine-uploader"></div></td>
+        <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}" style="width:485px"/></td>
     </tr>
     <tr>
-        <td>小编：</td><td colspan="3"><textarea rows="4" cols="10" name="desc" style="width:490px">${item.desc}</textarea></td>
+        <td>图片：</td><td colspan="3"><input type="text" name="pic" id="pic" value="${item.pic}" style="width:485px"/><div id="jquery-wrapped-fine-uploader"></div></td>
     </tr>
     <tr>
-        <td>推广链接：</td><td colspan="3"><input type="text" name="tbPath" value="${item.tbPath}" style="width:490px"/></td>
+        <td>小编：</td><td colspan="3"><textarea rows="4" cols="10" name="desc" style="width:485px">${item.desc}</textarea></td>
+    </tr>
+    <tr>
+        <td>推广链接：</td><td colspan="3"><input type="text" name="tbPath" value="${item.tbPath}" style="width:485px"/></td>
     </tr>
     <tr>
         <td>类别：</td>

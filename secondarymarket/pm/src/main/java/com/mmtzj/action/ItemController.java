@@ -60,7 +60,7 @@ public class ItemController {
     public String saveItem(HttpServletRequest request, Item item, BindingResult result) throws Exception {
         itemService.saveOrUpdate(item);
         for(Eval eval: item.getEvalList()){
-            if(StringUtils.isEmpty(eval.getEval())){
+            if(eval.getId() == 0 && StringUtils.isEmpty(eval.getEval())){
                 continue;
             }
             eval.setItemId(item.getId());

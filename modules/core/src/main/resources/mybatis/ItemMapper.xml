@@ -65,6 +65,9 @@
     <update id="update" parameterType="Item">
         UPDATE item
         <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
             <if test="title!=null">
                 title = #{title},
             </if>
@@ -103,7 +106,7 @@
     </update>
 
     <insert id="insert" parameterType="Item">
-        insert into item (title,`desc`,pic,tbPath,categoryId,oldPrice,newPrice,status,wantToBuy,likeCount,collectCount) values
-        (#{title},#{desc},#{pic},#{tbPath},#{categoryId},#{oldPrice},#{newPrice},#{status},#{wantToBuy},#{likeCount},#{collectCount})
+        insert into item (name,title,`desc`,pic,tbPath,categoryId,oldPrice,newPrice,status,wantToBuy,likeCount,collectCount) values
+        (#{name},#{title},#{desc},#{pic},#{tbPath},#{categoryId},#{oldPrice},#{newPrice},#{status},#{wantToBuy},#{likeCount},#{collectCount})
     </insert>
 </mapper> 
