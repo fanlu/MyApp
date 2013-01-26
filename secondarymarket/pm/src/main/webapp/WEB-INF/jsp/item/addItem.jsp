@@ -63,10 +63,23 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                 }
             });
         }
+        function getTaobaokeDetail(){
+            var num_iid = $("input[name=name]").val()
+            $.get("/item/getTaobaokeDetail/"+num_iid,null,function(data){
+                var item = data.taobaokeItemDetails[0].item;
+                $("input[name=pic]").val(item.picUrl);
+                var tbPath = data.taobaokeItemDetails[0].clickUrl;
+                $("input[name=tbPath]").val(tbPath);
+                $("input[name=oldPrice]").val(item.price);
+                $("input[name=title]").val(item.title);
+            });
+        }
     </script>
 </head>
 <body>
 <form action="/item/save" method="POST" id="f">
+    <input type="button" value="保存" onclick="submitf();">
+    <input type="button" value="获取" onclick="getTaobaokeDetail();">
     <input type="hidden" name="id" value="${item.id}"/>
 <table>
     <tr>
@@ -120,7 +133,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         </td>
     </tr>
 </table>
-    <input type="button" value="保存" onclick="submitf();">
+
 </form>
 </body>
 </html>
