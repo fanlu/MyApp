@@ -7,6 +7,13 @@ import com.mmtzj.mapper.CategoryMapper;
 import com.mmtzj.service.EvalService;
 import com.mmtzj.service.ItemService;
 import com.mmtzj.util.Page;
+import com.mmtzj.util.TaobaoConstant;
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.domain.TaobaokeItemDetail;
+import com.taobao.api.request.TaobaokeItemsDetailGetRequest;
+import com.taobao.api.response.TaobaokeItemsDetailGetResponse;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,5 +87,21 @@ public class ItemController {
     public Page pageItem(HttpServletRequest request, Page page){
         itemService.findPage(page);
         return page;
+    }
+
+    @RequestMapping("/getTaobaokeDetail/{num_iid}")
+    @ResponseBody
+    public TaobaokeItemsDetailGetResponse getTaobaokeDetail(HttpServletRequest request, @PathVariable String num_iid){
+        TaobaoClient client=new DefaultTaobaoClient(TaobaoConstant.APP_URL, TaobaoConstant.APP_KEY, TaobaoConstant.APP_SERCET);
+        TaobaokeItemsDetailGetRequest req=new TaobaokeItemsDetailGetRequest();
+        req.setFields("click_url,shop_click_url,seller_credit_score,num_iid,title,nick,price,pic_url");
+        req.setNumIids(num_iid);
+        try {
+            TaobaokeItemsDetailGetResponse response = client.execute(req);
+            return response;
+        } catch (ApiException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return null;
     }
 }
