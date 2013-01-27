@@ -1,23 +1,16 @@
 package com.mmtzj.action;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mmtzj.domain.Category;
 import com.mmtzj.domain.Eval;
 import com.mmtzj.domain.Item;
-import com.mmtzj.mapper.CategoryMapper;
-import com.mmtzj.mapper.IcollectMapper;
-import com.mmtzj.mapper.IlikeMapper;
-import com.mmtzj.mapper.ItemMapper;
 import com.mmtzj.service.JedisService;
 import com.mmtzj.service.QQService;
 import com.mmtzj.util.BaseUtil;
 import com.mmtzj.util.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +62,9 @@ public class QQController extends BaseController{
             List<Eval> evals = (List<Eval>) jedisService.get(item.getId() + "evals");
             if(evals == null){
                 evals = qqService.getAllEvals(ImmutableList.of(item.getId()));
+                for(Eval eval : evals){
+                    eval.setPicId(String.valueOf(BaseUtil.getRandom(1, 100)));
+                }
                 jedisService.set(item.getId() + "evals", evals, Constant.CACHE_SECONDS);
             }
             item.setEvalList(evals);

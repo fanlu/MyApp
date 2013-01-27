@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="com.mmtzj.util.Constant" %>
 <%@ page import="com.mmtzj.util.QQConstant" %>
-<c:set var="staticUrl" value="<%=Constant.staticUrl%>"/>
+<c:set var="staticUrl" value="<%=Constant.STATIC_URL%>"/>
 <c:set var="appid" value="<%=QQConstant.APP_ID_SM%>"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
@@ -172,7 +172,7 @@
                 <p class="item_desc"><span class="orange">小编推荐：</span><span id="desc_${item.id}">${item.desc}</span></p>
                 <div class="item_comm">
                     <c:forEach items="${item.evalList}" var="eval">
-                    <div><!--<img src="${eval.id}">--><span>${eval.eval}</span></div>
+                    <div><img src="${staticUrl}/images/header/${eval.picId}.jpg"><span>${eval.eval}</span></div>
                     </c:forEach>
                 </div>
                 <p class="wrap_bd_bottom_2">

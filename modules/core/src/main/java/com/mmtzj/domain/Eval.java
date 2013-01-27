@@ -17,6 +17,8 @@ public class Eval implements Serializable {
 
     private int itemId;
 
+    private String picId;
+
     public int getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Eval implements Serializable {
 
     public void setItemId(int itemId) {
         this.itemId = itemId;
+    }
+
+    public String getPicId() {
+        return picId;
+    }
+
+    public void setPicId(String picId) {
+        this.picId = picId;
     }
 }

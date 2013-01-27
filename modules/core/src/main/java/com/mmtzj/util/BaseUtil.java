@@ -33,4 +33,10 @@ public class BaseUtil {
         }
     }
 
+    public static long getRandom(int min, int max){
+        double rand = Math.random();
+        int range = max - min;
+        return min + Math.round(rand * range);
+    }
+
 }

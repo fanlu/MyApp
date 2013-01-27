@@ -13,9 +13,9 @@ public class Constant {
 
     public static final int PAGE_SLIDER = 10;
 
-    public static final String mainUrl = "http://www.mmtzj.com";
+    public static final String MAIN_URL = "http://www.mmtzj.com";
 
-    public static final String staticUrl = "http://i1.mmtzj.com";
+    public static final String STATIC_URL = "http://i1.mmtzj.com";
 
     public static final int CACHE_SECONDS = 3600;
 

@@ -58,7 +58,7 @@ public class UploadController {
                 retMap.put("success", false);
                 return retMap;
             }
-            url.add(Constant.staticUrl + "/images/" + new DateTime().toString("yyyyMMdd") + "/" +newName);
+            url.add(Constant.STATIC_URL + "/images/" + new DateTime().toString("yyyyMMdd") + "/" +newName);
         }
         retMap.put("success", true);
         retMap.put("urls", url);
