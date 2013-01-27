@@ -103,8 +103,8 @@
             }else if(itype==4){
                 $('.itemtype_4').css('display','block');
                 $('<p class="middletip">每天推荐5款孕妈宝贝和5款玩具，面是精选出来的5款玩具哦~</p>').appendTo('.wrap_list');
-                $('.itemtype_5').appendTo(".wrap_list");
-                $('.itemtype_5').css('display','block');
+                $('.itemtype_2').appendTo(".wrap_list");
+                $('.itemtype_2').css('display','block');
             }else if(itype==5){
                 $('.itemtype_5').css('display','block');
                 $('<p class="middletip">每天推荐5款和5款，下面是精选出来的5款哦~</p>').appendTo('.wrap_list');

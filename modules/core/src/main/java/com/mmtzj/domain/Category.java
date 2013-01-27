@@ -1,5 +1,7 @@
 package com.mmtzj.domain;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * User: wangxin
@@ -7,7 +9,7 @@ package com.mmtzj.domain;
  * Time: 下午10:56
  * To change this template use File | Settings | File Templates.
  */
-public class Category {
+public class Category implements Serializable{
 
     private Integer id;
 

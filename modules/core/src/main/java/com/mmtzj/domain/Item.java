@@ -2,6 +2,7 @@ package com.mmtzj.domain;
 
 import com.google.common.collect.Lists;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * Time: 下午9:01
  * To change this template use File | Settings | File Templates.
  */
-public class Item {
+public class Item implements Serializable {
 
     private Integer id;
 

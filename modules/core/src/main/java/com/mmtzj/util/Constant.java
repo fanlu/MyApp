@@ -17,4 +17,6 @@ public class Constant {
 
     public static final String staticUrl = "http://i1.mmtzj.com";
 
+    public static final int CACHE_SECONDS = 3600;
+
 }
