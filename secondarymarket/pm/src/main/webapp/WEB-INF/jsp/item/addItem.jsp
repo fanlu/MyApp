@@ -33,6 +33,17 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                             $("#pic").val(responseJSON.urls[0]);
                         }
                     });
+            var min = 260;
+            var max = 400;
+            if($("input[name=likeCount]").val() == ""){
+                $("input[name=likeCount]").val($.fn.getRandom(min, max));
+            }
+            if($("input[name=collectCount]").val() == ""){
+                $("input[name=collectCount]").val($.fn.getRandom(min, max));
+            }
+            if($("input[name=wantToBuy]").val() == ""){
+                $("input[name=wantToBuy]").val($.fn.getRandom(min, max));
+            }
         });
         function submitf(){
             var title = $("input[name='title']").val()
