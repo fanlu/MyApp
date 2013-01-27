@@ -8,23 +8,15 @@ select.ui-pg-selbox {width: auto; padding: 0px; margin: 0px; line-height: normal
 
 /* header */
 #header {
-    border-bottom: 2px solid #658A16;
+    border-bottom: 2px solid #006DCC;
     margin: 2px 0 0px;
     padding-bottom: 2px;
-}
-
-#header h1 {
-    color: #658A16;
-}
-
-#header h1 small {
-    color: #BACE87;
 }
 
 /* leftbar */
 #leftbar h1 {
     border-bottom: 1px solid #EEEEEE;
-    color: #4A8C04;
+    color: #006DCC;
     font-size: 16px;
     font-weight: bold;
     text-align: right;
@@ -71,7 +63,7 @@ select.ui-pg-selbox {width: auto; padding: 0px; margin: 0px; line-height: normal
     padding: 15px 0px 0px 0px;
     font-size: 95%;
     text-align: center;
-    border-top: 2px solid #658A16;
+    border-top: 2px solid #006DCC;
 }
 
 #footer a {color: #999;}
