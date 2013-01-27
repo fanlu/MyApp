@@ -36,7 +36,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                     {name:'status',index:'status', width:12,sorttype:"float",edittype:'select', formatter:'select', editoptions:{value:"0:未上线;1:上线"}}
                 ],
                 caption: "单品",
-                sortname: "status"
+                sortname: "status",
+                sortorder: "desc"
             }));
             $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
             $("#newBtn").click(function(){

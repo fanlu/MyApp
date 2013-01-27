@@ -17,6 +17,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <LINK href="${staticUrl}/images/favicon.ico" type="image/x-icon" rel=icon>
     <title>妈妈跳蚤街</title>
     <link rel="stylesheet" type="text/css" href="${staticUrl}/styles/style.css">
     <script type="text/javascript" src="${staticUrl}/js/jquery-1.8.3.min.js"></script>

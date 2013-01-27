@@ -13,6 +13,7 @@
 
     <mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/*.html" location="/"/>
+    <mvc:resources mapping="/*.txt" location="/"/>
 	
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" /> 
 
