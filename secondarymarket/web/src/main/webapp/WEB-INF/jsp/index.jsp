@@ -21,6 +21,7 @@
     <title>妈妈跳蚤街</title>
     <link rel="stylesheet" type="text/css" href="${staticUrl}/styles/style.css">
     <script type="text/javascript" src="${staticUrl}/js/jquery-1.8.3.min.js"></script>
+    <meta property="wb:webmaster" content="64bcb4eff13664ae" />
     <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid=${appid}&platform=qzone"></script>
     <script type="text/javascript">
         function openShareDialog(iid,type){
