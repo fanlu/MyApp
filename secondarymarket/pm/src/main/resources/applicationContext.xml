@@ -13,26 +13,12 @@
 
     <context:component-scan base-package="com.mmtzj" />
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-        destroy-method="close">
-        <property name="driverClass" value="#{jdbcProps['jdbc.driver']}" />
-        <property name="jdbcUrl" value="#{jdbcProps['jdbc.url']}" />
-        <property name="user" value="#{jdbcProps['jdbc.username']}" />
-        <property name="password" value="#{jdbcProps['jdbc.password']}" />
-        <!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
-        <property name="initialPoolSize" value="1" />
-        <!--连接池中保留的最小连接数。-->
-        <property name="minPoolSize" value="1" />
-        <!--连接池中保留的最大连接数。Default: 15 -->
-        <property name="maxPoolSize" value="300" />
-        <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
-        <property name="maxIdleTime" value="3600" />
-        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
-        <property name="acquireIncrement" value="5" />
-        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
-        <property name="idleConnectionTestPeriod" value="60" />
-        <property name="testConnectionOnCheckout" value="true"/>
-        <property name="testConnectionOnCheckin" value="true"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="#{jdbcProps['jdbc.driver']}"/>
+        <property name="url" value="#{jdbcProps['jdbc.url']}"/>
+        <property name="username" value="#{jdbcProps['jdbc.username']}"/>
+        <property name="password" value="#{jdbcProps['jdbc.password']}"/>
+        <property name="defaultAutoCommit" value="false"/>
     </bean>
 
     <bean id="transactionManager"
@@ -43,13 +29,6 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource" />
     </bean>
-
-    <!--
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="mapperLocations" value="classpath*:/mapper/*Mapper.xml"/>
-        <property name="dataSource" ref="dataSource" />
-        <property name="typeAliasesPackage" value="com.langtaojin.domain" />
-    </bean>-->
 
     <!-- MyBatis配置 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -67,4 +46,18 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"
         proxy-target-class="true" />
+
+    <!-- POOL -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxActive"  value="${redis.maxActive}" />
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxWait" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="true" />
+    </bean>
+    <!-- jedis shard -->
+    <bean id="jedisPool"  class="redis.clients.jedis.JedisPool">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1" value="${redis.hostname}"/>
+        <constructor-arg index="2" value="${redis.port}" />
+    </bean>
 </beans>

@@ -59,6 +59,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                 }
             });
         }
+        function refresh(){
+            $.get("/item/refreshCache",null, function(data){
+                if(data == "success"){
+                    alert("操作成功");
+                }
+            });
+        }
         function imageFormat( cellvalue, options, rowObject ){
             return cellvalue == null ? "" : '<img src="'+cellvalue+'" />';
         }
@@ -72,6 +79,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 <input type="button" value="修改" id="updateBtn" class="btn btn-primary"/>
 <input type="button" value="上线" id="publishBtn" onclick="publish(1)" class="btn btn-primary"/>
 <input type="button" value="取消上线" id="unpublishBtn" onclick="publish(0)" class="btn btn-primary"/>
+<input type="button" value="刷新" id="refreshBtn" onclick="refresh()" class="btn btn-primary"/>
 <table id="list4"></table>
 <div id="gridPager"></div>
 <div id="dialog"></div>

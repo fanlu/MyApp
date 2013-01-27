@@ -4,9 +4,6 @@ import com.mmtzj.util.RedisConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -36,7 +33,7 @@ public class JedisService {
     }
 
     public Object get(String key) {
-        if("off".equals(redisConfig.getStatus())){
+        if ("off".equals(redisConfig.getStatus())) {
             return null;
         }
         Object obj = null;
@@ -224,7 +221,7 @@ public class JedisService {
     }
 
     public void set(String key, Object value, int outTime) {
-        if("on".equals(redisConfig.getStatus())){
+        if ("on".equals(redisConfig.getStatus())) {
             Jedis jedis = jedisPool.getResource();
             try {
                 jedis.set(getKey(key), object2Bytes(value));

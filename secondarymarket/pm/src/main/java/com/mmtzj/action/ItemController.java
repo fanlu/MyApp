@@ -6,6 +6,7 @@ import com.mmtzj.domain.Item;
 import com.mmtzj.mapper.CategoryMapper;
 import com.mmtzj.service.EvalService;
 import com.mmtzj.service.ItemService;
+import com.mmtzj.service.JedisService;
 import com.mmtzj.util.Page;
 import com.mmtzj.util.TaobaoConstant;
 import com.taobao.api.ApiException;
@@ -45,6 +46,9 @@ public class ItemController {
 
     @Resource
     private EvalService evalService;
+
+    @Resource
+    private JedisService jedisService;
 
     @RequestMapping("/forAdd")
     public String forAddItem(HttpServletRequest request, Model model){
@@ -104,4 +108,18 @@ public class ItemController {
         }
         return null;
     }
+    @RequestMapping("/refreshCache")
+    @ResponseBody
+    public String refreshCache(HttpServletRequest request) throws Exception {
+        jedisService.del("categories");
+        List<Item> items = (List<Item>) jedisService.get("items");
+        if(items != null){
+            for(Item item : items){
+                jedisService.del(item.getId() + "evals");
+            }
+        }
+        jedisService.del("items");
+        return "success";
+    }
+
 }
