@@ -280,13 +280,20 @@
     </div>
     <div class="c mt15"><img src="${staticUrl}/images/bmuyoule.png"></div>
     <div class="tbanner" style="position:relative;width:678px;height:217px;background:url('${staticUrl}/images/bottombanner2.png') center center no-repeat;">
-        <a style="position:absolute;left:28px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/lady.php?pid=mm_27508566_3117978_10377431&amp;mode=86" target="_blank"></a>
-        <a style="position:absolute;left:155px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://s.click.taobao.com/t_8?e=7HZ5x%2BOzffaf8CdCl42apBmoFQ%3D%3D&amp;p=mm_27508566_0_0" target="_blank"></a>
-        <a style="position:absolute;left:290px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/jewelry.php?pid=mm_27508566_3117978_10377431&amp;mode=86" target="_blank"></a>
-        <a style="position:absolute;left:420px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/beauty.php?pid=mm_27508566_3117978_10377431&amp;mode=86" target="_blank"></a>
-        <a style="position:absolute;left:545px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://s.click.taobao.com/t_8?e=7HZ5x%2BOzdZdHgllS0RLJLXvytA%3D%3D&amp;p=mm_27508566_0_0" target="_blank"></a>
+        <a style="position:absolute;left:28px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/child.php?pid=mm_30014146_3468139_11289698&eventid=102185" target="_blank"></a>
+        <a style="position:absolute;left:155px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/child.php?pid=mm_30014146_3468139_11289698&eventid=102185" target="_blank"></a>
+        <a style="position:absolute;left:290px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/child.php?pid=mm_30014146_3468139_11289698&eventid=102185" target="_blank"></a>
+        <a style="position:absolute;left:420px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/child.php?pid=mm_30014146_3468139_11289698&eventid=102185" target="_blank"></a>
+        <a style="position:absolute;left:545px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/child.php?pid=mm_30014146_3468139_11289698&eventid=102185" target="_blank"></a>
     </div>
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    alimama_pid="mm_30014146_3468139_11289720";
+    alimama_width=760;
+    alimama_height=90;
+</script>
+<script src="http://a.alimama.cn/inf.js" type="text/javascript">
+</script>
 </html>
