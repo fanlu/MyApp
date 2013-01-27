@@ -35,13 +35,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                     });
             var min = 260;
             var max = 400;
-            if($("input[name=likeCount]").val() == ""){
+            if($("input[name=likeCount]").val() == "" || $("input[name=likeCount]").val() == "0"){
                 $("input[name=likeCount]").val($.fn.getRandom(min, max));
             }
-            if($("input[name=collectCount]").val() == ""){
+            if($("input[name=collectCount]").val() == "" || $("input[name=collectCount]").val() == "0"){
                 $("input[name=collectCount]").val($.fn.getRandom(min, max));
             }
-            if($("input[name=wantToBuy]").val() == ""){
+            if($("input[name=wantToBuy]").val() == "" || $("input[name=wantToBuy]").val() == "0"){
                 $("input[name=wantToBuy]").val($.fn.getRandom(min, max));
             }
         });
