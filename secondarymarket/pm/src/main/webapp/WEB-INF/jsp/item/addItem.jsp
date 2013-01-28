@@ -94,7 +94,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     <input type="hidden" name="id" value="${item.id}"/>
 <table>
     <tr>
-        <td>淘宝numid：</td><td colspan="3"><input type="text" name="name" value="${item.name}" style="width:485px"/></td>
+        <td>淘宝numid：</td><td><input type="text" name="name" value="${item.name}"/></td>
+        <td>优先级：</td><td><input type="text" name="rank" value="${item.rank}"/></td>
     </tr>
     <tr>
         <td>主题：</td><td colspan="3"><input type="text" name="title" value="${item.title}" style="width:485px"/></td>

@@ -24,7 +24,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         $(document).ready(function() {
             $("#list4").jqGrid($.extend(ObjectTemplate.gridSetting,{
                 url: "/item/page",
-                colNames:['id','名称','图片','主题','编辑描述','推广链接','类别','状态'],
+                colNames:['id','名称','图片','主题','编辑描述','推广链接','类别','状态','优先级'],
                 colModel:[
                     {name:'id',index:'id', width:60, sorttype:"int", hidden:true},
                     {name:'name',index:'name', width:100, hidden:true},
@@ -32,12 +32,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                     {name:'title',index:'title', width:100},
                     {name:'desc',index:'desc', width:90},
                     {name:'tbPath',index:'tbPath', width:80},
-                    {name:'categoryId',index:'categoryId', width:18,align:"center",formatter:'select', editoptions:{value:"1:童装童鞋;2:婴儿用品;3:玩具早教;4:孕妈专区"}},
-                    {name:'status',index:'status', width:12,sorttype:"float",edittype:'select', formatter:'select', editoptions:{value:"0:未上线;1:上线"}}
+                    {name:'categoryId',index:'categoryId', width:27,align:"center",formatter:'select', editoptions:{value:"1:童装童鞋;2:婴儿用品;3:玩具早教;4:孕妈专区"}},
+                    {name:'status',index:'status', width:15,sorttype:"float",edittype:'select', formatter:'select', editoptions:{value:"0:未上线;1:上线"}},
+                    {name:'rank',index:'rank', width:18}
                 ],
                 caption: "单品",
-                sortname: "status",
-                sortorder: "desc"
+                sortname: "status,rank,id",
+                sortorder: "desc,desc,desc"
             }));
             $("#list4").jqGrid('navGrid', "#gridPager",ObjectTemplate.pagerSetting);
             $("#newBtn").click(function(){

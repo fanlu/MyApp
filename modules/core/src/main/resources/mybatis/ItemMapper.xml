@@ -16,6 +16,7 @@
         <result property="wantToBuy" column="wantToBuy"/>
         <result property="likeCount" column="likeCount"/>
         <result property="collectCount" column="collectCount"/>
+        <result property="rank" column="rank"/>
         <collection property="evalList" javaType="Eval">
             <id property="id" column="eval_id"/>
             <result property="eval" column="eval_eval"/>
@@ -46,7 +47,7 @@
         FROM item
         <include refid="where"/>
         <if test="orderBy != null and orderBy != ''">
-            ORDER BY ${orderBy} ${order}
+            ORDER BY ${orderBy}
         </if>
         <if test="limit != null">
             limit
@@ -101,12 +102,15 @@
             <if test="collectCount!=null and collectCount>0">
                 collectCount = #{collectCount},
             </if>
+            <if test="rank!=null">
+                rank = #{rank},
+            </if>
         </set>
         WHERE id=#{id}
     </update>
 
     <insert id="insert" parameterType="Item">
-        insert into item (name,title,`desc`,pic,tbPath,categoryId,oldPrice,newPrice,status,wantToBuy,likeCount,collectCount) values
-        (#{name},#{title},#{desc},#{pic},#{tbPath},#{categoryId},#{oldPrice},#{newPrice},#{status},#{wantToBuy},#{likeCount},#{collectCount})
+        insert into item (name,title,`desc`,pic,tbPath,categoryId,oldPrice,newPrice,status,wantToBuy,likeCount,collectCount,rank) values
+        (#{name},#{title},#{desc},#{pic},#{tbPath},#{categoryId},#{oldPrice},#{newPrice},#{status},#{wantToBuy},#{likeCount},#{collectCount},#{rank})
     </insert>
 </mapper> 

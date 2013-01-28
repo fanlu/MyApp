@@ -1,5 +1,6 @@
 package com.mmtzj.service;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
 import com.mmtzj.mapper.BaseMapper;
 import com.mmtzj.util.Page;
@@ -70,10 +71,13 @@ public abstract class BaseService<E> {
 //        ImmutableMap<String, Object> map = ImmutableMap.of("offset", (Object)p.getOffset(), "limit", p.getPageSize());
         Map<String, Object> map = createQueryParam("offset, limit", p.getOffset(), p.getPageSize());
         if (StringUtils.isNotBlank(p.getOrderBy())) {
-            map.put("orderBy", p.getOrderBy());
-        }
-        if (StringUtils.isNotBlank(p.getOrder())) {
-            map.put("order", p.getOrder());
+            String[] orderBy = p.getOrderBy().split(",");
+            String[] order = p.getOrder().split(",");
+            StringBuffer orders = new StringBuffer();
+            for(int i = 0; i < orderBy.length; i++){
+                orders.append(orderBy[i]).append(" ").append(order[i]).append(",");
+            }
+            map.put("orderBy", orders.toString().substring(0, orders.length()-1));
         }
         if (!CollectionUtils.isEmpty(p.getParam())) {
             map.putAll(p.getParam());

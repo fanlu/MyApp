@@ -38,7 +38,7 @@ public class QQService {
 
     public List<Item> getAllItems() {
         try{
-            return jdbcTemplate.query("SELECT * FROM item WHERE status=1", ParameterizedBeanPropertyRowMapper.newInstance(Item.class));
+            return jdbcTemplate.query("SELECT * FROM item WHERE status=1 order by rank desc", ParameterizedBeanPropertyRowMapper.newInstance(Item.class));
         }catch (Exception e){
             e.printStackTrace();
         }

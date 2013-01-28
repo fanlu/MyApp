@@ -40,6 +40,8 @@ public class Item implements Serializable {
 
     private Integer collectCount;
 
+    private Integer rank;
+
     private List<Eval> evalList = Lists.newArrayList();
 
     public Integer getId() {
@@ -152,5 +154,13 @@ public class Item implements Serializable {
 
     public void setCollectCount(Integer collectCount) {
         this.collectCount = collectCount;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 }
