@@ -291,8 +291,8 @@
 </div>
 </body>
 <script type="text/javascript">
-    alimama_pid="mm_30014146_3468139_11289720";
-    alimama_width=760;
+    alimama_pid="mm_30014146_3468139_11292254";
+    alimama_width=728;
     alimama_height=90;
 </script>
 <script src="http://a.alimama.cn/inf.js" type="text/javascript">
