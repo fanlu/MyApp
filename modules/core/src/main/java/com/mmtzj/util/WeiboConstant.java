@@ -9,6 +9,10 @@ package com.mmtzj.util;
  */
 public class WeiboConstant {
 
-    public final static String APP_KEY = "4171136211";
-    public final static String APP_SERCET = "a04403d58b2ab4191c78a765e5bb89c3";
+    public final static String APP_KEY_FL= "4171136211";
+    public final static String APP_SERCET_FL = "a04403d58b2ab4191c78a765e5bb89c3";
+
+    public final static String APP_KEY = "571792694";
+    public final static String APP_SERCET = "dee6c3344b29830331d224a7da0943bf";
+    public final static String APP_WEBMASTER = "a5ef07c213568bf9";
 }
