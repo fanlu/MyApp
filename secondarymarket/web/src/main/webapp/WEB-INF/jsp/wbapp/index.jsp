@@ -9,8 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="com.mmtzj.util.Constant" %>
 <%@ page import="com.mmtzj.util.QQConstant" %>
+<%@ page import="com.mmtzj.util.WeiboConstant" %>
 <c:set var="staticUrl" value="<%=Constant.STATIC_URL%>"/>
-<c:set var="appid" value="<%=QQConstant.APP_ID_SM%>"/>
+<c:set var="appid" value="<%=WeiboConstant.APP_KEY%>"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn" lang="zh-cn">
 <head>
@@ -22,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="${staticUrl}/styles/style.css">
     <script type="text/javascript" src="${staticUrl}/js/jquery-1.8.3.min.js"></script>
     <meta property="wb:webmaster" content="64bcb4eff13664ae" />
-    <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid=${appid}&platform=qzone"></script>
+    <script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey={appid}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         function openShareDialog(iid,type){
             fusion2.dialog.share

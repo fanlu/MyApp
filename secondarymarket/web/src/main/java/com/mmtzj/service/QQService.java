@@ -27,31 +27,10 @@ public class QQService {
     @Resource
     private JdbcTemplate jdbcTemplate;
 
-    public List<Category> getCategories() {
-        try{
-            return jdbcTemplate.query("SELECT * FROM category", ParameterizedBeanPropertyRowMapper.newInstance(Category.class));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<Item> getAllItems() {
-        try{
-            return jdbcTemplate.query("SELECT * FROM item WHERE status=1 order by rank desc", ParameterizedBeanPropertyRowMapper.newInstance(Item.class));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @Transactional
     public void updateItem(int itemId, String key) {
         String sql = String.format("update item set %s = %s +1 where id=?", key, key);
         jdbcTemplate.update(sql, new Object[]{itemId});
     }
 
-    public List<Eval> getAllEvals(List<Integer> itemIds){
-        return jdbcTemplate.query("select * from eval where itemId in (?)", new Object[]{Joiner.on(",").join(itemIds)}, ParameterizedBeanPropertyRowMapper.newInstance(Eval.class));
-    }
 }
