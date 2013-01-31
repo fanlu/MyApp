@@ -47,6 +47,18 @@
             });
         }
 
+        function openInviteDialog(){
+            fusion2.dialog.invite({
+                msg : "你的好友邀请你来使用应用啦",
+                img : "http://i.gtimg.cn/qzonestyle/act/qzone_app_img/app888_888_75.png",
+                context : "invite",
+                onSuccess : function (opt) { alert("发送成功: " + fusion.JSON.stringify(opt)); },
+                onCancel : function (opt) { alert("用户取消: " + fusion.JSON.stringify(opt)); },
+                onClose : function (opt) { alert("浮层关闭: " + fusion.JSON.stringify(opt)); },
+                onError : function (opt) { alert("发生错误: " + fusion.JSON.stringify(opt)); }
+            });
+        }
+
         function share(iid){
             var snum = $('#share_'+iid).html();
             snum = parseInt(snum) + 1;

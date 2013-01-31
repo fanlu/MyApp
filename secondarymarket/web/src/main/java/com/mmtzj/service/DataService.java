@@ -8,6 +8,7 @@ import com.mmtzj.domain.Eval;
 import com.mmtzj.domain.Item;
 import com.mmtzj.util.BaseUtil;
 import com.mmtzj.util.Constant;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Service;

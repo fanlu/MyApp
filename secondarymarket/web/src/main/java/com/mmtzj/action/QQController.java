@@ -12,6 +12,7 @@ import com.mmtzj.util.BaseUtil;
 import com.mmtzj.util.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -41,9 +43,6 @@ public class QQController extends BaseController{
 
     @Resource
     private DataService dataService;
-
-    @Resource
-    private JedisService jedisService;
 
     @RequestMapping("/")
     public String index(Model model){

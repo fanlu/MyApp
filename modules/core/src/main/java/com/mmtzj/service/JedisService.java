@@ -4,6 +4,7 @@ import com.mmtzj.util.RedisConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -24,13 +25,8 @@ public class JedisService {
     @Resource
     private JedisPool jedisPool;
 
-    public JedisPool getJedisPool() {
-        return jedisPool;
-    }
-
-    public void setJedisPool(JedisPool jedisPool) {
-        this.jedisPool = jedisPool;
-    }
+    @Resource
+    private RedisTemplate redisTemplate;
 
     public Object get(String key) {
         if ("off".equals(redisConfig.getStatus())) {

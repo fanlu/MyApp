@@ -24,6 +24,7 @@
     <script type="text/javascript" src="${staticUrl}/js/jquery-1.8.3.min.js"></script>
     <meta property="wb:webmaster" content="64bcb4eff13664ae" />
     <script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey={appid}" type="text/javascript" charset="utf-8"></script>
+    <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
     <script type="text/javascript">
         function openShareDialog(iid,type){
             fusion2.dialog.share
