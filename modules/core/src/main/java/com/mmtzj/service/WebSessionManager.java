@@ -17,7 +17,7 @@ public class WebSessionManager extends DefaultWebSessionManager {
         super.setGlobalSessionTimeout(1000 * 3600 * 24 * 365 * 2);
         Cookie cookie = new SimpleCookie("MMTZJ_SESS_ID");
         cookie.setHttpOnly(true); // more secure, protects against XSS attacks
-        cookie.setMaxAge(3600 * 24 * 365 *2);
+        cookie.setMaxAge(3600 * 24 * 365 * 2);
 
         setSessionIdCookie(cookie);
         setSessionIdCookieEnabled(true);
