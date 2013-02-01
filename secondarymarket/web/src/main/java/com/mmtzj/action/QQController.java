@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -45,8 +46,14 @@ public class QQController extends BaseController{
     private DataService dataService;
 
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(HttpServletRequest request, Model model){
         long l1 = System.currentTimeMillis();
+        Map<String, Object> reqMap = WebUtils.getParametersStartingWith(request,"");
+        String refresh = (String) reqMap.get("refresh");
+        String openid = (String) reqMap.get("openid");
+        String openkey = (String) reqMap.get("openkey");
+        logger.info("==========" + openid);
+        logger.info("==========" + openkey);
         List<Category> categories = dataService.getCategories();
         model.addAttribute("categories", categories);
         List<Item> items = dataService.getItems();
