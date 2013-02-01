@@ -1,18 +1,12 @@
 package com.mmtzj.action;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
 import com.mmtzj.domain.Category;
-import com.mmtzj.domain.Eval;
 import com.mmtzj.domain.Item;
 import com.mmtzj.service.DataService;
-import com.mmtzj.service.JedisService;
 import com.mmtzj.service.QQService;
 import com.mmtzj.util.BaseUtil;
-import com.mmtzj.util.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +15,6 @@ import org.springframework.web.util.WebUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +28,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/qqapp")
-public class QQController extends BaseController{
+public class QQController extends BaseController {
 
     Logger logger = LoggerFactory.getLogger(QQController.class);
 
@@ -46,14 +39,13 @@ public class QQController extends BaseController{
     private DataService dataService;
 
     @RequestMapping("/")
-    public String index(HttpServletRequest request, Model model){
+    public String index(HttpServletRequest request, Model model) {
         long l1 = System.currentTimeMillis();
-        Map<String, Object> reqMap = WebUtils.getParametersStartingWith(request,"");
+        Map<String, Object> reqMap = WebUtils.getParametersStartingWith(request, "");
         String refresh = (String) reqMap.get("refresh");
         String openid = (String) reqMap.get("openid");
         String openkey = (String) reqMap.get("openkey");
-        logger.info("==========" + openid);
-        logger.info("==========" + openkey);
+        logger.info("=========={} {} {}", openid, openkey, refresh);
         List<Category> categories = dataService.getCategories();
         model.addAttribute("categories", categories);
         List<Item> items = dataService.getItems();
@@ -67,10 +59,9 @@ public class QQController extends BaseController{
     }
 
 
-
     @RequestMapping("/ilike")
     @ResponseBody
-    public String ilike(HttpServletRequest request){
+    public String ilike(HttpServletRequest request) {
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
         logger.info("the ip {} like the item {}", BaseUtil.getIP(request), itemId);
         qqService.updateItem(itemId, "likeCount");
@@ -79,7 +70,7 @@ public class QQController extends BaseController{
 
     @RequestMapping("/icollect")
     @ResponseBody
-    public String icollect(HttpServletRequest request){
+    public String icollect(HttpServletRequest request) {
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
         logger.info("the ip {} collect the item {}", BaseUtil.getIP(request), itemId);
         qqService.updateItem(itemId, "collectCount");
@@ -88,7 +79,7 @@ public class QQController extends BaseController{
 
     @RequestMapping("/iclick")
     @ResponseBody
-    public String iclick(HttpServletRequest request){
+    public String iclick(HttpServletRequest request) {
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
         logger.info("the ip {} click the item {}", BaseUtil.getIP(request), itemId);
         qqService.updateItem(itemId, "wantToBuy");
