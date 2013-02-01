@@ -1,10 +1,17 @@
 package com.mmtzj.action;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mmtzj.domain.Category;
 import com.mmtzj.domain.Item;
 import com.mmtzj.service.DataService;
 import com.mmtzj.service.QQService;
 import com.mmtzj.util.BaseUtil;
+import com.mmtzj.util.QQConstant;
+import com.qq.open.OpenApiV3;
+import com.qq.open.OpensnsException;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +22,7 @@ import org.springframework.web.util.WebUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +53,14 @@ public class QQController extends BaseController {
         String refresh = (String) reqMap.get("refresh");
         String openid = (String) reqMap.get("openid");
         String openkey = (String) reqMap.get("openkey");
-        logger.info("=========={} {} {}", openid, openkey, refresh);
+        String pf = (String) reqMap.get("pf");
+        Session session = SecurityUtils.getSubject().getSession();
+        if(StringUtils.isNotBlank(openid)&&StringUtils.isNotBlank(openkey)){
+            session.setAttribute("openid", openid);
+            session.setAttribute("openkey", openkey);
+            session.setAttribute("refresh", refresh);
+            session.setAttribute("pf", pf);
+        }
         List<Category> categories = dataService.getCategories();
         model.addAttribute("categories", categories);
         List<Item> items = dataService.getItems();
@@ -56,6 +71,39 @@ public class QQController extends BaseController {
         long l2 = System.currentTimeMillis();
         logger.info("cost {} ms", l2 - l1);
         return "/qqapp/index";
+    }
+
+    @RequestMapping("/getUserInfo")
+    @ResponseBody
+    public Map<String, Object> getUserInfo(HttpServletRequest request) {
+        Session session = SecurityUtils.getSubject().getSession();
+        String openid = "";
+        if(session.getAttribute("openid")!=null){
+            openid = (String) session.getAttribute("openid");
+        }else{
+            return null;
+        }
+        String openkey = (String) session.getAttribute("openkey");
+        String pf = (String) session.getAttribute("pf");
+        logger.info("=========={} {} {}", openid, openkey, pf);
+        OpenApiV3 sdk = new OpenApiV3(QQConstant.APP_ID_SM, QQConstant.APP_KEY_SM);
+        sdk.setServerName("openapi.tencentyun.com");
+        String scriptName = "/v3/user/get_info";
+        // 指定HTTP请求协议类型
+        String protocol = "http";
+        // 填充URL请求参数
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("openid", openid);
+        params.put("openkey", openkey);
+        params.put("pf", pf);
+        try {
+            String resp = sdk.api(scriptName, params, protocol);
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(resp, Map.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

@@ -6,7 +6,7 @@
         <groupId>com.mmtzj</groupId>
         <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../modules/parent/</relativePath>
+        <relativePath>../modules/parent/pom.xml</relativePath>
     </parent>
     <artifactId>modules</artifactId>
     <name>mmtzj :: Module</name>
@@ -15,6 +15,6 @@
     <modules>
         <module>parent</module>
         <module>core</module>
-        <module>core</module>
+        <module>qqapi</module>
     </modules>
 </project>

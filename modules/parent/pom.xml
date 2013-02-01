@@ -11,6 +11,7 @@
     <properties>
         <!-- 主要依赖库的版本定义 -->
         <mmtzj.version>1.0-SNAPSHOT</mmtzj.version>
+        <qqapi.version>1.0-SNAPSHOT</qqapi.version>
         <spring.version>3.2.0.RELEASE</spring.version>
         <hibernate.version>4.1.9.Final</hibernate.version>
         <mybatis.version>3.1.1</mybatis.version>
@@ -107,6 +108,11 @@
                 <groupId>com.mmtzj</groupId>
                 <artifactId>core</artifactId>
                 <version>${mmtzj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mmtzj</groupId>
+                <artifactId>qqapi</artifactId>
+                <version>${qqapi.version}</version>
             </dependency>
             <!-- SPRING basic begin(一般不需要显式定义) -->
             <dependency>
@@ -522,6 +528,11 @@
                         <artifactId>commons-logging</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
             </dependency>
 
             <!-- google java library -->
