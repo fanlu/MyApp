@@ -144,7 +144,7 @@
         }
         $(document).ready(function(){
             $.ajax({
-                url: "/qqapp/user/",
+                url: "/qqapp/testMap",
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 data: null,
                 type: 'GET',

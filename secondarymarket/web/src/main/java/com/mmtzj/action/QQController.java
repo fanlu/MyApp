@@ -56,7 +56,7 @@ public class QQController extends BaseController {
         String openkey = (String) reqMap.get("openkey");
         String pf = (String) reqMap.get("pf");
         Session session = SecurityUtils.getSubject().getSession();
-        if (StringUtils.isNotBlank(openid) && StringUtils.isNotBlank(openkey)) {
+        if(StringUtils.isNotBlank(openid)&&StringUtils.isNotBlank(openkey)){
             session.setAttribute("openid", openid);
             session.setAttribute("openkey", openkey);
             session.setAttribute("refresh", refresh);
@@ -79,13 +79,43 @@ public class QQController extends BaseController {
     @ResponseBody
     public Map<String, Object> getUserInfo(HttpServletRequest request) {
         Session session = SecurityUtils.getSubject().getSession();
-//        String openid = "4D2B3A0F6C211F8A55E598D6C2B97B39";
-//        String openkey = "0DEA4780EB0F37DA0722177B3472919D";
-//        String pf = "qzone";
-        String openid = null;
-        if (session.getAttribute("openid") != null) {
+        String openid = "4D2B3A0F6C211F8A55E598D6C2B97B39";
+//        if(session.getAttribute("openid")!=null){
+//            openid = (String) session.getAttribute("openid");
+//        }else{
+//            return Maps.newHashMap();
+//        }
+        String openkey = "0DEA4780EB0F37DA0722177B3472919D";//(String) session.getAttribute("openkey");
+        String pf = "qzone";//(String) session.getAttribute("pf");
+        logger.info("=========={} {} {}", openid, openkey, pf);
+        OpenApiV3 sdk = new OpenApiV3(QQConstant.APP_ID_SM, QQConstant.APP_KEY_SM);
+        sdk.setServerName("openapi.tencentyun.com");
+        String scriptName = "/v3/user/get_info";
+        // 指定HTTP请求协议类型
+        String protocol = "http";
+        // 填充URL请求参数
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("openid", openid);
+        params.put("openkey", openkey);
+        params.put("pf", pf);
+        try {
+            String resp = sdk.api(scriptName, params, protocol);
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(resp, Map.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @RequestMapping("/testMap")
+    @ResponseBody
+    public Map<String, Object> testMap(){
+        Session session = SecurityUtils.getSubject().getSession();
+        String openid = "";
+        if(session.getAttribute("openid")!=null){
             openid = (String) session.getAttribute("openid");
-        } else {
+        }else{
             return Maps.newHashMap();
         }
         String openkey = (String) session.getAttribute("openkey");
@@ -106,8 +136,15 @@ public class QQController extends BaseController {
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(resp, Map.class);
         } catch (Exception e) {
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @RequestMapping("/testString")
+    @ResponseBody
+    public String testString(){
         return null;
     }
 
