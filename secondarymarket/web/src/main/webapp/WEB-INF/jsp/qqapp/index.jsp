@@ -143,9 +143,18 @@
             });
         }
         $(document).ready(function(){
-            $.get("/qqapp/getUserInfo", null, function(data){
-                if(data == ""){
-                    fusion2.dialog.relogin();
+            $.ajax({
+                url: "/qqapp/user/",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                data: null,
+                type: 'GET',
+                success: function(b) {
+                    if(b==""){
+                        fusion2.dialog.relogin();
+                    }
+                },
+                error: function(transport) {
+                    //alert("服务器繁忙，请稍候重试!");
                 }
             });
         });
@@ -198,6 +207,9 @@
                 <p class="wrap_bd_bottom_2">
                     已有<span class="pink">${item.wantToBuy}</span>人想买
                 </p>
+                <a>
+                <iframe id="iframe_guanzhu_1" src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F${guangzhuQQ}&type=button&width=400&height=30&style=3" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>
+                </a>
                 <p class="wrap_bd_bottom">
                     <span class="fl">
                         <a class="share_btn pngfix fl" href="javascript:void('${item.id}_00');" onclick="javascript:share(${item.id})"></a>

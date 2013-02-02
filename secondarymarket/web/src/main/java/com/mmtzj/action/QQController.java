@@ -1,6 +1,7 @@
 package com.mmtzj.action;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
 import com.mmtzj.domain.Category;
 import com.mmtzj.domain.Item;
 import com.mmtzj.service.DataService;
@@ -65,6 +66,7 @@ public class QQController extends BaseController {
         model.addAttribute("categories", categories);
         List<Item> items = dataService.getItems();
         model.addAttribute("items", items);
+        model.addAttribute("guangzhuQQ", "377309000");
 
         Map<String, Integer> itemTypes = dataService.getItemTypeCountsMap(items);
         model.addAttribute("itemTypes", itemTypes);
@@ -73,7 +75,7 @@ public class QQController extends BaseController {
         return "/qqapp/index";
     }
 
-    @RequestMapping("/getUserInfo")
+    @RequestMapping("/user/")
     @ResponseBody
     public Map<String, Object> getUserInfo(HttpServletRequest request) {
         Session session = SecurityUtils.getSubject().getSession();
@@ -81,14 +83,14 @@ public class QQController extends BaseController {
         if(session.getAttribute("openid")!=null){
             openid = (String) session.getAttribute("openid");
         }else{
-            return null;
+            return Maps.newHashMap();
         }
         String openkey = (String) session.getAttribute("openkey");
         String pf = (String) session.getAttribute("pf");
         logger.info("=========={} {} {}", openid, openkey, pf);
         OpenApiV3 sdk = new OpenApiV3(QQConstant.APP_ID_SM, QQConstant.APP_KEY_SM);
         sdk.setServerName("openapi.tencentyun.com");
-        String scriptName = "/v3/user/get_info";
+        String scriptName = "/v3/user/g et_info";
         // 指定HTTP请求协议类型
         String protocol = "http";
         // 填充URL请求参数
