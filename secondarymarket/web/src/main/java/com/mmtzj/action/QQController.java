@@ -108,6 +108,17 @@ public class QQController extends BaseController {
         return null;
     }
 
+    @RequestMapping("/testMap")
+    @ResponseBody
+    public Map<String, Object> testMap(){
+        return null;
+    }
+
+    @RequestMapping("/testString")
+    @ResponseBody
+    public String testString(){
+        return null;
+    }
 
     @RequestMapping("/ilike")
     @ResponseBody
