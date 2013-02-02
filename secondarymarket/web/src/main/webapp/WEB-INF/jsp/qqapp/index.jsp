@@ -143,13 +143,9 @@
             });
         }
         $(document).ready(function(){
-            $.ajax({
-                url: "/qqapp/getUserInfo",
-                type: 'GET',
-                success: function(data){
-                    if(data == ""){
-                        fusion2.dialog.relogin();
-                    }
+            $.get("/qqapp/getUserInfo", null, function(data){
+                if(data == ""){
+                    fusion2.dialog.relogin();
                 }
             });
         });
