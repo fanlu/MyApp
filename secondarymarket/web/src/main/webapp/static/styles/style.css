@@ -384,3 +384,49 @@ a.tobuy_btn:hover{
 .none{
     display:none;
 }
+
+#userinfobox{
+    position:absolute;
+    top:18px;
+    right:30px;
+    width:262px;
+    height:42px;
+    z-index:900;
+    color: #EEE;
+    font-family: simsun;
+}
+#userinfobox .userinfoimg{
+    float:left;
+    _display:inline;
+    height:42px;
+    width:42px;
+}
+#userinfobox .userinfoimg img{
+    width:41px;
+    border:1px solid white;
+}
+#userinfobox a{
+    float:right;
+    _display:inline;
+    width:84px;
+    height:20px;
+    background:url('../images/topbtn.png') no-repeat;
+}
+#userinfobox .userinfotop a{
+    background-position:0 0;
+}
+#userinfobox .userinfotop a:hover{
+    background-position:0 -21px;
+}
+#userinfobox .userinfobottom a{
+    background-position:-84px 0;
+}
+#userinfobox .userinfobottom a:hover{
+    background-position:-84px -21px;
+}
+#userinfobox .userinfotop{
+    height: 24px;
+}
+#userinfobox .userinfobottom{
+    height: 22px;
+}
