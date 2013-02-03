@@ -100,7 +100,7 @@ public class DataService {
         try{
             StringBuffer sql = new StringBuffer("SELECT * FROM item WHERE status=1 order by ");
             if(StringUtils.isNotBlank(pid)){
-                sql.append(" id=").append(pid).append("desc, ");
+                sql.append(" id=").append(pid).append(" desc, ");
             }
             sql.append(" rank desc");
             return jdbcTemplate.query(sql.toString(), ParameterizedBeanPropertyRowMapper.newInstance(Item.class));
