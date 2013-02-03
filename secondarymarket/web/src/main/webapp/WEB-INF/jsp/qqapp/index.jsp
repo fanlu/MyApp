@@ -152,8 +152,8 @@
                     if($.isEmptyObject(b)){
                         fusion2.dialog.relogin();
                     }else{
-                        $(".userinfoimg").appendChild("<img src='"+b.figureurl+"'/>");
-                        $(".userinfotop span").val(b.nickname);
+                        $(".userinfoimg").append("<img src='"+b.figureurl+"'/>");
+                        $("#userinfo").text(b.nickname);
                     }
                 },
                 error: function(transport) {
@@ -324,7 +324,7 @@
 </div>
 <div id="userinfobox">
     <div class="userinfoimg"></div>
-    <div class="userinfotop"><!--<a href="javascript:void();" onclick="javascript:openrewardsbox();return false;">&nbsp;</a>--><span style="padding-left:15px;"><span id="topownmoney"></span></span></div>
+    <div class="userinfotop"><!--<a href="javascript:void();" onclick="javascript:openrewardsbox();return false;">&nbsp;</a>--><span style="padding-left:15px;"><span id="userinfo"></span><span id="topownmoney"></span></span></div>
     <div class="userinfobottom"><!--<a href="wydj.php?openid=0695C76BBFF16347591EAC9AF0238ED4&amp;openkey=A892E45F45E5AE0A915CBBA9B7AB2395&amp;pfkey=06d7b494aefe772049b590c1cf22bd1c">&nbsp;</a><span style="padding-left:15px;">还可免费竞拍<span id="topowntimes">40</span>次</span>--></div>
     <div class="clear"></div>
 </div>
