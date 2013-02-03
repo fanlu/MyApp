@@ -75,9 +75,9 @@ public class QQController extends BaseController {
         return "/qqapp/index";
     }
 
-    @RequestMapping("/user/")
+    @RequestMapping("/testMap")
     @ResponseBody
-    public Map<String, Object> getUserInfo(HttpServletRequest request) {
+    public Map<String, Object> testMap(HttpServletRequest request) {
         Session session = SecurityUtils.getSubject().getSession();
         String openid = "4D2B3A0F6C211F8A55E598D6C2B97B39";
 //        if(session.getAttribute("openid")!=null){
@@ -108,9 +108,9 @@ public class QQController extends BaseController {
         return null;
     }
 
-    @RequestMapping("/testMap")
+    @RequestMapping("/user/")
     @ResponseBody
-    public Map<String, Object> testMap(){
+    public Map<String, Object> getUserInfo(){
         Session session = SecurityUtils.getSubject().getSession();
         String openid = "";
         if(session.getAttribute("openid")!=null){
