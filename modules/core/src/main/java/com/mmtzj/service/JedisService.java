@@ -204,6 +204,18 @@ public class JedisService {
         }
     }
 
+    public Long sadd(String key, Object o){
+        Jedis jedis = jedisPool.getResource();
+        try {
+            return jedis.sadd(getKey(key), object2Bytes(o));
+        } catch (Exception e) {
+            logger.error(e.getLocalizedMessage());
+            return null;
+        } finally {
+            this.jedisPool.returnResource(jedis);
+        }
+    }
+
     public boolean isExist(String key) {
         Jedis jedis = jedisPool.getResource();
         try {

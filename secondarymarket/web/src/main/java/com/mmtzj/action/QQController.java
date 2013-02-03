@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -114,6 +115,29 @@ public class QQController extends BaseController {
         return null;
     }
 
+    @RequestMapping("/getCollect")
+    @ResponseBody
+    public Set getCollect(HttpServletRequest request){
+        Session session = SecurityUtils.getSubject().getSession();
+        String openid = "";
+        if(session.getAttribute("openid")!=null){
+            openid = (String) session.getAttribute("openid");
+        }
+        return qqService.getCollect(openid);
+    }
+
+    @RequestMapping("delCollect")
+    @ResponseBody
+    public void delCollect(HttpServletRequest request){
+        String itemId = request.getParameter("itemId");
+        Session session = SecurityUtils.getSubject().getSession();
+        String openid = "";
+        if(session.getAttribute("openid")!=null){
+            openid = (String) session.getAttribute("openid");
+        }
+        qqService.delCollect(openid, itemId);
+    }
+
 
     @RequestMapping("/ilike")
     @ResponseBody
@@ -129,6 +153,9 @@ public class QQController extends BaseController {
     public String icollect(HttpServletRequest request) {
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
         Session session = SecurityUtils.getSubject().getSession();
+        if(session.getAttribute("openid")!=null){
+            qqService.addCollect(session.getAttribute("openid").toString(), itemId);
+        }
         logger.info("the ip {} collect the item {}", BaseUtil.getIP(request), itemId);
         qqService.updateItem(itemId, "collectCount");
         return null;
