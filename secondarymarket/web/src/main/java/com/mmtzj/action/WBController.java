@@ -34,7 +34,8 @@ public class WBController {
         long l1 = System.currentTimeMillis();
         List<Category> categories = dataService.getCategories();
         model.addAttribute("categories", categories);
-        List<Item> items = dataService.getItems();
+        String pid = "";
+        List<Item> items = dataService.getItems(pid);
         model.addAttribute("items", items);
 
         Map<String, Integer> itemTypes = dataService.getItemTypeCountsMap(items);

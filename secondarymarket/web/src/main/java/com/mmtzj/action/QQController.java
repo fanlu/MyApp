@@ -63,9 +63,13 @@ public class QQController extends BaseController {
             session.setAttribute("refresh", refresh);
             session.setAttribute("pf", pf);
         }
+        String pid = "";
+        if(reqMap.get("pid")!=null){
+            pid = (String) reqMap.get("pid");
+        }
         List<Category> categories = dataService.getCategories();
         model.addAttribute("categories", categories);
-        List<Item> items = dataService.getItems();
+        List<Item> items = dataService.getItems(pid);
         model.addAttribute("items", items);
         model.addAttribute("guangzhuQQ", "377309000");
 

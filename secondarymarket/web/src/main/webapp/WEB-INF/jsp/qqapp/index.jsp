@@ -22,41 +22,12 @@
     <link rel="stylesheet" type="text/css" href="${staticUrl}/styles/style.css">
     <script type="text/javascript" src="${staticUrl}/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="http://fusion.qq.com/fusion_loader?appid=${appid}&platform=qzone"></script>
+    <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
     <script type="text/javascript">
         function openShareDialog(iid,type){
-            fusion2.dialog.share
-            ({
-                url:'http://rc.qzone.qq.com/${appid}',
-                showcount:'0',/*是否显示分享总数,显示：'1'，不显示：'0' */
-                desc:$("#desc_"+iid).text(),/*默认分享理由(可选)*/
-                title:$("#title_"+iid).text(),/*分享标题(可选)*/
-                site:'妈妈跳蚤街',/*分享来源 如：腾讯网(可选)*/
-                pics :$("#pic_"+iid).attr("src"),
-                summary:'',
-                context:"share",
-                onShown:  function (opt){
-                },
-                onSuccess : function (opt){
-                    $.get("/qqapp/ishare/"+type, function(data) {
-                    });
-                },
-                onCancel : function (opt){
-                },
-                onClose : function (opt){
-                }
-            });
-        }
-
-        function openInviteDialog(){
-            fusion2.dialog.invite({
-                msg : "你的好友邀请你来使用应用啦",
-                img : "http://i.gtimg.cn/qzonestyle/act/qzone_app_img/app888_888_75.png",
-                context : "invite",
-                onSuccess : function (opt) { alert("发送成功: " + fusion.JSON.stringify(opt)); },
-                onCancel : function (opt) { alert("用户取消: " + fusion.JSON.stringify(opt)); },
-                onClose : function (opt) { alert("浮层关闭: " + fusion.JSON.stringify(opt)); },
-                onError : function (opt) { alert("发生错误: " + fusion.JSON.stringify(opt)); }
-            });
+            var url = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http%3A%2F%2Frc%2eqzone%2eqq%2ecom%2Fmyhome%2F${appid}%3Fapp_custom%3Djx_'+iid+'%26pid%3D'+iid+'%26via%3Dqz%2eappassit%2estoryfeed&amp;title='+encodeURIComponent(""+$("#title_"+iid).text())+'&amp;pics='+encodeURIComponent(""+$("#pic_"+iid).attr("src"))+'&amp;summary='+encodeURIComponent('')+'&amp;desc='+encodeURIComponent(""+$("#desc_"+iid).text());
+            window.open(url, '_blank','scrollbars=no,width=600,height=560,left=175,top=70,status=no,resizable=yes');
+            return false;
         }
 
         function share(iid){
@@ -150,7 +121,6 @@
                 type: 'GET',
                 success: function(b) {
                     if($.isEmptyObject(b)){
-                        fusion2.dialog.relogin();
                     }else{
                         $(".userinfoimg").append("<img src='"+b.figureurl+"'/>");
                         $("#userinfo").text(b.nickname);
@@ -193,7 +163,7 @@
     <div class="wrap_box itemtype_0 itemtype_${item.categoryId} ">
         <p class="wrap_hd"><a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
             <i class="item_tip_${item.categoryId} wrap_hd_tips"></i><span id="title_${item.id}">${item.title}</span>
-            <em class="bold" style="text-decoration:line-through;color: orange;font-weight: normal;"><c:if test="${item.oldPrice gt 0}">原价 ${item.oldPrice}元</c:if></em>&nbsp;&nbsp;&nbsp;<em class="bold">现价 ${item.newPrice}元</em></a></p>
+            <em class="bold" style="text-decoration:line-through;color: orange;font-weight: normal;"><c:if test="${item.oldPrice gt 0}">原价 ${item.oldPrice}元</c:if></em>&nbsp;&nbsp;&nbsp;<em class="bold"><c:if test="${item.oldPrice gt 0}">现价</c:if> ${item.newPrice}元</em></a></p>
         <ul class="wrap_bd">
             <li class="fl w310">
                 <a href="${item.tbPath}" onclick="javascript:togo('${item.tbPath}',${item.id});" target="_blank">
@@ -330,7 +300,8 @@
     </div>
     <div class="ft">
         <div class="copyright">
-        <div>您的ID是:${openid} 客服邮箱：service@mmtzj.com © 麻麻跳蚤街</div>
+        <div>您的ID是:${openid}  © 麻麻跳蚤街</div>
+        <div>声明:麻麻跳蚤街应用由麻麻跳蚤街提供 如有问题，请联系客服邮箱：service@mmtzj.com</div>
         </div>
     </div>
 </div>

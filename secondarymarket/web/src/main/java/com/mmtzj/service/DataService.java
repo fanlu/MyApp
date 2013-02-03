@@ -2,12 +2,14 @@ package com.mmtzj.service;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mmtzj.domain.Category;
 import com.mmtzj.domain.Eval;
 import com.mmtzj.domain.Item;
 import com.mmtzj.util.BaseUtil;
 import com.mmtzj.util.Constant;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -55,11 +57,16 @@ public class DataService {
         return evals;
     }
 
-    public List<Item> getItems() {
-        List<Item> items = (List<Item>) jedisService.get("items");
-        if(items == null){
-            items = getAllItems();
-            jedisService.set("items", items, Constant.CACHE_SECONDS);
+    public List<Item> getItems(String pid) {
+        List<Item> items = null;
+        if(StringUtils.isBlank(pid)){
+            items = (List<Item>) jedisService.get("items");
+            if(items == null){
+                items = getAllItems(pid);
+                jedisService.set("items", items, Constant.CACHE_SECONDS);
+            }
+        }else{
+            items = getAllItems(pid);
         }
         return items;
     }
@@ -89,9 +96,14 @@ public class DataService {
         return null;
     }
 
-    public List<Item> getAllItems() {
+    public List<Item> getAllItems(String pid) {
         try{
-            return jdbcTemplate.query("SELECT * FROM item WHERE status=1 order by rank desc", ParameterizedBeanPropertyRowMapper.newInstance(Item.class));
+            StringBuffer sql = new StringBuffer("SELECT * FROM item WHERE status=1 order by ");
+            if(StringUtils.isNotBlank(pid)){
+                sql.append(" id=").append(pid).append("desc, ");
+            }
+            sql.append(" rank desc");
+            return jdbcTemplate.query(sql.toString(), ParameterizedBeanPropertyRowMapper.newInstance(Item.class));
         }catch (Exception e){
             e.printStackTrace();
         }
