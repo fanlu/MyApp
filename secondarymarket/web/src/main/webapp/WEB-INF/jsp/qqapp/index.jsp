@@ -210,9 +210,7 @@
                 <p class="wrap_bd_bottom_2">
                     已有<span class="pink">${item.wantToBuy}</span>人想买
                 </p>
-                <a>
-                <iframe id="iframe_guanzhu_1" src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F${guangzhuQQ}&type=button&width=400&height=30&style=3" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>
-                </a>
+
                 <p class="wrap_bd_bottom">
                     <span class="fl">
                         <a class="share_btn pngfix fl" href="javascript:void('${item.id}_00');" onclick="javascript:share(${item.id})"></a>
@@ -321,19 +319,31 @@
         <a style="position:absolute;left:545px;top:60px;width:100px;height:120px;cursor:pointer;display:block;" href="http://www.taobao.com/go/chn/tbk_channel/child.php?pid=mm_30014146_3468139_11289698&eventid=102185" target="_blank"></a>
     </div>
     </div>
+    <div style="position:relative;height:100px;">
+        <script type="text/javascript">
+            alimama_pid="mm_30014146_3468139_11292254";
+            alimama_width=728;
+            alimama_height=90;
+        </script>
+        <script src="http://a.alimama.cn/inf.js" type="text/javascript">
+        </script>
+    </div>
+    <div class="ft">
+        <div class="copyright">
+        <div>您的ID是:${openid} 客服邮箱：service@mmtzj.com © 麻麻跳蚤街</div>
+        </div>
+    </div>
 </div>
 <div id="userinfobox">
     <div class="userinfoimg"></div>
     <div class="userinfotop"><!--<a href="javascript:void();" onclick="javascript:openrewardsbox();return false;">&nbsp;</a>--><span style="padding-left:15px;"><span id="userinfo"></span><span id="topownmoney"></span></span></div>
-    <div class="userinfobottom"><!--<a href="wydj.php?openid=0695C76BBFF16347591EAC9AF0238ED4&amp;openkey=A892E45F45E5AE0A915CBBA9B7AB2395&amp;pfkey=06d7b494aefe772049b590c1cf22bd1c">&nbsp;</a><span style="padding-left:15px;">还可免费竞拍<span id="topowntimes">40</span>次</span>--></div>
+    <div class="userinfobottom"><!--<a href="wydj.php?openid=0695C76BBFF16347591EAC9AF0238ED4&amp;openkey=A892E45F45E5AE0A915CBBA9B7AB2395&amp;pfkey=06d7b494aefe772049b590c1cf22bd1c">&nbsp;</a><span style="padding-left:15px;">还可免费竞拍<span id="topowntimes">40</span>次</span>-->
+        <a>
+            <iframe id="iframe_guanzhu_1" src="http://open.qzone.qq.com/like?url=http%3A%2F%2Fuser.qzone.qq.com%2F${guangzhuQQ}&type=button&width=400&height=30&style=3" allowtransparency="true" scrolling="no" border="0" frameborder="0" style="width:65px;height:30px;border:none;overflow:hidden;"></iframe>
+        </a>
+    </div>
     <div class="clear"></div>
 </div>
 </body>
-<script type="text/javascript">
-    alimama_pid="mm_30014146_3468139_11292254";
-    alimama_width=728;
-    alimama_height=90;
-</script>
-<script src="http://a.alimama.cn/inf.js" type="text/javascript">
-</script>
+
 </html>

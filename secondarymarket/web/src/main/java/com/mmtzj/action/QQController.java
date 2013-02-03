@@ -58,6 +58,7 @@ public class QQController extends BaseController {
         Session session = SecurityUtils.getSubject().getSession();
         if(StringUtils.isNotBlank(openid)&&StringUtils.isNotBlank(openkey)){
             session.setAttribute("openid", openid);
+            model.addAttribute("openid", openid);
             session.setAttribute("openkey", openkey);
             session.setAttribute("refresh", refresh);
             session.setAttribute("pf", pf);
@@ -67,7 +68,7 @@ public class QQController extends BaseController {
         List<Item> items = dataService.getItems();
         model.addAttribute("items", items);
         model.addAttribute("guangzhuQQ", "377309000");
-        model.addAttribute("userInfo", getUserInfo());
+
         Map<String, Integer> itemTypes = dataService.getItemTypeCountsMap(items);
         model.addAttribute("itemTypes", itemTypes);
         long l2 = System.currentTimeMillis();
@@ -123,6 +124,7 @@ public class QQController extends BaseController {
     @ResponseBody
     public String icollect(HttpServletRequest request) {
         int itemId = BaseUtil.getIntValue(request.getParameter("iid"));
+        Session session = SecurityUtils.getSubject().getSession();
         logger.info("the ip {} collect the item {}", BaseUtil.getIP(request), itemId);
         qqService.updateItem(itemId, "collectCount");
         return null;

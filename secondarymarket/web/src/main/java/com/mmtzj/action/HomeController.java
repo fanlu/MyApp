@@ -17,6 +17,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(Model model){
-        return "redirect:/qqapp/";
+        return "redirect:/wb/";
     }
 }
