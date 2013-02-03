@@ -67,7 +67,7 @@ public class QQController extends BaseController {
         List<Item> items = dataService.getItems();
         model.addAttribute("items", items);
         model.addAttribute("guangzhuQQ", "377309000");
-
+        model.addAttribute("userInfo", getUserInfo());
         Map<String, Integer> itemTypes = dataService.getItemTypeCountsMap(items);
         model.addAttribute("itemTypes", itemTypes);
         long l2 = System.currentTimeMillis();
