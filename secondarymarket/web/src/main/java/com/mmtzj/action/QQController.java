@@ -9,7 +9,6 @@ import com.mmtzj.service.QQService;
 import com.mmtzj.util.BaseUtil;
 import com.mmtzj.util.QQConstant;
 import com.qq.open.OpenApiV3;
-import com.qq.open.OpensnsException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -26,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 /**
@@ -117,7 +115,7 @@ public class QQController extends BaseController {
 
     @RequestMapping("/getCollect")
     @ResponseBody
-    public Set getCollect(HttpServletRequest request){
+    public List getCollect(HttpServletRequest request){
         Session session = SecurityUtils.getSubject().getSession();
         String openid = "";
         if(session.getAttribute("openid")!=null){

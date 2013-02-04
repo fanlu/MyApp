@@ -1,20 +1,12 @@
 package com.mmtzj.service;
 
-import com.google.common.base.Joiner;
-import com.mmtzj.domain.Category;
-import com.mmtzj.domain.Eval;
-import com.mmtzj.domain.Item;
-import com.mmtzj.mapper.BaseMapper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -42,14 +34,15 @@ public class QQService {
     }
 
     public void addCollect(String openid, int itemId) {
-        redisTemplate.opsForSet().add(openid, itemId);
+        redisTemplate.opsForList().remove(openid, 0, itemId);
+        redisTemplate.opsForList().leftPush(openid, itemId);
     }
 
-    public Set getCollect(String openid){
-        return redisTemplate.opsForSet().members(openid);
+    public List getCollect(String openid){
+        return redisTemplate.opsForList().range(openid, 0, 3);
     }
 
     public void delCollect(String openid, String itemId) {
-        redisTemplate.opsForSet().remove(openid, itemId);
+        redisTemplate.opsForList().remove(openid, 0, itemId);
     }
 }
