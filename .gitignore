@@ -8,3 +8,6 @@ taobao/Servers/
 *.idea
 *.iml
 *target
+py/*.jpg
+py/weibo_collect/
+
