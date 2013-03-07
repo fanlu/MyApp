@@ -3,6 +3,7 @@ package com.mmtzj.thrift.server;
 import com.mmtzj.thrift.ServiceRegistry;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.thrift.TProcessor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.remoting.support.RemoteExporter;
 
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class ThriftExporter extends RemoteExporter implements InitializingBean {
 
-    public Processor processor;
+    public TProcessor processor;
     private ServiceRegistry serviceRegistry;
 
     public void afterPropertiesSet() throws Exception {

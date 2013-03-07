@@ -32,7 +32,6 @@ public class ThriftHttpServiceExporter extends ThriftExporter implements HttpReq
     private URL metadataXml;
     private TProtocolFactory jsonProtocolFactory;
     private TProtocolFactory protocolFactory;
-//    private Processor processor;
 
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (!"POST".equals(request.getMethod()) && metadataXml != null) {
