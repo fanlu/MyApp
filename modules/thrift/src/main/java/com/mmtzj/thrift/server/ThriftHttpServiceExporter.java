@@ -1,6 +1,7 @@
 package com.mmtzj.thrift.server;
 
 import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.transport.TIOStreamTransport;
 import org.apache.thrift.transport.TTransport;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.HttpRequestHandler;
 
+import javax.annotation.processing.Processor;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URL;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,6 +29,10 @@ import java.io.PrintWriter;
 public class ThriftHttpServiceExporter extends ThriftExporter implements HttpRequestHandler {
 
     Logger logger = LoggerFactory.getLogger(ThriftHttpServiceExporter.class);
+    private URL metadataXml;
+    private TProtocolFactory jsonProtocolFactory;
+    private TProtocolFactory protocolFactory;
+//    private Processor processor;
 
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (!"POST".equals(request.getMethod()) && metadataXml != null) {
@@ -53,7 +60,13 @@ public class ThriftHttpServiceExporter extends ThriftExporter implements HttpReq
         }
     }
 
+    private TProtocolFactory getProtocolFactory() {
+        return this.protocolFactory;
+    }
+
     protected void doInvoke(TProtocol in, TProtocol out) throws Throwable {
         processor.process(in, out);
     }
+
+
 }

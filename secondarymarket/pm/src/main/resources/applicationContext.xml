@@ -61,11 +61,11 @@
         <constructor-arg index="2" value="${redis.port}" />
     </bean>
 
-    <!-- 平台共通服务 -->
+    <!-- 平台共通服务
     <bean id="standardService"
           class="com.mmtzj.thrift.ThriftHttpProxyFactoryBean">
         <property name="serviceUrl" value="${cs.url}/standardService" />
         <property name="serviceInterface"
                   value="com.mmtzj.service.StandardService$Iface" />
-    </bean>
+    </bean>-->
 </beans>

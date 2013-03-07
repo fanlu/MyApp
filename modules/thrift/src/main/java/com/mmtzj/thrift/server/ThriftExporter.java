@@ -1,5 +1,6 @@
 package com.mmtzj.thrift.server;
 
+import com.mmtzj.thrift.ServiceRegistry;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,18 +18,23 @@ import java.util.List;
  */
 public class ThriftExporter extends RemoteExporter implements InitializingBean {
 
-    private Object processor;
+    public Processor processor;
+    private ServiceRegistry serviceRegistry;
 
     public void afterPropertiesSet() throws Exception {
         if (serviceRegistry != null) {
             List<MethodInterceptor> il = new ArrayList<MethodInterceptor>();
-            il.add(new ClassLoaderInterceptor(getBeanClassLoader()));
-            if (threadResourceManager != null) {
-                il.add(new ThreadResourceSupportInterceptor(threadResourceManager));
-            }
-            serviceRegistry.exportService(getServiceInterface(), getProxyForService0(il));
+//            il.add(new ClassLoaderInterceptor(getBeanClassLoader()));
+//            if (threadResourceManager != null) {
+//                il.add(new ThreadResourceSupportInterceptor(threadResourceManager));
+//            }
+//            serviceRegistry.exportService(getServiceInterface(), getProxyForService0(il));
         }
-        super.setInterceptors(ArrayUtils.add(interceptors, new AnyExceptionConvertInterceptor()));
+//        super.setInterceptors(ArrayUtils.add(interceptors, new AnyExceptionConvertInterceptor()));
         this.processor = ThriftHelper.buildProcessor(getServiceInterface(), getProxyForService());
+    }
+
+    private void getProxyForService0(List<MethodInterceptor> il) {
+        //To change body of created methods use File | Settings | File Templates.
     }
 }

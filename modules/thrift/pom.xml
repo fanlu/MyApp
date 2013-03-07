@@ -5,12 +5,13 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>com.mmtzj</groupId>
-        <version>1.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>core</artifactId>
-    <name>mmtzj :: Module :: Core</name>
+    <artifactId>thrift</artifactId>
+    <packaging>jar</packaging>
+    <name>mmtzj :: Module :: thrift</name>
 
     <dependencies>
         <!-- SPRING begin -->
@@ -162,7 +163,18 @@
             <groupId>org.python</groupId>
             <artifactId>jython</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -2,11 +2,12 @@ package com.mmtzj.thrift;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.http.client.HttpClient;
 import org.apache.thrift.TApplicationException;
+import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.osgi.framework.ServiceReference;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.remoting.support.UrlBasedRemoteAccessor;
@@ -27,6 +28,10 @@ public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements I
     private Object serviceProxy;
 
     private ServiceRegistry serviceRegistry;
+
+    private ClientConstructor clientConstructor;
+
+    private TProtocolFactory protocolFactory;
 
     public void afterPropertiesSet() {
         super.afterPropertiesSet();
@@ -95,4 +100,7 @@ public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements I
         return new THttpClient(getServiceUrl(), getHttpClient());
     }
 
+    public HttpClient getHttpClient() {
+        return getHttpClient();
+    }
 }

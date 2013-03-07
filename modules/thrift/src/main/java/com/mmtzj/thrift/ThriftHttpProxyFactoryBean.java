@@ -52,8 +52,6 @@ public class ThriftHttpProxyFactoryBean<T> extends ThriftClientInterceptor imple
         return true;
     }
 
-
-
     public HttpClient getHttpClient() {
         return httpClient;
     }
