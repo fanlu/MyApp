@@ -1,10 +1,11 @@
-package thrift.server;
+package com.mmtzj.handler;
+import com.mmtzj.thrift.gen.User;
+import com.mmtzj.thrift.gen.UserNotFound;
+import com.mmtzj.thrift.gen.UserService;
+import org.apache.thrift.TException;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.thrift.TException;
-import thrift.gen.User;
-import thrift.gen.UserNotFound;
-import thrift.gen.UserService;
 
 public class UserServiceHandler implements UserService.Iface {
 	@Override

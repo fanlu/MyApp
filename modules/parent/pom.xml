@@ -12,6 +12,7 @@
         <!-- 主要依赖库的版本定义 -->
         <mmtzj.version>1.0-SNAPSHOT</mmtzj.version>
         <qqapi.version>1.0-SNAPSHOT</qqapi.version>
+        <mmtzj.thrift.version>1.0-SNAPSHOT</mmtzj.thrift.version>
         <spring.version>3.2.0.RELEASE</spring.version>
         <hibernate.version>4.1.9.Final</hibernate.version>
         <mybatis.version>3.1.1</mybatis.version>
@@ -108,6 +109,11 @@
                 <groupId>com.mmtzj</groupId>
                 <artifactId>core</artifactId>
                 <version>${mmtzj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mmtzj</groupId>
+                <artifactId>thrift</artifactId>
+                <version>${mmtzj.thrift.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.mmtzj</groupId>

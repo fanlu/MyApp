@@ -4,13 +4,16 @@ import com.mmtzj.util.RedisConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -25,8 +28,8 @@ public class JedisService {
     @Resource
     private JedisPool jedisPool;
 
-    @Resource
-    private RedisTemplate redisTemplate;
+//    @Resource
+//    private RedisTemplate redisTemplate;
 
     public Object get(String key) {
         if ("off".equals(redisConfig.getStatus())) {

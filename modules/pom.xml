@@ -16,5 +16,6 @@
         <module>parent</module>
         <module>core</module>
         <module>qqapi</module>
+        <module>thrift</module>
     </modules>
 </project>

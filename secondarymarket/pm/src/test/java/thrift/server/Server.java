@@ -1,9 +1,11 @@
 package thrift.server;
+
+import com.mmtzj.handler.UserServiceHandler;
+import com.mmtzj.thrift.gen.UserService;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
-import thrift.gen.UserService;
 
 public class Server {
 	public static void main(String[] args) {

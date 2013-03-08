@@ -9,10 +9,10 @@
     </appender>
 
     <!-- project default level -->
-    <logger name="com.mmtzj" level="info" />
+    <logger name="com.mmtzj" level="debug" />
 
     <!--log4jdbc -->
-    <logger name="jdbc.sqltiming" level="INFO"/>
+    <logger name="jdbc.sqltiming" level="debug"/>
 
     <root level="WARN">
         <appender-ref ref="console" />
