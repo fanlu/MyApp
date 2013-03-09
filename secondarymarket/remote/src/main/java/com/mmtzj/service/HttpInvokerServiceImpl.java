@@ -12,7 +12,7 @@ import java.util.Map;
  * Time: 下午1:05
  * To change this template use File | Settings | File Templates.
  */
-//@Service("httpInvokerService")
+@Service("httpInvokerService")
 public class HttpInvokerServiceImpl implements HttpInvokerService {
     @Override
     public void getAll() {
