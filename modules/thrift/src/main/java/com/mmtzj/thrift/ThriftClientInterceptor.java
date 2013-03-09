@@ -23,9 +23,7 @@ import java.lang.reflect.Method;
  * Time: 下午8:41
  * To change this template use File | Settings | File Templates.
  */
-public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements InitializingBean, MethodInterceptor {
-
-    private Object serviceProxy;
+public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements MethodInterceptor {
 
     private ServiceRegistry serviceRegistry;
 
@@ -33,14 +31,13 @@ public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements I
 
     private TProtocolFactory protocolFactory;
 
-    public void afterPropertiesSet() {
+    public void afterPropertiesSet(){
         super.afterPropertiesSet();
-        if (getServiceInterface() == null) {
-            throw new IllegalArgumentException("property serviceInterface is required.");
-        }
-//        .....
-        ProxyFactory pf = new ProxyFactory(getServiceInterface(), this);//用当前对象包装接口
-        this.serviceProxy = pf.getProxy(getBeanClassLoader());
+        prepare();
+    }
+
+    private void prepare() {
+        //To change body of created methods use File | Settings | File Templates.
     }
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
@@ -86,14 +83,6 @@ public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements I
 
     private Throwable convertException(Throwable target) {
         return new RuntimeException(target);
-    }
-
-    public Object getServiceProxy() {
-        return serviceProxy;
-    }
-
-    public void setServiceProxy(Object serviceProxy) {
-        this.serviceProxy = serviceProxy;
     }
 
     protected TTransport getTransport() throws TTransportException {

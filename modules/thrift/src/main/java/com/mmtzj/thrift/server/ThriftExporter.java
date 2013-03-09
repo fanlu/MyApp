@@ -25,7 +25,7 @@ public class ThriftExporter extends RemoteExporter implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         if (serviceRegistry != null) {
             List<MethodInterceptor> il = new ArrayList<MethodInterceptor>();
-//            il.add(new ClassLoaderInterceptor(getBeanClassLoader()));
+            il.add(new ClassLoaderInterceptor(getBeanClassLoader()));
 //            if (threadResourceManager != null) {
 //                il.add(new ThreadResourceSupportInterceptor(threadResourceManager));
 //            }
@@ -36,6 +36,7 @@ public class ThriftExporter extends RemoteExporter implements InitializingBean {
     }
 
     private void getProxyForService0(List<MethodInterceptor> il) {
+        getProxyForService();
         //To change body of created methods use File | Settings | File Templates.
     }
 }

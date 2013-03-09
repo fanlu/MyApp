@@ -11,6 +11,8 @@ import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: FANLU
@@ -26,10 +28,13 @@ public class THttpClientTest {
         TProtocol protocol = new TBinaryProtocol(transport);
         UserService.Client client = new UserService.Client(protocol);
         transport.open();
-        System.out.println("test1");
         try {
             User user1 = client.getUser("login1");
             System.out.println("name=" + user1.getName());
+            List<User> users = client.getUsers();
+            for(User user: users){
+                System.out.println(user.getName());
+            }
         } catch (UserNotFound e) {
             System.out.println(e.getMessage());
         } catch (TException e) {

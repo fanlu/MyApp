@@ -7,6 +7,8 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
+import org.apache.http.params.HttpConnectionParams;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
@@ -22,6 +24,7 @@ public class ThriftHttpProxyFactoryBean<T> extends ThriftClientInterceptor imple
     private static final int DEFAULT_MAX_CONNECTIONS_PER_ROUTE = 10;
     private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60;
     private HttpClient httpClient; // FactoryBean初始化httpClient&nbsp;
+    private Object serviceProxy;
 
     public ThriftHttpProxyFactoryBean() {
         SchemeRegistry schemeRegistry = new SchemeRegistry();
@@ -35,11 +38,22 @@ public class ThriftHttpProxyFactoryBean<T> extends ThriftClientInterceptor imple
     }
 
     private void setReadTimeout(int defaultReadTimeoutMilliseconds) {
+        HttpConnectionParams.setSoTimeout(httpClient.getParams(), defaultReadTimeoutMilliseconds);
+    }
+
+    public void afterPropertiesSet() {
+        super.afterPropertiesSet();
+        if (getServiceInterface() == null) {
+            throw new IllegalArgumentException("property serviceInterface is required.");
+        }
+//        .....
+        ProxyFactory pf = new ProxyFactory(getServiceInterface(), this);//用当前对象包装接口
+        this.serviceProxy = pf.getProxy(getBeanClassLoader());
     }
 
     @Override
     public T getObject() throws Exception {
-        return (T) getServiceProxy(); // 服务对象不在本地，使用代理
+        return (T) this.serviceProxy; // 服务对象不在本地，使用代理
     }
 
     @Override
