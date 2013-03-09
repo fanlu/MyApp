@@ -22,7 +22,7 @@ public class THttpClientTest {
 
     @Test
     public void get() throws TTransportException {
-        TTransport transport = new THttpClient("http://localhost:8095/user/service");
+        TTransport transport = new THttpClient("http://localhost:8096/user/service");
         TProtocol protocol = new TBinaryProtocol(transport);
         UserService.Client client = new UserService.Client(protocol);
         transport.open();
