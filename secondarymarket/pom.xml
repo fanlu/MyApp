@@ -16,5 +16,6 @@
 	<modules>
 		<module>web</module>
 		<module>pm</module>
-	</modules>
+        <module>remote</module>
+    </modules>
 </project>
