@@ -16,4 +16,11 @@
         <property name="serviceInterface" value="com.mmtzj.service.HttpInvokerService" />
     </bean>
 
+    <bean name="/UserService" class="com.mmtzj.thrift.server.ThriftHttpServiceExporter">
+        <property name="service">
+            <bean class="com.mmtzj.handler.UserServiceHandler"/>
+        </property>
+        <property name="serviceInterface" value="com.mmtzj.thrift.gen.UserService$Iface"/>
+    </bean>
+
 </beans>  

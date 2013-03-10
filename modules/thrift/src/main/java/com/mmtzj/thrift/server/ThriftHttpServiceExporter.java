@@ -1,5 +1,7 @@
 package com.mmtzj.thrift.server;
 
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.transport.TIOStreamTransport;
@@ -30,8 +32,8 @@ public class ThriftHttpServiceExporter extends ThriftExporter implements HttpReq
 
     Logger logger = LoggerFactory.getLogger(ThriftHttpServiceExporter.class);
     private URL metadataXml;
-    private TProtocolFactory jsonProtocolFactory;
-    private TProtocolFactory protocolFactory;
+    private TProtocolFactory jsonProtocolFactory = new TJSONProtocol.Factory();
+    private TProtocolFactory protocolFactory = new TBinaryProtocol.Factory();
 
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (!"POST".equals(request.getMethod()) && metadataXml != null) {

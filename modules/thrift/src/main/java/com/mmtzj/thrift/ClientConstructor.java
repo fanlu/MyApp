@@ -1,5 +1,6 @@
 package com.mmtzj.thrift;
 
+import com.mmtzj.thrift.gen.UserService;
 import org.apache.thrift.protocol.TProtocol;
 
 /**
@@ -12,6 +13,7 @@ import org.apache.thrift.protocol.TProtocol;
 public class ClientConstructor {
 
     public Object newInstance(TProtocol protocol) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        UserService.Client client = new UserService.Client(protocol);
+        return client;
     }
 }

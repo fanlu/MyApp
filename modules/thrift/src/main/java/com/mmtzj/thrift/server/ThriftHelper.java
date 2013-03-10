@@ -1,5 +1,6 @@
 package com.mmtzj.thrift.server;
 
+import com.mmtzj.thrift.gen.UserService;
 import org.apache.thrift.TProcessor;
 
 /**
@@ -11,7 +12,7 @@ import org.apache.thrift.TProcessor;
  */
 public class ThriftHelper {
     public static TProcessor buildProcessor(Class serviceInterface, Object proxyForService) {
-        return null;
-        //To change body of created methods use File | Settings | File Templates.
+        UserService.Processor processor = new UserService.Processor((UserService.Iface) proxyForService);
+        return processor;
     }
 }

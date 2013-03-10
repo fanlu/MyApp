@@ -22,7 +22,7 @@ public class ThriftHttpProxyFactoryBean<T> extends ThriftClientInterceptor imple
 
     private static final int DEFAULT_MAX_TOTAL_CONNECTIONS = 100;
     private static final int DEFAULT_MAX_CONNECTIONS_PER_ROUTE = 10;
-    private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 60;
+    private static final int DEFAULT_READ_TIMEOUT_MILLISECONDS = 1000;
     private HttpClient httpClient; // FactoryBean初始化httpClient&nbsp;
     private Object serviceProxy;
 

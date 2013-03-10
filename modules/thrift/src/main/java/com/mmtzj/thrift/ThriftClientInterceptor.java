@@ -4,6 +4,8 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.http.client.HttpClient;
 import org.apache.thrift.TApplicationException;
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TTransport;
@@ -23,13 +25,13 @@ import java.lang.reflect.Method;
  * Time: 下午8:41
  * To change this template use File | Settings | File Templates.
  */
-public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements MethodInterceptor {
+public abstract class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements MethodInterceptor {
 
     private ServiceRegistry serviceRegistry;
 
-    private ClientConstructor clientConstructor;
+    private ClientConstructor clientConstructor = new ClientConstructor();
 
-    private TProtocolFactory protocolFactory;
+    private TProtocolFactory protocolFactory = new TBinaryProtocol.Factory();
 
     public void afterPropertiesSet(){
         super.afterPropertiesSet();
@@ -89,7 +91,5 @@ public class ThriftClientInterceptor extends UrlBasedRemoteAccessor implements M
         return new THttpClient(getServiceUrl(), getHttpClient());
     }
 
-    public HttpClient getHttpClient() {
-        return getHttpClient();
-    }
+    public abstract HttpClient getHttpClient();
 }
