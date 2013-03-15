@@ -1,17 +1,14 @@
-package com.mmtzj.thrift;
+package com.mmtzj.thrift.http;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.http.client.HttpClient;
 import org.apache.thrift.TApplicationException;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.transport.THttpClient;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.remoting.support.UrlBasedRemoteAccessor;
 import org.springframework.util.Assert;
 
@@ -65,7 +62,7 @@ public abstract class ThriftClientInterceptor extends UrlBasedRemoteAccessor imp
         } else if (args.length == 1 && "equals".equals(name)) {
             return getServiceUrl().equals(args[0]);
         }
-        Object client = clientConstructor.newInstance(protocolFactory.getProtocol(getTransport()));
+        Object client = clientConstructor.newInstance(protocolFactory.getProtocol(getTransport()),getServiceInterface());
         Assert.notNull(client, "the Thrift RPC client was not correctly created. Aborting.");
         ClassLoader originalClassLoader = overrideThreadContextClassLoader();
         try {

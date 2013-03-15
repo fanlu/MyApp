@@ -1,13 +1,12 @@
 package thrift.client.proxy;
 
-import com.mmtzj.thrift.ThriftHttpProxyFactoryBean;
 import com.mmtzj.thrift.gen.User;
+import com.mmtzj.thrift.gen.UserProfile;
 import com.mmtzj.thrift.gen.UserService;
+import com.mmtzj.thrift.gen.UserStorageService;
 import org.apache.thrift.TException;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -28,6 +27,9 @@ public class UserClientTest {
     @Resource
     public UserService.Iface userService1;
 
+    @Resource
+    public UserStorageService.Iface userStorageService1;
+
 //    @Before
 //    public void before() throws Exception {
 //        ThriftHttpProxyFactoryBean httpInvoker = new ThriftHttpProxyFactoryBean();
@@ -44,6 +46,14 @@ public class UserClientTest {
         for(User user : users){
             System.out.println(user.getName());
         }
+    }
+
+    @Test
+    public void test1() throws TException {
+        UserProfile u = new UserProfile();
+        u.setUid(123);
+        u.setName("test1");
+        userStorageService1.store(u);
     }
 
 }

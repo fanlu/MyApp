@@ -1,8 +1,7 @@
-package com.mmtzj.thrift.server;
+package com.mmtzj.thrift.http.server;
 
-import com.mmtzj.thrift.ServiceRegistry;
+import com.mmtzj.thrift.http.ServiceRegistry;
 import org.aopalliance.intercept.MethodInterceptor;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.thrift.TProcessor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.remoting.support.RemoteExporter;

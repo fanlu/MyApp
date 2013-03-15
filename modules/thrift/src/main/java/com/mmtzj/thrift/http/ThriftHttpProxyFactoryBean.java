@@ -1,4 +1,4 @@
-package com.mmtzj.thrift;
+package com.mmtzj.thrift.http;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.scheme.PlainSocketFactory;

@@ -1,4 +1,4 @@
-package com.mmtzj.thrift.server;
+package com.mmtzj.thrift.http.server;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;

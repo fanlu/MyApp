@@ -1,4 +1,4 @@
-package com.mmtzj.thrift.server;
+package com.mmtzj.thrift.http.server;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TJSONProtocol;
@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.HttpRequestHandler;
 
-import javax.annotation.processing.Processor;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +27,7 @@ import java.net.URL;
  * Time: 下午9:14
  * To change this template use File | Settings | File Templates.
  */
-public class ThriftHttpServiceExporter extends ThriftExporter implements HttpRequestHandler {
+public class ThriftHttpServiceExporter extends com.mmtzj.thrift.http.server.ThriftExporter implements HttpRequestHandler {
 
     Logger logger = LoggerFactory.getLogger(ThriftHttpServiceExporter.class);
     private URL metadataXml;

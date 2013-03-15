@@ -1,4 +1,4 @@
-package com.mmtzj.thrift.server;
+package com.mmtzj.thrift.http.server;
 
 /**
  * Created with IntelliJ IDEA.

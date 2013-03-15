@@ -16,11 +16,18 @@
         <property name="serviceInterface" value="com.mmtzj.service.HttpInvokerService" />
     </bean>
 
-    <bean name="/UserService" class="com.mmtzj.thrift.server.ThriftHttpServiceExporter">
+    <bean name="/UserService" class="com.mmtzj.thrift.http.server.ThriftHttpServiceExporter">
         <property name="service">
             <bean class="com.mmtzj.handler.UserServiceHandler"/>
         </property>
         <property name="serviceInterface" value="com.mmtzj.thrift.gen.UserService$Iface"/>
+    </bean>
+
+    <bean name="/UserStorageService" class="com.mmtzj.thrift.http.server.ThriftHttpServiceExporter">
+        <property name="service">
+            <bean class="com.mmtzj.handler.UserStorageServiceHandler"/>
+        </property>
+        <property name="serviceInterface" value="com.mmtzj.thrift.gen.UserStorageService$Iface"/>
     </bean>
 
 </beans>  
