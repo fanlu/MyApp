@@ -1,5 +1,6 @@
 package com.mmtzj.thrift.http;
 
+import com.mmtzj.thrift.http.server.ThriftHelper;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.http.client.HttpClient;
@@ -62,7 +63,8 @@ public abstract class ThriftClientInterceptor extends UrlBasedRemoteAccessor imp
         } else if (args.length == 1 && "equals".equals(name)) {
             return getServiceUrl().equals(args[0]);
         }
-        Object client = clientConstructor.newInstance(protocolFactory.getProtocol(getTransport()),getServiceInterface());
+//        Object client = clientConstructor.newInstance(protocolFactory.getProtocol(getTransport()),getServiceInterface());
+        Object client = ThriftHelper.buildClient(getServiceInterface(), protocolFactory.getProtocol(getTransport()));
         Assert.notNull(client, "the Thrift RPC client was not correctly created. Aborting.");
         ClassLoader originalClassLoader = overrideThreadContextClassLoader();
         try {
