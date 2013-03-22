@@ -1,6 +1,8 @@
 package thrift.client.dubbo;
 
+import com.mmtzj.thrift.gen.UserProfile;
 import com.mmtzj.thrift.gen.UserService;
+import com.mmtzj.thrift.gen.UserStorageService;
 import org.apache.thrift.TException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +25,17 @@ public class DubboClientTest {
     @Resource
     private UserService.Iface userService2;
 
+    @Resource
+    private UserStorageService.Iface userStorageService2;
+
     @Test
     public void test() throws TException {
         System.out.println(userService2.getUser("login1").getName());
+    }
+
+    @Test
+    public void test2() throws TException {
+        UserProfile u = userStorageService2.retrieve(123);
+        System.out.println(u.getUid());
     }
 }

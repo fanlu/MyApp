@@ -39,8 +39,14 @@
 
     <dubbo:protocol name="thrift" port="3030" />
 
+    <dubbo:protocol name="dubbo" port="20880" />
+
     <dubbo:service interface="com.mmtzj.thrift.gen.UserService$Iface" ref="userServiceHandler" />
 
     <bean id="userServiceHandler" class="com.mmtzj.handler.UserServiceHandler" />
+
+    <dubbo:service interface="com.mmtzj.thrift.gen.UserStorageService$Iface" ref="userStorageServiceHandler" />
+
+    <bean id="userStorageServiceHandler" class="com.mmtzj.handler.UserStorageServiceHandler" />
 
 </beans>  

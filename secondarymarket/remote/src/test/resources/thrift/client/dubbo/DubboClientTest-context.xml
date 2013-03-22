@@ -14,5 +14,5 @@
     <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
     <dubbo:reference id="userService2" interface="com.mmtzj.thrift.gen.UserService$Iface" />
 
-
+    <dubbo:reference id="userStorageService2" interface="com.mmtzj.thrift.gen.UserStorageService$Iface" />
 </beans>
