@@ -13,4 +13,9 @@
         <property name="serviceInterface" value="com.mmtzj.thrift.gen.UserStorageService$Iface" />
     </bean>
 
+    <bean id="userStorageServiceAsync1" class="com.mmtzj.thrift.http.ThriftHttpProxyFactoryBean">
+        <property name="serviceUrl" value="http://localhost:8096/UserStorageService" />
+        <property name="serviceInterface" value="com.mmtzj.thrift.gen.UserStorageService$AsyncIface" />
+    </bean>
+
 </beans>

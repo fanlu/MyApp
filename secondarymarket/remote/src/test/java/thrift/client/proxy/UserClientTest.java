@@ -5,6 +5,7 @@ import com.mmtzj.thrift.gen.UserProfile;
 import com.mmtzj.thrift.gen.UserService;
 import com.mmtzj.thrift.gen.UserStorageService;
 import org.apache.thrift.TException;
+import org.apache.thrift.async.AsyncMethodCallback;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,6 +31,9 @@ public class UserClientTest {
     @Resource
     public UserStorageService.Iface userStorageService1;
 
+    @Resource
+    public UserStorageService.AsyncIface userStorageServiceAsync1;
+
 //    @Before
 //    public void before() throws Exception {
 //        ThriftHttpProxyFactoryBean httpInvoker = new ThriftHttpProxyFactoryBean();
@@ -54,6 +58,25 @@ public class UserClientTest {
         u.setUid(123);
         u.setName("test1");
         userStorageService1.store(u);
+        System.out.println(userStorageService1.retrieve(1).getUid());
+    }
+
+    @Test
+    public void testAsync() throws TException {
+        UserProfile u = new UserProfile();
+        u.setUid(123);
+        u.setName("test1");
+        userStorageServiceAsync1.store(u, new AsyncMethodCallback<UserStorageService.AsyncClient.store_call>() {
+            @Override
+            public void onComplete(UserStorageService.AsyncClient.store_call store_call) {
+                System.out.println("complete" + store_call.toString());
+            }
+
+            @Override
+            public void onError(Exception e) {
+                System.out.println("error");
+            }
+        });
     }
 
 }

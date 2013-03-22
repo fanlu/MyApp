@@ -1,7 +1,10 @@
 package com.mmtzj.thrift.http.server;
 
 import org.apache.thrift.TProcessor;
+import org.apache.thrift.async.TAsyncClientManager;
 import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.protocol.TProtocolFactory;
+import org.apache.thrift.transport.TNonblockingTransport;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
@@ -38,6 +41,8 @@ public class ThriftHelper {
      */
     public static String CLIENT_NAME = "$Client";
 
+    public static String ASYNC_CLIENT_NAME = "$AsyncClient";
+
     public static Class<?> getThriftServiceInnerClassOrNull(Class<?> thriftServiceClass, String match, boolean isInterface) {
         Class<?>[] declaredClasses = thriftServiceClass.getDeclaredClasses();
         for (Class<?> declaredClass : declaredClasses) {
@@ -63,9 +68,11 @@ public class ThriftHelper {
     }
 
     public static Constructor<?> getClientConstructor(Class<?> svcInterface) throws Exception {
-        Class<?> clientClass = getThriftServiceInnerClassOrNull(svcInterface.getEnclosingClass(), CLIENT_NAME, false);
+        String client = svcInterface.getName().indexOf("Async") > 0 ? ASYNC_CLIENT_NAME : CLIENT_NAME;
+        Class<?>[] args = svcInterface.getName().indexOf("Async") > 0 ? new Class[]{TProtocolFactory.class, TAsyncClientManager.class, TNonblockingTransport.class} :new Class[]{TProtocol.class};
+        Class<?> clientClass = getThriftServiceInnerClassOrNull(svcInterface.getEnclosingClass(), client, false);
         Assert.notNull(clientClass, "the client class must not be null");
-        Constructor<?> constructor = ClassUtils.getConstructorIfAvailable(clientClass, TProtocol.class);
+        Constructor<?> constructor = ClassUtils.getConstructorIfAvailable(clientClass, args);
         Assert.notNull(constructor);
         return constructor;
     }
