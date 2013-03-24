@@ -38,4 +38,5 @@ public class DubboClientTest {
         UserProfile u = userStorageService2.retrieve(123);
         System.out.println(u.getUid());
     }
+
 }
