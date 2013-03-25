@@ -16,7 +16,7 @@ import java.util.Map;
 public class HttpInvokerServiceImpl implements HttpInvokerService {
     @Override
     public void getAll() {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override

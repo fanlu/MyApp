@@ -49,4 +49,6 @@
 
     <bean id="userStorageServiceHandler" class="com.mmtzj.handler.UserStorageServiceHandler" />
 
+    <dubbo:service interface="com.mmtzj.service.AsyncDubboService" ref="asyncDubboService"/>
+
 </beans>  
