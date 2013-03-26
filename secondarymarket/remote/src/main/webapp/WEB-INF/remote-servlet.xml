@@ -49,6 +49,16 @@
 
     <bean id="userStorageServiceHandler" class="com.mmtzj.handler.UserStorageServiceHandler" />
 
-    <dubbo:service interface="com.mmtzj.service.AsyncDubboService" ref="asyncDubboService"/>
+    <dubbo:service interface="com.mmtzj.service.AsyncDubboService" ref="asyncDubboService" protocol="dubbo" token="true" cluster="failover" retries="2"/>
+
+
+    <bean id="callbackService" class="com.mmtzj.service.CallbackServiceImpl" />
+    <dubbo:service interface="com.mmtzj.service.CallbackService" ref="callbackService" connections="1" callbacks="1000">
+        <dubbo:method name="addListener">
+            <dubbo:argument index="1" callback="true" />
+            <!--也可以通过指定类型的方式-->
+            <!--<dubbo:argument type="com.demo.CallbackListener" callback="true" />-->
+        </dubbo:method>
+    </dubbo:service>
 
 </beans>  

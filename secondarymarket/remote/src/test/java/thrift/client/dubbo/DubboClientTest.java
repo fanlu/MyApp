@@ -3,6 +3,8 @@ package thrift.client.dubbo;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.google.common.collect.Maps;
 import com.mmtzj.service.AsyncDubboService;
+import com.mmtzj.service.CallbackListener;
+import com.mmtzj.service.CallbackService;
 import com.mmtzj.thrift.gen.UserProfile;
 import com.mmtzj.thrift.gen.UserService;
 import com.mmtzj.thrift.gen.UserStorageService;
@@ -37,6 +39,9 @@ public class DubboClientTest {
     @Resource
     private AsyncDubboService asyncDubboService2;
 
+    @Resource
+    private CallbackService callbackService2;
+
     @Test
     public void test() throws TException {
         System.out.println(userService2.getUser("login1"));
@@ -61,6 +66,15 @@ public class DubboClientTest {
         } catch (ExecutionException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+    }
+
+    @Test
+    public void testCallBack(){
+        callbackService2.addListener("foo.bar", new CallbackListener(){
+            public void changed(String msg) {
+                System.out.println("callback1:" + msg);
+            }
+        });
     }
 
 }

@@ -20,4 +20,7 @@
         <dubbo:method name="queryForObject" async="true" timeout="10000"/>
     </dubbo:reference>
 
+
+    <dubbo:reference id="callbackService2" interface="com.mmtzj.service.CallbackService" />
+
 </beans>
