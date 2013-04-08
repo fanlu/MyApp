@@ -1,6 +1,5 @@
 package webservice.dubbo;
 
-import com.google.common.collect.Maps;
 import com.mmtzj.interceptor.HeaderIntercepter;
 import com.mmtzj.service.PhoneService;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
@@ -47,10 +46,11 @@ public class DubboWebServiceTest {
         jaxFactory.setServiceClass(PhoneService.class);
         jaxFactory.setAddress("http://tel.m400.net/ppc/soap");
         PhoneService phoneService = (PhoneService)jaxFactory.create();
-        HashMap<String, Object> param = Maps.newHashMap();
-        param.put("startid", 579559);
-        ArrayList<HashMap<String, Object>> l = phoneService.getCDRRecord400(param);
-//        ArrayList<HashMap<String, Object>> l = phoneService.getMemberByPhoneInfo("4001171171","9006");
+//        HashMap<String, Object> param = Maps.newHashMap();
+//        param.put("startid", 579559);
+//        ArrayList<HashMap<String, Object>> l = phoneService.getCDRRecord400(param);
+        System.out.println(phoneService.getMemberByPhoneInfo("4001171171","9006"));
+        ArrayList<HashMap<String, Object>> l = phoneService.getMemberByPhoneInfo("4001171171","9006");
         System.out.println(l.size());
     }
 }

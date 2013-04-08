@@ -18,5 +18,6 @@
         <module>qqapi</module>
         <module>thrift</module>
         <module>disruptor</module>
+        <module>storm</module>
     </modules>
 </project>

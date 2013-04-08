@@ -75,6 +75,10 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
+        </repository>
     </repositories>
 
     <!-- 设定插件仓库 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
@@ -783,6 +787,11 @@
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-frontend-simple</artifactId>
                 <version>2.7.3</version>
+            </dependency>
+            <dependency>
+                <groupId>storm</groupId>
+                <artifactId>storm</artifactId>
+                <version>0.8.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
