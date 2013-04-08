@@ -1,5 +1,6 @@
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
+import backtype.storm.testing.TestWordSpout;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 import backtype.storm.utils.Utils;
@@ -15,7 +16,7 @@ public class MainTest {
     public static void main(String[] args){
         TopologyBuilder builder = new TopologyBuilder();
 
-//        builder.setSpout(1, new KestrelSpout("kestrel.backtype.com",22133,"sentence_queue",new StringScheme()));
+        builder.setSpout("1", new TestWordSpout(), 5);
 
         builder.setBolt("2", new SplitSentence(), 10).shuffleGrouping("1");
 
