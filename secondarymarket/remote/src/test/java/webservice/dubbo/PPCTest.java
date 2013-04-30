@@ -13,7 +13,7 @@ public class PPCTest {
 
     @Test
     public void test(){
-        String data = HTTPUtil.httpPost2("tel.m400.net", 80, "/ppc/soap", reqSoap("583000"));
+        String data = HTTPUtil.httpPost2("tel.m400.net", 80, "/ppc/soap", reqSoap("589835"));
         System.out.println(data);
     }
 

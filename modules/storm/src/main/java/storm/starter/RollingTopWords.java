@@ -1,35 +1,61 @@
 package storm.starter;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
 import backtype.storm.testing.TestWordSpout;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
-import storm.starter.bolt.MergeObjects;
-import storm.starter.bolt.RankObjects;
-import storm.starter.bolt.RollingCountObjects;
+import storm.starter.bolt.IntermediateRankingsBolt;
+import storm.starter.bolt.RollingCountBolt;
+import storm.starter.bolt.TotalRankingsBolt;
+import storm.starter.util.StormRunner;
 
+/**
+ * This topology does a continuous computation of the top N words that the topology has seen in terms of cardinality.
+ * The top N computation is done in a completely scalable way, and a similar approach could be used to compute things
+ * like trending topics or trending images on Twitter.
+ */
 public class RollingTopWords {
-    public static void main(String[] args) throws Exception {
 
-        final int TOP_N = 3;
+    private static final int DEFAULT_RUNTIME_IN_SECONDS = 60;
+    private static final int TOP_N = 5;
 
-        TopologyBuilder builder = new TopologyBuilder();
+    private final TopologyBuilder builder;
+    private final String topologyName;
+    private final Config topologyConfig;
+    private final int runtimeInSeconds;
 
-        builder.setSpout("1", new TestWordSpout(), 5);
+    public RollingTopWords() throws InterruptedException {
+        builder = new TopologyBuilder();
+        topologyName = "slidingWindowCounts";
+        topologyConfig = createTopologyConfiguration();
+        runtimeInSeconds = DEFAULT_RUNTIME_IN_SECONDS;
 
-        builder.setBolt("2", new RollingCountObjects(60, 10), 4)
-                .fieldsGrouping("1", new Fields("word"));
-        builder.setBolt("3", new RankObjects(TOP_N), 4)
-                .fieldsGrouping("2", new Fields("obj"));
-        builder.setBolt("4", new MergeObjects(TOP_N))
-                .globalGrouping("3");
+        wireTopology();
+    }
+
+    private static Config createTopologyConfiguration() {
         Config conf = new Config();
         conf.setDebug(true);
+        return conf;
+    }
 
-        LocalCluster cluster = new LocalCluster(); // 本地模式启动集群
-        cluster.submitTopology("rolling-demo", conf, builder.createTopology());
-        Thread.sleep(10000);
-        cluster.shutdown();
+    private void wireTopology() throws InterruptedException {
+        String spoutId = "wordGenerator";
+        String counterId = "counter";
+        String intermediateRankerId = "intermediateRanker";
+        String totalRankerId = "finalRanker";
+        builder.setSpout(spoutId, new TestWordSpout(), 5);
+        builder.setBolt(counterId, new RollingCountBolt(9, 3), 4).fieldsGrouping(spoutId, new Fields("word"));
+        builder.setBolt(intermediateRankerId, new IntermediateRankingsBolt(TOP_N), 4).fieldsGrouping(counterId,
+            new Fields("obj"));
+        builder.setBolt(totalRankerId, new TotalRankingsBolt(TOP_N)).globalGrouping(intermediateRankerId);
+    }
+
+    public void run() throws InterruptedException {
+        StormRunner.runTopologyLocally(builder.createTopology(), topologyName, topologyConfig, runtimeInSeconds);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new RollingTopWords().run();
     }
 }
