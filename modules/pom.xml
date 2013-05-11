@@ -19,5 +19,6 @@
         <module>thrift</module>
         <module>disruptor</module>
         <module>storm</module>
+        <module>io</module>
     </modules>
 </project>

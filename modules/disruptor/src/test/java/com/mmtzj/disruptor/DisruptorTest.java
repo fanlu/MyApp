@@ -1,9 +1,16 @@
 package com.mmtzj.disruptor;
 
+import com.jdon.annotation.pointcut.Before;
+import com.jdon.async.disruptor.DisruptorFactory;
+import com.jdon.async.disruptor.EventDisruptor;
+import com.jdon.domain.message.DomainEventHandler;
+import com.jdon.domain.message.DomainMessage;
 import com.lmax.disruptor.*;
+import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.util.DaemonThreadFactory;
 import org.junit.Test;
 
+import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,69 +24,67 @@ import java.util.concurrent.Executors;
  */
 public class DisruptorTest {
 
-    final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
-    {
-        public void onEvent(final ValueEvent event, final long sequence, final boolean endOfBatch) throws Exception
-        {
-            // process a new event.
-        }
-    };
+    DisruptorFactory disruptorFactory;
 
-    private static final int BUFFER_SIZE = 1024 * 64;
-    private static final long ITERATIONS = 1000L * 1000L * 200L;
-
-    private final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor(DaemonThreadFactory.INSTANCE);
-
-    private final Sequencer sequencer = new SingleProducerSequencer(BUFFER_SIZE, new YieldingWaitStrategy());
-    private final MyRunnable myRunnable = new MyRunnable(sequencer);
-    {
-        sequencer.addGatingSequences(myRunnable.sequence);
-    }
-
-    private static class MyRunnable implements Runnable
-    {
-        private CountDownLatch latch;
-        private long expectedCount;
-        Sequence sequence = new Sequence(-1);
-        private SequenceBarrier barrier;
-
-        public MyRunnable(Sequencer sequencer)
-        {
-            this.barrier = sequencer.newBarrier();
-        }
-
-        public void reset(CountDownLatch latch, long expectedCount)
-        {
-            this.latch = latch;
-            this.expectedCount = expectedCount;
-        }
-
-        @Override
-        public void run()
-        {
-            long expected = expectedCount;
-            long processed = -1;
-
-            try
-            {
-                do
-                {
-                    processed = barrier.waitFor(sequence.get() + 1);
-                    sequence.set(processed);
-                }
-                while (processed < expected);
-
-                latch.countDown();
-                sequence.setVolatile(processed);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+    @Before
+    public void before(){
+        disruptorFactory = new DisruptorFactory();
     }
 
     @Test
     public void test(){
+        disruptorFactory = new DisruptorFactory();
+        TreeSet<DomainEventHandler> handlers = disruptorFactory.getTreeSet();
+        final DomainEventHandler<EventDisruptor> handler = new DomainEventHandler<EventDisruptor>() {
+
+            @Override
+            public void onEvent(EventDisruptor event, final boolean endOfBatch) throws Exception {
+                System.out.println("MyEventA=" + event.getDomainMessage().getEventSource());
+                event.getDomainMessage().setEventResult("not null");
+
+            }
+        };
+
+        final DomainEventHandler<EventDisruptor> handler2 = new DomainEventHandler<EventDisruptor>() {
+
+            @Override
+            public void onEvent(EventDisruptor event, final boolean endOfBatch) throws Exception {
+                System.out.println("MyEventA=" + event.getDomainMessage().getEventSource());
+                event.getDomainMessage().setEventResult(null);
+
+            }
+        };
+
+        handlers.add(handler2);
+        handlers.add(handler);
+
+        Disruptor disruptor = disruptorFactory.addEventMessageHandler("test", handlers);
+        disruptor.start();
+
+        int i = 0;
+
+        // while (i < 10) {
+        RingBuffer ringBuffer = disruptor.getRingBuffer();
+        long sequence = ringBuffer.next();
+
+        DomainMessage domainMessage = new DomainMessage(sequence);
+
+        EventDisruptor eventDisruptor = (EventDisruptor) ringBuffer.get(sequence);
+        eventDisruptor.setTopic("test");
+        eventDisruptor.setDomainMessage(domainMessage);
+
+        ringBuffer.publish(sequence);
+        System.out.print("\n RESULT=" + domainMessage.getBlockEventResult());
+
+        System.out.print("\n RESULT=" + domainMessage.getBlockEventResult());
+
+        System.out.print("\n RESULT=" + domainMessage.getBlockEventResult());
+
+        i++;
+        System.out.print(i);
+
+        // }
+
+        System.out.print("ok");
     }
 }
