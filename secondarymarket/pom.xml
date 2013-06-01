@@ -17,5 +17,6 @@
 		<module>web</module>
 		<module>pm</module>
         <module>remote</module>
+        <module>servlet3</module>
     </modules>
 </project>
