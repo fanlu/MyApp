@@ -1,5 +1,7 @@
 package com.mmtzj.action;
 
+import com.mmtzj.action.async.AppAsyncListener;
+
 import javax.servlet.AsyncContext;
 import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
@@ -33,31 +35,13 @@ public class AsyncDemoServlet extends HttpServlet {
         out.println("进入Servlet的时间：" + new Date() + ".");
         out.flush();
 
-//在子线程中执行业务调用，并由其负责输出响应，主线程退出
+        //在子线程中执行业务调用，并由其负责输出响应，主线程退出
         AsyncContext ctx = req.startAsync();
         executor.submit(new Executor(ctx));
-        ctx.addListener(new AsyncListener() {
-            public void onComplete(AsyncEvent asyncEvent) throws IOException {
-            //做一些清理工作或者其他
-            }
-
-            @Override
-            public void onTimeout(AsyncEvent asyncEvent) throws IOException {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void onError(AsyncEvent asyncEvent) throws IOException {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void onStartAsync(AsyncEvent asyncEvent) throws IOException {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-        });
+        ctx.addListener(new AppAsyncListener());
         out.println("结束Servlet的时间：" + new Date() + ".");
         out.flush();
+//        out.close();
     }
 
 }
