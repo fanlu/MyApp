@@ -107,12 +107,13 @@ public class BaseTest {
         }
     }
 
+    private static int _1MB = 1024 * 1024;
+
     /**
-     * -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8
+     * -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8 -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError
      */
     @Test
     public void allocationTest(){
-        int _1MB = 1024 * 1024;
         byte[] allocation1, allocation2, allocation3, allocation4;
         allocation1 = new byte[2 * _1MB];
         allocation2 = new byte[2 * _1MB];
@@ -120,9 +121,40 @@ public class BaseTest {
         allocation4 = new byte[4 * _1MB];
     }
 
+    /**
+     * -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8 -XX:+PrintGCDetails -XX:+HeapDumpOnOutOfMemoryError -XX:PretenureSizeThreshold=3145728
+     */
+    @Test
+    public void pretenureSizeThresholdTest(){
+        byte[] allocation = new byte[4 * _1MB];
+    }
+
     @Test
     public void getArch(){
         String arch = System.getProperty("sun.arch.data.model");
         System.out.println(arch+"-bit");
+    }
+
+    public Object instance = null;
+
+
+
+    private byte[] bigSize = new byte[_1MB * 2];
+
+    /**
+     * -XX:+PrintGCDetails
+     */
+    @Test
+    public void referenceCountingGCTest(){
+
+        BaseTest a = new BaseTest();
+        BaseTest b = new BaseTest();
+        a.instance = b;
+        b.instance = a;
+
+        a = null;
+        b = null;
+
+        System.gc();
     }
 }
