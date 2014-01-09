@@ -8,6 +8,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by fanlu on 13-12-4.
@@ -156,5 +158,134 @@ public class BaseTest {
         b = null;
 
         System.gc();
+    }
+
+    @Test
+    public void testThread(){
+        Thread thread = new Thread("aaa"){
+            public void run(){
+                System.out.println(this.getName());
+            }
+        };
+        thread.setName("bbb");
+//        thread.setDaemon(true);
+        thread.start();
+    }
+
+    public void foo() throws InterruptedException {
+        if (Thread.interrupted()) {
+            throw new InterruptedException();
+        }
+    }
+
+    @Test
+    public void testThreadInterupt(){
+        Thread thread = new Thread("interupt"){
+            public void run(){
+                for(;;){
+                    try{
+                        foo();
+                        System.out.println(1);
+                    }catch(InterruptedException e){
+                        e.printStackTrace();
+                        break;
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+//                    if(Thread.interrupted()){
+//                        System.out.println("iiiiiii");
+//                        break;
+//                    }
+                }
+            }
+        };
+        thread.start();
+        System.out.println(thread.getName());
+    }
+
+    @Test
+    public void testExecutor(){
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Future<Object> f = executorService.submit(new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                Thread.sleep(2000);
+                Object o = "123";
+                return o;
+            }
+        });
+        try {
+            Object o = f.get(1, TimeUnit.SECONDS);
+            System.out.println(o.toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testBolockingQueue(){
+        final BlockingQueue<Object> blockingQ = new ArrayBlockingQueue<Object>(10);
+        Thread thread = new Thread("consumer thread") {
+            public void run() {
+                System.out.println(1);
+                for (int i=0;i<5;i++) {
+//                    Object object = blockingQ.poll(); // 杯具，不等待就会直接返回
+                    Object object = null;
+                    try {
+                        object = blockingQ.take();
+                        System.out.println(i);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(object);
+                }
+            }
+        };
+        thread.start();
+        try {
+            blockingQ.put("111");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testBlockingQL(){
+        final BlockingQL ql = new BlockingQL();
+        final AtomicInteger c = new AtomicInteger(0);
+        Thread thread = new Thread("producer thread") {
+            public void run() {
+                System.out.println("producer");
+                for (;;) {
+                    try {
+                        System.out.println(this.getName() + "produce");
+                        ql.offer("aaa" + c.incrementAndGet());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        Thread thread1 = new Thread("consumer thread"){
+            public void run(){
+                System.out.println("consumer");
+                for(;;){
+                    try {
+                        Object o = ql.take();
+                        System.out.println(this.getName() + " consume " + o);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        thread1.start();
+        thread.start();
     }
 }
