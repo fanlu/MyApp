@@ -227,6 +227,25 @@ public class BaseTest {
     }
 
     @Test
+    public void testExecutor1() throws InterruptedException, ExecutionException {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        CompletionService<String> completion=new ExecutorCompletionService<String>(executorService);
+        for(int i=0;i<10;i++){
+            final int finalI = i;
+            completion.submit(new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return String.valueOf(finalI);
+                }
+            });
+        }
+        for(int i=0;i<10;i++){
+            System.out.println(completion.take().get());
+        }
+        executorService.shutdown();
+    }
+
+    @Test
     public void testBolockingQueue(){
         final BlockingQueue<Object> blockingQ = new ArrayBlockingQueue<Object>(10);
         Thread thread = new Thread("consumer thread") {
