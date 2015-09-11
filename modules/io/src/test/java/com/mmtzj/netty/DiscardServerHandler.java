@@ -1,9 +1,7 @@
 package com.mmtzj.netty;
 
-import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.*;
 
-@ChannelPipelineCoverage("all")
 public class DiscardServerHandler extends SimpleChannelHandler {
   
     @Override  

@@ -1,10 +1,7 @@
 package com.mmtzj.netty;
 
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.*;
 
-@ChannelPipelineCoverage("all")
 public class TimeServerHandler extends SimpleChannelHandler {
   
 //    @Override
@@ -40,5 +37,10 @@ public class TimeServerHandler extends SimpleChannelHandler {
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {   
         e.getCause().printStackTrace();   
         e.getChannel().close();   
-    }   
+    }
+
+    @Override
+    public void channelOpen(ChannelHandlerContext ctx, ChannelStateEvent e) {
+        TimeServer.allChannels.add(e.getChannel());
+    }
 }

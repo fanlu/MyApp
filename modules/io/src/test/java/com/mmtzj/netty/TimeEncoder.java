@@ -5,7 +5,6 @@ import org.jboss.netty.channel.*;
 
 import static org.jboss.netty.buffer.ChannelBuffers.*;
   
-@ChannelPipelineCoverage("all")
 public class TimeEncoder extends SimpleChannelHandler {
   
     public void writeRequested(ChannelHandlerContext ctx, MessageEvent e) {

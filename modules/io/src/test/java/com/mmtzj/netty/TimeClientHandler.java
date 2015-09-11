@@ -1,12 +1,10 @@
 package com.mmtzj.netty;
 
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.channel.*;
-import static org.jboss.netty.buffer.ChannelBuffers.*;
-import java.util.Date;
-  
-//@ChannelPipelineCoverage("all")
-@ChannelPipelineCoverage("one")
+import org.jboss.netty.channel.ChannelHandlerContext;
+import org.jboss.netty.channel.ExceptionEvent;
+import org.jboss.netty.channel.MessageEvent;
+import org.jboss.netty.channel.SimpleChannelHandler;
+
 public class TimeClientHandler extends SimpleChannelHandler {
   
 //    @Override
