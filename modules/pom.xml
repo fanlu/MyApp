@@ -20,5 +20,6 @@
         <module>disruptor</module>
         <module>storm</module>
         <module>io</module>
+        <module>algo</module>
     </modules>
 </project>
