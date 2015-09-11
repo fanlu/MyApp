@@ -21,5 +21,6 @@
         <module>storm</module>
         <module>io</module>
         <module>algo</module>
+        <module>base</module>
     </modules>
 </project>
