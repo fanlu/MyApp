@@ -1,9 +1,7 @@
-package com.mmtzj.util;
-
 import java.util.Random;
 /**
  * Created with IntelliJ IDEA.
- * User: pengfei.hpf
+ * User: Lonica
  * Date: 14-4-29
  * Time: 上午11:45
  * To change this template use File | Settings | File Templates.
