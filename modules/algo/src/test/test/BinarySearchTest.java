@@ -67,4 +67,32 @@ public class BinarySearchTest {
         }
         return -(min + 1);  // key not found.
     }
+
+    @Test
+    public void test1(){
+        int a[]={1,2,3,5,7,7,9};
+//        int a[]={7,7,9,10,11,12};
+//        int a[]={1,2,3,5};
+        int i = binarySearch1(a, 0, a.length -1, 7);
+        System.out.println(i);
+    }
+
+    public int binarySearch1(int[] a, int min, int max, int key){
+        if(a[min] > key){
+            return 0;
+        }
+        if(a[max] < key){
+            return -1;
+        }
+        while(min < max){
+            int i = (min + max) >>> 1;
+            if(a[i] < key){
+                min = i + 1;
+            }
+            if(a[i] >= key){
+                max = i;
+            }
+        }
+        return min;
+    }
 }
