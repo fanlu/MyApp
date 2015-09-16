@@ -1,5 +1,3 @@
-package com.mmtzj.disruptor;
-
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
